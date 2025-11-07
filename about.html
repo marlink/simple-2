@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About – Your School</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Unified Responsive Framework -->
+    <link rel="stylesheet" href="assets/css/framework-unified.css">
+</head>
+<body data-theme="light">
+    <header class="site-header">
+        <nav class="nav">
+            <a class="nav__logo" href="index.html">YourSchool</a>
+
+            <!-- THEME TOGGLE -->
+            <div class="theme-toggle" role="group" aria-label="Color theme">
+                <input type="radio" name="theme" id="theme-light" value="light" checked>
+                <label for="theme-light" class="theme-toggle__label" title="Light theme">☀️</label>
+
+                <input type="radio" name="theme" id="theme-dark" value="dark">
+                <label for="theme-dark" class="theme-toggle__label" title="Dark theme">🌙</label>
+            </div>
+
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="about.html" class="nav__link is-active">About</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+                <li><a href="blog.html" class="nav__link">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero" style="background-image: url('assets/images/hero.jpg');">
+            <div class="hero__overlay"></div>
+            <div class="hero__content">
+                <h1 class="hero__title">About Us</h1>
+                <p class="hero__subtitle">Learn more about our mission, values, and commitment to education.</p>
+            </div>
+        </section>
+
+        <!-- ABOUT CONTENT -->
+        <section class="about">
+            <div class="container" style="padding: var(--space-8) 0;">
+                <div class="grid">
+                    <div class="col-12 col-md-8">
+                        <h2>Our Mission</h2>
+                        <p>Provide a brief paragraph about your school's mission, values, or any special programmes you offer. This section can be expanded with more detailed information about your educational philosophy, history, and goals.</p>
+
+                        <h3 class="mt-6">Our Values</h3>
+                        <p>Describe the core values that guide your school's approach to education. What principles do you stand for? How do these values shape the learning experience for your students?</p>
+
+                        <h3 class="mt-6">Our History</h3>
+                        <p>Share the story of your school. When was it founded? What milestones have you achieved? How has your school evolved over the years?</p>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="card card--solid">
+                            <div class="card__body">
+                                <h4>Quick Facts</h4>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="margin-bottom: var(--space-2);"><strong>Founded:</strong> [Year]</li>
+                                    <li style="margin-bottom: var(--space-2);"><strong>Students:</strong> [Number]</li>
+                                    <li style="margin-bottom: var(--space-2);"><strong>Faculty:</strong> [Number]</li>
+                                    <li style="margin-bottom: var(--space-2);"><strong>Programmes:</strong> [List]</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <p>&copy; <span id="year"></span> Your School. All rights reserved.</p>
+                </div>
+                <div class="col-12 col-md-6" style="text-align: right;">
+                    <a href="showcase.html" class="nav__link">Framework Showcase</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+

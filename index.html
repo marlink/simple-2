@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home – Your School</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Unified Responsive Framework (includes grid, base styles, components, accessibility, touch optimization) -->
+    <link rel="stylesheet" href="assets/css/framework-unified.css">
+</head>
+<body data-theme="light">
+    <header class="site-header">
+        <nav class="nav">
+            <a class="nav__logo" href="index.html">YourSchool</a>
+
+            <!-- THEME TOGGLE -->
+            <div class="theme-toggle" role="group" aria-label="Color theme">
+                <input type="radio" name="theme" id="theme-light" value="light" checked>
+                <label for="theme-light" class="theme-toggle__label" title="Light theme">☀️</label>
+
+                <input type="radio" name="theme" id="theme-dark" value="dark">
+                <label for="theme-dark" class="theme-toggle__label" title="Dark theme">🌙</label>
+            </div>
+
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+                <li><a href="blog.html" class="nav__link">Blog</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero" style="background-image: url('assets/images/hero.jpg');">
+            <div class="hero__overlay"></div>
+            <div class="hero__content">
+                <h1 class="hero__title">Welcome to Your School</h1>
+                <p class="hero__subtitle">Where learning meets inspiration.</p>
+
+                <!-- PHONE CTA – disappears after school hours -->
+                <div id="phone-cta" class="phone-cta">
+                    <a href="tel:+1234567890" class="phone-cta__link" aria-label="Call the school office">+1 (234) 567‑890</a>
+                </div>
+                <noscript>
+                    <p>For assistance, please call <a href="tel:+1234567890">+1 (234) 567‑890</a>.</p>
+                </noscript>
+            </div>
+        </section>
+
+        <!-- OPTIONAL – QUICK INFO / ABOUT SNIPPET -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Us</h2>
+                <p>Provide a brief paragraph about your school’s mission, values, or any special programmes you offer.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <p>&copy; <span id="year"></span> Your School. All rights reserved.</p>
+                </div>
+                <div class="col-12 col-md-6" style="text-align: right;">
+                    <a href="showcase.html" class="nav__link">Framework Showcase</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

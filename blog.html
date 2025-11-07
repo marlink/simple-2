@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog – Your School</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Unified Responsive Framework -->
+    <link rel="stylesheet" href="assets/css/framework-unified.css">
+</head>
+<body data-theme="light">
+    <header class="site-header">
+        <nav class="nav">
+            <a class="nav__logo" href="index.html">YourSchool</a>
+
+            <!-- THEME TOGGLE -->
+            <div class="theme-toggle" role="group" aria-label="Color theme">
+                <input type="radio" name="theme" id="theme-light" value="light" checked>
+                <label for="theme-light" class="theme-toggle__label" title="Light theme">☀️</label>
+
+                <input type="radio" name="theme" id="theme-dark" value="dark">
+                <label for="theme-dark" class="theme-toggle__label" title="Dark theme">🌙</label>
+            </div>
+
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+                <li><a href="blog.html" class="nav__link is-active">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO POST - Latest/Featured -->
+        <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&h=900&fit=crop');">
+            <div class="hero__overlay"></div>
+            <div class="hero__content">
+                <h1 class="hero__title">The Future of Education: Embracing Change</h1>
+                <p class="hero__subtitle">Discover how innovative teaching methods are transforming classrooms and empowering students to reach their full potential.</p>
+                <a href="blog-details.html" class="btn btn--primary mt-4">Read Article</a>
+            </div>
+        </section>
+
+        <!-- BLOG GRID - 3x4 Layout -->
+        <section class="container" style="padding: var(--space-8) 0;">
+            <div class="grid">
+                <!-- Blog Post 1 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop" alt="Collaborative learning">
+                        <div class="card__body">
+                            <h4>Collaborative Learning</h4>
+                            <p class="text-sm">Exploring the benefits of group-based education.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Blog Post 2 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=600&fit=crop" alt="Digital tools">
+                        <div class="card__body">
+                            <h4>Digital Tools in Education</h4>
+                            <p class="text-sm">How technology enhances the learning experience.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Blog Post 3 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=600&fit=crop" alt="Student success">
+                        <div class="card__body">
+                            <h4>Student Success Stories</h4>
+                            <p class="text-sm">Inspiring journeys of achievement and growth.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Blog Post 4 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=800&h=600&fit=crop" alt="Creative thinking">
+                        <div class="card__body">
+                            <h4>Fostering Creativity</h4>
+                            <p class="text-sm">Building environments that encourage innovation.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Blog Post 5 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&h=600&fit=crop" alt="Reading culture">
+                        <div class="card__body">
+                            <h4>Building Reading Culture</h4>
+                            <p class="text-sm">Strategies to develop lifelong reading habits.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Blog Post 6 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop" alt="Science lab">
+                        <div class="card__body">
+                            <h4>Hands-On Science</h4>
+                            <p class="text-sm">Experiential learning in laboratory settings.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Blog Post 7 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&h=600&fit=crop" alt="Outdoor education">
+                        <div class="card__body">
+                            <h4>Outdoor Education</h4>
+                            <p class="text-sm">Learning beyond the classroom walls.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Blog Post 8 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop" alt="Future skills">
+                        <div class="card__body">
+                            <h4>Preparing for Tomorrow</h4>
+                            <p class="text-sm">Essential skills for the future workforce.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Blog Post 9 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop" alt="Art education">
+                        <div class="card__body">
+                            <h4>Art in Education</h4>
+                            <p class="text-sm">The role of arts in holistic development.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Blog Post 10 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=600&fit=crop" alt="Mathematics">
+                        <div class="card__body">
+                            <h4>Making Math Fun</h4>
+                            <p class="text-sm">Innovative approaches to mathematics education.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Blog Post 11 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=600&fit=crop" alt="Language learning">
+                        <div class="card__body">
+                            <h4>Language Learning</h4>
+                            <p class="text-sm">Effective methods for multilingual education.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Blog Post 12 -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top card--image-top--compact">
+                        <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=800&h=600&fit=crop" alt="Physical education">
+                        <div class="card__body">
+                            <h4>Physical Wellness</h4>
+                            <p class="text-sm">Integrating health and fitness into education.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="blog-details.html" class="btn btn--sm btn--outline">Read More</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <p>&copy; <span id="year"></span> Your School. All rights reserved.</p>
+                </div>
+                <div class="col-12 col-md-6" style="text-align: right;">
+                    <a href="showcase.html" class="nav__link">Framework Showcase</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+

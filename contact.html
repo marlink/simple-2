@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact – Your School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Unified Responsive Framework (includes grid, base styles, components, accessibility, touch optimization) -->
+    <link rel="stylesheet" href="assets/css/framework-unified.css">
+</head>
+<body data-theme="light">
+    <header class="site-header">
+        <nav class="nav">
+            <a class="nav__logo" href="index.html">YourSchool</a>
+
+            <!-- THEME TOGGLE -->
+            <div class="theme-toggle" role="group" aria-label="Color theme">
+                <input type="radio" name="theme" id="theme-light" value="light" checked>
+                <label for="theme-light" class="theme-toggle__label" title="Light theme">☀️</label>
+
+                <input type="radio" name="theme" id="theme-dark" value="dark">
+                <label for="theme-dark" class="theme-toggle__label" title="Dark theme">🌙</label>
+            </div>
+
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="contact.html" class="nav__link is-active">Contact</a></li>
+                <li><a href="blog.html" class="nav__link">Blog</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <main class="contact">
+        <section class="contact__hero">
+            <div class="container">
+                <h1>Get in Touch</h1>
+                <p>We’d love to hear from you. Use the form below or reach us directly.</p>
+            </div>
+        </section>
+
+        <!-- Layout using the 12‑column grid -->
+        <section class="contact__content container">
+            <div class="grid">
+                <div class="col-12 col-md-7">
+                    <form id="contact-form" class="form" action="mailto:info@yourschool.org" method="post" enctype="text/plain">
+                        <div class="form__row">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Jane Doe">
+                        </div>
+
+                        <div class="form__row">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="jane@example.com">
+                        </div>
+
+                        <div class="form__row">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Inquiry about enrollment">
+                        </div>
+
+                        <div class="form__row">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="How can we help?"></textarea>
+                        </div>
+
+                        <div class="form__actions">
+                            <button type="submit" class="btn btn--primary">Send Message</button>
+                            <button type="reset" class="btn btn--secondary">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-12 col-md-5">
+                    <div class="contact__info">
+                        <h2>Our Office</h2>
+                        <p>123 Education Lane, Learning City, LC 12345</p>
+                        <p>Phone: <a href="tel:+1234567890">+1 (234) 567‑890</a></p>
+                        <p>Email: <a href="mailto:info@yourschool.org">info@yourschool.org</a></p>
+                    </div>
+
+                    <!-- SIMPLE FILTER -->
+                    <div class="contact__filter">
+                        <h2>Filter by Topic</h2>
+                        <input type="text" id="filter-input" placeholder="e.g., admissions, fees, events">
+                        <ul id="filter-list" class="filter-list">
+                            <li>Admissions</li>
+                            <li>Financial Aid</li>
+                            <li>Schedule</li>
+                            <li>Events</li>
+                        </ul>
+                        <p class="filter-note"><small>Typing in the box will hide/show matching items.</small></p>
+                    </div>
+                </div>
+            </div> <!-- .grid -->
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <p>&copy; <span id="year"></span> Your School. All rights reserved.</p>
+                </div>
+                <div class="col-12 col-md-6" style="text-align: right;">
+                    <a href="showcase.html" class="nav__link">Framework Showcase</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

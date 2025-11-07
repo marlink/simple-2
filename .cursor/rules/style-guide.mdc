@@ -1,0 +1,4 @@
+---
+alwaysApply: true
+Always follow style-guide.html rules, grid system, tokens, components, colours and anything else that we specify, in order to get all pages 100% consistent. If new component, colour or element is created, make sure it's also added to the styleguide, as this is a big living document.
+---

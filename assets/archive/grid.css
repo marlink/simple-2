@@ -1,0 +1,49 @@
+/* ===== 12‑Column Grid System =====
+   Mobile‑first: base `.grid` stacks; columns are 100% wide.
+   For ≥ 600px (small), columns become horizontal.
+*/
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-4);
+}
+
+/* Base = all columns stack (mobile) */
+.col-12 { grid-column: 1 / -1; }
+
+/* Small screens (≥ 600px) – stack still; */
+@media (min-width: 600px) {
+    .grid { gap: var(--space-5); }
+}
+
+/* Medium screens (≥ 768px) – enable column classes */
+@media (min-width: 768px) {
+    .grid { gap: var(--space-6); }
+    .col-1  { grid-column: span 1; }
+    .col-2  { grid-column: span 2; }
+    .col-3  { grid-column: span 3; }
+    .col-4  { grid-column: span 4; }
+    .col-5  { grid-column: span 5; }
+    .col-6  { grid-column: span 6; }
+    .col-7  { grid-column: span 7; }
+    .col-8  { grid-column: span 8; }
+    .col-9  { grid-column: span 9; }
+    .col-10 { grid-column: span 10; }
+    .col-11 { grid-column: span 11; }
+    .col-12 { grid-column: span 12; }
+}
+
+/* Large (≥ 1024px) – tighter gaps */
+@media (min-width: 1024px) {
+    .grid { gap: var(--space-7); }
+}
+
+/* XL (≥ 1280px) – max container, centered */
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--space-6);
+    }
+}

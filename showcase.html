@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Framework Showcase – Your School</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Unified Responsive Framework -->
+    <link rel="stylesheet" href="assets/css/framework-unified.css">
+    <style>
+        /* Demo-specific styles */
+        .demo-box {
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+        }
+        
+        .demo-section {
+            margin-bottom: var(--space-8);
+            padding: var(--space-6) 0;
+        }
+        
+        .demo-section h2 {
+            margin-bottom: var(--space-4);
+            color: var(--color-primary);
+        }
+        
+        .code-example {
+            background: var(--color-surface);
+            padding: var(--space-4);
+            border-radius: var(--border-radius);
+            margin-top: var(--space-4);
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+            font-size: var(--font-size-sm);
+            overflow-x: auto;
+            border: 1px solid var(--color-border);
+        }
+
+        .token-swatch {
+            width: 100%;
+            height: 60px;
+            border-radius: var(--border-radius);
+            margin-bottom: var(--space-2);
+            border: 1px solid var(--color-border);
+        }
+
+        .space-demo {
+            width: 100%;
+            height: 40px;
+            background: var(--color-primary);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .radius-demo {
+            width: 100%;
+            height: 60px;
+            background: var(--color-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .shadow-demo {
+            width: 100%;
+            height: 60px;
+            background: var(--color-surface);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--space-2);
+        }
+
+        .typography-sample {
+            margin: var(--space-4) 0;
+        }
+
+        .typography-sample h1,
+        .typography-sample h2,
+        .typography-sample h3,
+        .typography-sample p {
+            margin: var(--space-2) 0;
+        }
+
+        .code-block {
+            background: var(--color-surface);
+            padding: var(--space-4);
+            border-radius: var(--border-radius);
+            margin-top: var(--space-4);
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+            font-size: var(--font-size-sm);
+            overflow-x: auto;
+            border: 1px solid var(--color-border);
+        }
+
+        .code-block code {
+            background: transparent;
+            padding: 0;
+            border: none;
+        }
+
+        /* Carousel Styles */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+        }
+
+        .carousel--horizontal {
+            width: 100%;
+        }
+
+        .carousel--vertical {
+            height: 400px;
+            max-width: 300px;
+        }
+
+        .carousel__track {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel--horizontal .carousel__track {
+            flex-direction: row;
+        }
+
+        .carousel--vertical .carousel__track {
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .carousel__slide {
+            flex-shrink: 0;
+        }
+
+        .carousel--horizontal .carousel__slide {
+            width: 100%;
+        }
+
+        .carousel--vertical .carousel__slide {
+            height: 100%;
+        }
+
+        .carousel__controls {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-2);
+            margin-top: var(--space-4);
+        }
+
+        .carousel__button {
+            background: var(--color-primary);
+            color: var(--color-primary-contrast);
+            border: none;
+            border-radius: var(--border-radius);
+            padding: var(--space-2) var(--space-3);
+            cursor: pointer;
+            min-height: var(--touch-target-min);
+            transition: opacity 0.2s ease;
+        }
+
+        .carousel__button:hover {
+            opacity: 0.8;
+        }
+
+        .carousel__button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .carousel__indicators {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-2);
+            margin-top: var(--space-3);
+        }
+
+        .carousel__indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--color-border);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: background 0.2s ease;
+        }
+
+        .carousel__indicator.is-active {
+            background: var(--color-primary);
+        }
+
+        .viewport-info {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: #eaf4f4;
+            padding: var(--space-2) var(--space-3);
+            font-size: var(--font-size-xs);
+            z-index: 1000;
+            border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+        }
+
+        .showcase-tabs {
+            border-bottom: 2px solid var(--color-border);
+            margin-bottom: var(--space-6);
+        }
+
+        .state-demo {
+            padding: var(--space-4);
+            background: var(--color-surface);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+        }
+
+        .state-demo button {
+            margin-right: var(--space-2);
+            margin-bottom: var(--space-2);
+        }
+
+        .tab__panel {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="viewport-info" id="viewport-info">
+        Viewport: <span id="viewport-width">0px</span> | Breakpoint: <span id="breakpoint">xs</span>
+    </div>
+
+    <header class="site-header">
+        <nav class="nav">
+            <a class="nav__logo" href="index.html">YourSchool</a>
+
+            <!-- THEME TOGGLE -->
+            <div class="theme-toggle" role="group" aria-label="Color theme">
+                <input type="radio" name="theme" id="theme-light" value="light" checked>
+                <label for="theme-light" class="theme-toggle__label" title="Light theme">☀️</label>
+
+                <input type="radio" name="theme" id="theme-dark" value="dark">
+                <label for="theme-dark" class="theme-toggle__label" title="Dark theme">🌙</label>
+            </div>
+
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+                <li><a href="blog.html" class="nav__link">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" style="background-image: url('assets/images/hero.jpg');">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+            <h1 class="hero__title">Framework Showcase</h1>
+            <p class="hero__subtitle">
+                Complete design system with interactive components, carousels, and responsive layouts.
+            </p>
+        </div>
+    </section>
+
+    <main class="container" style="padding: var(--space-7) 0;">
+        
+        <!-- MAIN TABS NAVIGATION -->
+        <div class="tabs showcase-tabs" style="margin-bottom: var(--space-6);">
+            <div class="tablist" role="tablist" aria-label="Showcase navigation">
+                <button class="tab is-active" role="tab" aria-selected="true" aria-controls="tab-overview" id="tab-btn-overview" data-tab="overview">Overview</button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab-components" id="tab-btn-components" data-tab="components">Components</button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab-cards" id="tab-btn-cards" data-tab="cards">Cards</button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab-tokens" id="tab-btn-tokens" data-tab="tokens">Design Tokens</button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab-layout" id="tab-btn-layout" data-tab="layout">Layout</button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab-accessibility" id="tab-btn-accessibility" data-tab="accessibility">Accessibility</button>
+            </div>
+        </div>
+
+        <!-- TAB PANELS -->
+        
+        <!-- OVERVIEW TAB -->
+        <div class="tab__panel is-active" role="tabpanel" id="tab-overview" aria-labelledby="tab-btn-overview">
+            <section class="demo-section">
+                <h2>Framework Overview</h2>
+                <p>Welcome to the unified responsive CSS framework showcase. Use the tabs above to explore different sections.</p>
+                
+                <h3 class="h3 mt-4">Quick Links</h3>
+                <div class="grid">
+                    <div class="col-12 col-md-4">
+                        <article class="card">
+                            <div class="card__body">
+                                <h4>Components</h4>
+                                <p>Buttons, forms, alerts, badges, and interactive elements with all states demonstrated.</p>
+                                <a href="#tab-components" class="btn btn--primary btn--sm" onclick="switchTab('components'); return false;">View Components</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <article class="card">
+                            <div class="card__body">
+                                <h4>Cards</h4>
+                                <p>All card variants including glass morphism, image cards, and horizontal layouts.</p>
+                                <a href="#tab-cards" class="btn btn--primary btn--sm" onclick="switchTab('cards'); return false;">View Cards</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <article class="card">
+                            <div class="card__body">
+                                <h4>Design Tokens</h4>
+                                <p>Colors, typography, spacing, borders, and shadows - the foundation of the design system.</p>
+                                <a href="#tab-tokens" class="btn btn--primary btn--sm" onclick="switchTab('tokens'); return false;">View Tokens</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- CAROUSELS -->
+                <h2 id="carousels" class="h2 mt-6">Carousels</h2>
+                <p>Horizontal and vertical carousels with navigation controls and indicators.</p>
+
+                <h3 class="h3 mt-4">Horizontal Carousel</h3>
+                <div class="carousel carousel--horizontal" id="carousel-horizontal">
+                    <div class="carousel__track">
+                        <div class="carousel__slide">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=600&fit=crop" alt="Slide 1" style="width: 100%; height: 400px; object-fit: cover;">
+                        </div>
+                        <div class="carousel__slide">
+                            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&h=600&fit=crop" alt="Slide 2" style="width: 100%; height: 400px; object-fit: cover;">
+                        </div>
+                        <div class="carousel__slide">
+                            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&h=600&fit=crop" alt="Slide 3" style="width: 100%; height: 400px; object-fit: cover;">
+                        </div>
+                        <div class="carousel__slide">
+                            <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&h=600&fit=crop" alt="Slide 4" style="width: 100%; height: 400px; object-fit: cover;">
+                        </div>
+                    </div>
+                    <div class="carousel__controls">
+                        <button class="carousel__button" data-carousel-prev="carousel-horizontal">← Prev</button>
+                        <button class="carousel__button" data-carousel-next="carousel-horizontal">Next →</button>
+                    </div>
+                    <div class="carousel__indicators" id="indicators-horizontal"></div>
+                </div>
+
+                <h3 class="h3 mt-6">Vertical Carousel</h3>
+                <div class="carousel carousel--vertical" id="carousel-vertical">
+                    <div class="carousel__track">
+                        <div class="carousel__slide">
+                            <div class="card" style="height: 100%; margin: 0;">
+                                <div class="card__body">
+                                    <h4>Card 1</h4>
+                                    <p>First card in vertical carousel. Scroll through to see more content.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel__slide">
+                            <div class="card" style="height: 100%; margin: 0;">
+                                <div class="card__body">
+                                    <h4>Card 2</h4>
+                                    <p>Second card with different content. Perfect for showcasing multiple items.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel__slide">
+                            <div class="card" style="height: 100%; margin: 0;">
+                                <div class="card__body">
+                                    <h4>Card 3</h4>
+                                    <p>Third card demonstrates vertical scrolling capability.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel__slide">
+                            <div class="card" style="height: 100%; margin: 0;">
+                                <div class="card__body">
+                                    <h4>Card 4</h4>
+                                    <p>Final card in the vertical carousel sequence.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel__controls">
+                        <button class="carousel__button" data-carousel-prev="carousel-vertical">↑ Prev</button>
+                        <button class="carousel__button" data-carousel-next="carousel-vertical">Next ↓</button>
+                    </div>
+                    <div class="carousel__indicators" id="indicators-vertical"></div>
+                </div>
+
+                <div class="code-example mt-4">
+                    <strong>Carousel HTML Structure:</strong><br>
+                    &lt;div class="carousel carousel--horizontal" id="my-carousel"&gt;<br>
+                    &nbsp;&nbsp;&lt;div class="carousel__track"&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="carousel__slide"&gt;...&lt;/div&gt;<br>
+                    &nbsp;&nbsp;&lt;/div&gt;<br>
+                    &nbsp;&nbsp;&lt;div class="carousel__controls"&gt;...&lt;/div&gt;<br>
+                    &nbsp;&nbsp;&lt;div class="carousel__indicators"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;
+                </div>
+            </section>
+        </div>
+
+        <!-- COMPONENTS TAB -->
+        <div class="tab__panel" role="tabpanel" id="tab-components" aria-labelledby="tab-btn-components" hidden>
+            <section class="demo-section">
+                <h2 id="components">UI Components</h2>
+                <p>Every component uses the token system, is mobile‑first and supports light/dark theming.</p>
+
+                <h3 id="buttons" class="h3 mt-4">Buttons</h3>
+                
+                <h4 class="h4 mt-4">Button Styles</h4>
+                <div class="grid">
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <button class="btn btn--primary">Primary</button>
+                        <button class="btn btn--secondary">Secondary</button>
+                        <button class="btn btn--outline">Outline</button>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <button class="btn btn--ghost">Ghost</button>
+                        <button class="btn btn--text">Text</button>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <button class="btn btn--primary btn--sm">Small</button>
+                        <button class="btn btn--primary">Medium</button>
+                        <button class="btn btn--primary btn--lg">Large</button>
+                    </div>
+                </div>
+
+                <h4 class="h4 mt-6">Button States</h4>
+                <p class="text-sm text-muted mb-3">Hover, focus, and active states are demonstrated below. Try interacting with the buttons to see the states in action.</p>
+                <div class="grid">
+                    <div class="col-12 col-md-6">
+                        <div class="state-demo">
+                            <p class="text-sm mb-2"><strong>Default State</strong></p>
+                            <button class="btn btn--primary">Primary Button</button>
+                            <button class="btn btn--secondary">Secondary Button</button>
+                            <button class="btn btn--outline">Outline Button</button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="state-demo">
+                            <p class="text-sm mb-2"><strong>Disabled State</strong></p>
+                            <button class="btn btn--primary" disabled>Primary (Disabled)</button>
+                            <button class="btn btn--secondary" disabled>Secondary (Disabled)</button>
+                            <button class="btn btn--outline" disabled>Outline (Disabled)</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-example mt-4">
+                    <strong>Button States:</strong><br>
+                    Default: &lt;button class="btn btn--primary"&gt;Button&lt;/button&gt;<br>
+                    Disabled: &lt;button class="btn btn--primary" disabled&gt;Button&lt;/button&gt;<br>
+                    <br>
+                    <strong>Interactive States:</strong> Hover (lift effect), Focus (keyboard ring), Active (pressed). Use browser dev tools or interact with buttons to see them.
+                </div>
+
+                <h4 class="h4 mt-6">Buttons with Icons</h4>
+                <div class="grid">
+                    <div class="col-12 col-md-6">
+                        <p class="text-sm mb-2">Icon on Left:</p>
+                        <button class="btn btn--primary btn--icon-left" data-tooltip="Download file">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download
+                        </button>
+                        <button class="btn btn--secondary btn--icon-left" data-tooltip="Save changes">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                <polyline points="7 3 7 8 15 8"></polyline>
+                            </svg>
+                            Save
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="text-sm mb-2">Icon on Right:</p>
+                        <button class="btn btn--primary btn--icon-right" data-tooltip="Continue to next step">
+                            Continue
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                        <button class="btn btn--outline btn--icon-right" data-tooltip="Open external link">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="code-example mt-4">
+                    <strong>Button with Icon:</strong><br>
+                    &lt;button class="btn btn--primary btn--icon-left"&gt;<br>
+                    &nbsp;&nbsp;&lt;svg&gt;...&lt;/svg&gt;<br>
+                    &nbsp;&nbsp;Button Text<br>
+                    &lt;/button&gt;<br><br>
+                    Use <code>btn--icon-left</code> or <code>btn--icon-right</code> classes.
+                </div>
+
+                <h3 id="alerts" class="h3 mt-6">Alerts</h3>
+                <div class="grid">
+                    <div class="col-12 col-md-6">
+                        <div class="alert alert--success">
+                            <strong>Success!</strong> Your data has been saved.
+                            <button class="alert__close" aria-label="Close alert">&times;</button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="alert alert--error">
+                            <strong>Error!</strong> Something went wrong.
+                            <button class="alert__close" aria-label="Close alert">&times;</button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="alert alert--info">
+                            <strong>Info:</strong> New features are available.
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="alert alert--warning">
+                            <strong>Warning:</strong> Check your settings.
+                        </div>
+                    </div>
+                </div>
+                <div class="code-example mt-4">
+                    <strong>Alert Usage:</strong><br>
+                    &lt;div class="alert alert--success"&gt;<br>
+                    &nbsp;&nbsp;&lt;strong&gt;Success!&lt;/strong&gt; Your data has been saved.<br>
+                    &nbsp;&nbsp;&lt;button class="alert__close" aria-label="Close alert"&gt;&times;&lt;/button&gt;<br>
+                    &lt;/div&gt;
+                </div>
+
+                <h3 id="badges" class="h3 mt-6">Badges</h3>
+                <p>
+                    <span class="badge badge--pill">New</span>
+                    <span class="badge">Default</span>
+                    <span class="badge badge--pill badge--outline">Promo</span>
+                </p>
+                <div class="code-example mt-4">
+                    <strong>Badge Usage:</strong><br>
+                    &lt;span class="badge badge--pill"&gt;New&lt;/span&gt;
+                </div>
+
+                <h3 id="progress" class="h3 mt-6">Progress & Spinner</h3>
+                <div class="grid">
+                    <div class="col-12 col-md-6">
+                        <div class="progress" aria-label="Upload progress">
+                            <div class="progress__bar" style="width:70%"></div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="spinner" aria-hidden="true"></div>
+                    </div>
+                </div>
+                <div class="code-example mt-4">
+                    <strong>Progress Bar:</strong><br>
+                    &lt;div class="progress"&gt;<br>
+                    &nbsp;&nbsp;&lt;div class="progress__bar" style="width:70%"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;
+                </div>
+
+                <h3 id="tooltips" class="h3 mt-6">Tooltips</h3>
+                <p>Interactive tooltips that appear on hover or focus. Hover over the elements below:</p>
+            
+            <div class="grid" style="margin-top: var(--space-4);">
+                <div class="col-12 col-md-4">
+                    <button class="btn btn--primary" data-tooltip="This is a primary button tooltip">Primary Button</button>
+                </div>
+                <div class="col-12 col-md-4">
+                    <button class="btn btn--secondary" data-tooltip="Secondary button with helpful information">Secondary Button</button>
+                </div>
+                <div class="col-12 col-md-4">
+                    <button class="btn btn--outline" data-tooltip="Outline button tooltip example">Outline Button</button>
+                </div>
+            </div>
+
+            <div class="grid mt-4">
+                <div class="col-12 col-md-6">
+                    <p>Tooltips on icons:</p>
+                    <button class="btn btn--ghost" data-tooltip="Edit this item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                    </button>
+                    <button class="btn btn--ghost" data-tooltip="Delete permanently">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                    </button>
+                    <button class="btn btn--ghost" data-tooltip="Share with others">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="col-12 col-md-6">
+                    <p>Tooltips on text elements:</p>
+                    <p>
+                        You can add tooltips to <a href="#" data-tooltip="This link goes somewhere interesting">links</a>, 
+                        <span data-tooltip="Tooltips work on any element" style="text-decoration: underline; cursor: help;">text spans</span>, or 
+                        <abbr data-tooltip="HyperText Markup Language" title="HTML">abbreviations</abbr>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="code-example mt-4">
+                <strong>Tooltip Usage:</strong><br>
+                &lt;button data-tooltip="Your tooltip text here"&gt;Button&lt;/button&gt;<br>
+                &lt;a href="#" data-tooltip="Link description"&gt;Link&lt;/a&gt;<br>
+                &lt;span data-tooltip="Helpful hint"&gt;Text&lt;/span&gt;
+            </div>
+        </section>
+
+        <!-- RADIO BUTTONS AS SELECTABLE BUTTONS -->
+        <section class="demo-section">
+            <h2 id="radio-buttons">Radio Buttons as Selectable Buttons</h2>
+            <p>Radio buttons styled as interactive button groups. Only one option can be selected at a time.</p>
+            
+            <h3 class="h3 mt-4">Example: Select Size</h3>
+            <div class="radio-group">
+                <div class="radio-button">
+                    <input type="radio" id="size-xs" name="size" value="xs">
+                    <label for="size-xs">XS</label>
+                </div>
+                <div class="radio-button">
+                    <input type="radio" id="size-sm" name="size" value="sm" checked>
+                    <label for="size-sm">SM</label>
+                </div>
+                <div class="radio-button">
+                    <input type="radio" id="size-md" name="size" value="md">
+                    <label for="size-md">MD</label>
+                </div>
+                <div class="radio-button">
+                    <input type="radio" id="size-lg" name="size" value="lg">
+                    <label for="size-lg">LG</label>
+                </div>
+                <div class="radio-button">
+                    <input type="radio" id="size-xl" name="size" value="xl">
+                    <label for="size-xl">XL</label>
+                </div>
+            </div>
+
+            <h3 class="h3 mt-6">Example: Select Theme</h3>
+            <div class="radio-group">
+                <div class="radio-button">
+                    <input type="radio" id="theme-auto" name="theme-pref" value="auto">
+                    <label for="theme-auto">Auto</label>
+                </div>
+                <div class="radio-button">
+                    <input type="radio" id="theme-light" name="theme-pref" value="light" checked>
+                    <label for="theme-light">Light</label>
+                </div>
+                <div class="radio-button">
+                    <input type="radio" id="theme-dark" name="theme-pref" value="dark">
+                    <label for="theme-dark">Dark</label>
+                </div>
+            </div>
+
+            <div class="code-example mt-4">
+                <strong>Radio Button Group:</strong><br>
+                &lt;div class="radio-group"&gt;<br>
+                &nbsp;&nbsp;&lt;div class="radio-button"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="radio" id="option1" name="group" value="1"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;label for="option1"&gt;Option 1&lt;/label&gt;<br>
+                &nbsp;&nbsp;&lt;/div&gt;<br>
+                &nbsp;&nbsp;&lt;!-- More options --&gt;<br>
+                &lt;/div&gt;
+            </div>
+        </section>
+
+        <!-- TOGGLE SWITCHES -->
+        <section class="demo-section">
+            <h2 id="toggles">Toggle Switches</h2>
+            <p>Large toggle switches for on/off states. Perfect for settings and preferences.</p>
+            
+            <h3 class="h3 mt-4">Standard Toggle</h3>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
+                        <label for="toggle-1" style="margin: 0; font-weight: 500;">Enable notifications</label>
+                        <label class="toggle">
+                            <input type="checkbox" id="toggle-1">
+                            <span class="toggle__slider"></span>
+                        </label>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
+                        <label for="toggle-2" style="margin: 0; font-weight: 500;">Dark mode</label>
+                        <label class="toggle">
+                            <input type="checkbox" id="toggle-2" checked>
+                            <span class="toggle__slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
+                        <label for="toggle-3" style="margin: 0; font-weight: 500;">Auto-save</label>
+                        <label class="toggle">
+                            <input type="checkbox" id="toggle-3">
+                            <span class="toggle__slider"></span>
+                        </label>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
+                        <label for="toggle-4" style="margin: 0; font-weight: 500;">Public profile</label>
+                        <label class="toggle">
+                            <input type="checkbox" id="toggle-4" checked>
+                            <span class="toggle__slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="h3 mt-6">Large Toggle</h3>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
+                        <label for="toggle-lg-1" style="margin: 0; font-weight: 500; font-size: var(--font-size-lg);">Enable feature</label>
+                        <label class="toggle toggle--lg">
+                            <input type="checkbox" id="toggle-lg-1">
+                            <span class="toggle__slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
+                        <label for="toggle-lg-2" style="margin: 0; font-weight: 500; font-size: var(--font-size-lg);">Advanced mode</label>
+                        <label class="toggle toggle--lg">
+                            <input type="checkbox" id="toggle-lg-2" checked>
+                            <span class="toggle__slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-example mt-4">
+                <strong>Toggle Switch:</strong><br>
+                &lt;label class="toggle"&gt;<br>
+                &nbsp;&nbsp;&lt;input type="checkbox" id="toggle-1"&gt;<br>
+                &nbsp;&nbsp;&lt;span class="toggle__slider"&gt;&lt;/span&gt;<br>
+                &lt;/label&gt;<br><br>
+                Use <code>toggle--lg</code> for larger toggle switches.
+            </div>
+        </section>
+
+        <!-- SLIDERS -->
+        <section class="demo-section">
+            <h2 id="sliders">Range Sliders</h2>
+            <p>Interactive range sliders for selecting numeric values. Perfect for volume, brightness, or any numeric input.</p>
+            
+            <h3 class="h3 mt-4">Standard Slider</h3>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <label for="slider-volume" style="display: block; margin-bottom: var(--space-2); font-weight: 500;">
+                        Volume: <span id="volume-value">50</span>%
+                    </label>
+                    <input type="range" id="slider-volume" class="slider" min="0" max="100" value="50">
+                </div>
+                <div class="col-12 col-md-6">
+                    <label for="slider-brightness" style="display: block; margin-bottom: var(--space-2); font-weight: 500;">
+                        Brightness: <span id="brightness-value">75</span>%
+                    </label>
+                    <input type="range" id="slider-brightness" class="slider" min="0" max="100" value="75">
+                </div>
+            </div>
+
+            <h3 class="h3 mt-6">Large Slider</h3>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <label for="slider-lg-1" style="display: block; margin-bottom: var(--space-2); font-weight: 500; font-size: var(--font-size-lg);">
+                        Opacity: <span id="opacity-value">60</span>%
+                    </label>
+                    <input type="range" id="slider-lg-1" class="slider slider--lg" min="0" max="100" value="60">
+                </div>
+                <div class="col-12 col-md-6">
+                    <label for="slider-lg-2" style="display: block; margin-bottom: var(--space-2); font-weight: 500; font-size: var(--font-size-lg);">
+                        Speed: <span id="speed-value">30</span>%
+                    </label>
+                    <input type="range" id="slider-lg-2" class="slider slider--lg" min="0" max="100" value="30">
+                </div>
+            </div>
+
+            <div class="code-example mt-4">
+                <strong>Range Slider:</strong><br>
+                &lt;input type="range" class="slider" min="0" max="100" value="50"&gt;<br><br>
+                Use <code>slider--lg</code> for larger sliders with bigger thumbs.
+            </div>
+        </section>
+
+            <h3 id="modals" class="h3 mt-6">Modals</h3>
+            <button class="btn btn--primary" data-modal-target="#example-modal">Open Modal</button>
+            <div class="modal" id="example-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+                <div class="modal__overlay" data-modal-close></div>
+                <div class="modal__dialog">
+                    <div class="modal__header">
+                        <h3 id="modal-title">Modal Title</h3>
+                        <button class="modal__close" aria-label="Close" data-modal-close>&times;</button>
+                    </div>
+                    <div class="modal__body">
+                        <p>Modal body text – the overlay darkens the background and focus is trapped inside.</p>
+                    </div>
+                    <div class="modal__footer">
+                        <button class="btn btn--secondary" data-modal-close>Cancel</button>
+                        <button class="btn btn--primary" data-modal-close>Save</button>
+                    </div>
+                </div>
+            </div>
+            <div class="code-example mt-4">
+                <strong>Modal Usage:</strong><br>
+                &lt;button class="btn btn--primary" data-modal-target="#example-modal"&gt;Open Modal&lt;/button&gt;
+            </div>
+
+            <h3 id="tabs" class="h3 mt-6">Tabs</h3>
+            <div class="tabs">
+                <div class="tablist" role="tablist">
+                    <button class="tab is-active" role="tab" aria-selected="true" aria-controls="tab-panel-1">Tab 1</button>
+                    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-panel-2">Tab 2</button>
+                    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-panel-3">Tab 3</button>
+                </div>
+                <div class="tab__panel is-active" id="tab-panel-1" role="tabpanel">
+                    <p>Content for tab 1. This is the first tab panel.</p>
+                </div>
+                <div class="tab__panel" id="tab-panel-2" role="tabpanel">
+                    <p>Content for tab 2. This is the second tab panel.</p>
+                </div>
+                <div class="tab__panel" id="tab-panel-3" role="tabpanel">
+                    <p>Content for tab 3. This is the third tab panel.</p>
+                </div>
+            </div>
+            <div class="code-example mt-4">
+                <strong>Tab Usage:</strong><br>
+                &lt;div class="tabs"&gt;<br>
+                &nbsp;&nbsp;&lt;div class="tablist" role="tablist"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;button class="tab is-active" role="tab"&gt;Tab 1&lt;/button&gt;<br>
+                &nbsp;&nbsp;&lt;/div&gt;<br>
+                &nbsp;&nbsp;&lt;div class="tab__panel is-active"&gt;Content&lt;/div&gt;<br>
+                &lt;/div&gt;
+            </div>
+
+            <h3 id="accordion" class="h3 mt-6">Accordion</h3>
+            <div class="accordion">
+                <div class="accordion__item">
+                    <button class="accordion__button" aria-expanded="false" aria-controls="acc-1">Item 1</button>
+                    <div class="accordion__panel" id="acc-1" hidden>
+                        <p>First collapsible section.</p>
+                    </div>
+                </div>
+                <div class="accordion__item">
+                    <button class="accordion__button" aria-expanded="false" aria-controls="acc-2">Item 2</button>
+                    <div class="accordion__panel" id="acc-2" hidden>
+                        <p>Second collapsible section.</p>
+                    </div>
+                </div>
+                <div class="accordion__item">
+                    <button class="accordion__button" aria-expanded="false" aria-controls="acc-3">Item 3</button>
+                    <div class="accordion__panel" id="acc-3" hidden>
+                        <p>Third collapsible section.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="code-example mt-4">
+                <strong>Accordion Usage:</strong><br>
+                &lt;div class="accordion"&gt;<br>
+                &nbsp;&nbsp;&lt;div class="accordion__item"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;button class="accordion__button" aria-expanded="false" aria-controls="acc-1"&gt;Item 1&lt;/button&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="accordion__panel" id="acc-1" hidden&gt;…&lt;/div&gt;<br>
+                &nbsp;&nbsp;&lt;/div&gt;<br>
+                &lt;/div&gt;
+            </div>
+
+            <h3 id="forms" class="h3 mt-6">Form Controls</h3>
+            <p class="text-sm text-muted mb-3">Form controls with focus states. Try tabbing through the fields to see focus indicators.</p>
+            <form class="form">
+                <div class="grid">
+                    <div class="col-12 col-md-6">
+                        <div class="form__row">
+                            <label for="showcase-name">Name</label>
+                            <input id="showcase-name" type="text" placeholder="Jane Doe">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form__row">
+                            <label for="showcase-email">Email</label>
+                            <input id="showcase-email" type="email" placeholder="jane@example.com">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form__row">
+                            <label for="showcase-message">Message</label>
+                            <textarea id="showcase-message" rows="4" placeholder="Your message"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="form__row">
+                            <label for="showcase-country">Country</label>
+                            <select id="showcase-country">
+                                <option>USA</option>
+                                <option>UK</option>
+                                <option>Canada</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="form__row">
+                            <label for="showcase-checkbox">
+                                <input id="showcase-checkbox" type="checkbox"> I agree to the terms
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="form__row">
+                            <label>Gender</label>
+                            <label><input name="showcase-gender" type="radio" value="f"> Female</label>
+                            <label><input name="showcase-gender" type="radio" value="m"> Male</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn--primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+            <div class="code-example mt-4">
+                <strong>Form Usage:</strong><br>
+                &lt;form class="form"&gt;<br>
+                &nbsp;&nbsp;&lt;div class="form__row"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;label for="name"&gt;Name&lt;/label&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;input id="name" type="text"&gt;<br>
+                &nbsp;&nbsp;&lt;/div&gt;<br>
+                &lt;/form&gt;
+            </div>
+
+            <h3 id="table" class="h3 mt-6">Table</h3>
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First</th>
+                            <th>Last</th>
+                            <th>Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@motto</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@jthornton</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Larry</td>
+                            <td>Bird</td>
+                            <td>@lbird</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="code-example mt-4">
+                <strong>Table Usage:</strong><br>
+                &lt;table class="table"&gt;…&lt;/table&gt;
+            </div>
+            </section>
+        </div>
+
+        <!-- CARDS TAB -->
+        <div class="tab__panel" role="tabpanel" id="tab-cards" aria-labelledby="tab-btn-cards" hidden>
+            <section class="demo-section">
+                <h2 id="cards">Card Components</h2>
+                <p>All card variants with different styles and layouts. Cards in the same row automatically have equal height.</p>
+
+                <h3 class="h3 mt-4">Basic Cards</h3>
+                <div class="grid">
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <article class="card card--shadow-sm">
+                            <div class="card__header">
+                                <h4>Card Header</h4>
+                            </div>
+                            <div class="card__body">
+                                <p>Basic card with a subtle shadow.</p>
+                            </div>
+                            <div class="card__footer">
+                                <a href="#" class="btn btn--primary btn--sm">Action</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <article class="card card--image card--shadow-md">
+                            <img src="assets/images/hero.jpg" alt="Sample image">
+                            <div class="card__body">
+                                <h4>Image Card</h4>
+                                <p>Image above content.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <article class="card card--shadow-lg">
+                            <div class="card__header">
+                                <h4>Card with Footer</h4>
+                            </div>
+                            <div class="card__body">
+                                <p>More room for copy.</p>
+                            </div>
+                            <div class="card__footer">
+                                <a href="#" class="btn btn--secondary btn--sm">Read more</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="code-example mt-4">
+                    <strong>Basic Card:</strong><br>
+                    &lt;article class="card card--shadow-sm"&gt;<br>
+                    &nbsp;&nbsp;&lt;div class="card__header"&gt;&lt;h4&gt;Header&lt;/h4&gt;&lt;/div&gt;<br>
+                    &nbsp;&nbsp;&lt;div class="card__body"&gt;…&lt;/div&gt;<br>
+                    &nbsp;&nbsp;&lt;div class="card__footer"&gt;…&lt;/div&gt;<br>
+                    &lt;/article&gt;
+                </div>
+
+                <h3 class="h3 mt-6">Glass Morphism Cards</h3>
+                <p>Frosted glass effect cards with backdrop blur. Works in both light and dark themes.</p>
+                <div class="grid">
+                    <div class="col-12 col-md-6">
+                        <article class="card card--glass-solid">
+                            <div class="card__header">
+                                <h4>Solid Glass</h4>
+                            </div>
+                            <div class="card__body">
+                                <p>Solid glass morphism card with 85% opacity background and backdrop blur. Perfect for overlays and modern UI designs.</p>
+                            </div>
+                            <div class="card__footer">
+                                <a href="#" class="btn btn--primary btn--sm">Action</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card card--glass-outline">
+                            <div class="card__header">
+                                <h4>Outline Glass</h4>
+                            </div>
+                            <div class="card__body">
+                                <p>Outline glass morphism with transparent background and prominent border. Great for subtle content containers.</p>
+                            </div>
+                            <div class="card__footer">
+                                <a href="#" class="btn btn--outline btn--sm">Action</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <p class="mt-2"><strong>Note:</strong> Glass morphism cards automatically adapt to light/dark theme. Toggle the theme above to see the dark variants.</p>
+                <div class="code-example mt-4">
+                    <strong>Glass Morphism Card:</strong><br>
+                    &lt;article class="card card--glass-solid"&gt;…&lt;/article&gt;<br>
+                    &lt;article class="card card--glass-outline"&gt;…&lt;/article&gt;
+                </div>
+
+                <h3 class="h3 mt-6">Solid & Outline Cards</h3>
+                <div class="grid">
+                    <div class="col-12 col-md-6">
+                        <article class="card card--solid">
+                            <div class="card__body">
+                                <h4>Solid Card</h4>
+                                <p>Card with solid background and border. Great for content that needs emphasis.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <article class="card card--outline">
+                            <div class="card__body">
+                                <h4>Outline Card</h4>
+                                <p>Card with transparent background and colored border. Subtle and modern.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <h3 class="h3 mt-6">Image on Top Cards</h3>
+                <div class="grid">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <article class="card card--image-top">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" alt="Mountain">
+                            <div class="card__body">
+                                <h4>Card Title</h4>
+                                <p>Image on top with heading and description below. Perfect for product cards or feature highlights.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <article class="card card--image-top">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" alt="Mountain">
+                            <div class="card__body">
+                                <h4>Another Card</h4>
+                                <p>Consistent layout with image at the top and content below.</p>
+                            </div>
+                            <div class="card__footer">
+                                <a href="#" class="btn btn--primary btn--sm">Learn More</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <h3 class="h3 mt-6">Image Background Cards</h3>
+                <div class="grid">
+                    <div class="col-12 col-md-6">
+                        <article class="card card--image-bg" style="background-image: url('assets/images/hero.jpg');">
+                            <div class="card__body">
+                                <h3>Featured Content</h3>
+                                <p>This card uses an image as the background with a gradient overlay for text readability. Great for highlighting important content.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <h3 class="h3 mt-6">Horizontal Cards</h3>
+                <div class="grid">
+                    <div class="col-12">
+                        <article class="card card--horizontal">
+                            <div class="card__image">
+                                <img src="assets/images/hero.jpg" alt="Sample image">
+                            </div>
+                            <div class="card__body">
+                                <div class="card__subheading">Featured Article</div>
+                                <h3>Main Heading</h3>
+                                <p class="text-lg">Sub-heading or lead text that provides context.</p>
+                                <p>Detailed description text goes here. This card layout is perfect for blog posts, news articles, or feature highlights.</p>
+                                <div class="mt-4">
+                                    <a href="#" class="btn btn--primary">Read More</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="code-example mt-4">
+                    <strong>Horizontal Card:</strong><br>
+                    &lt;article class="card card--horizontal"&gt;<br>
+                    &nbsp;&nbsp;&lt;div class="card__image"&gt;&lt;img src="..."&gt;&lt;/div&gt;<br>
+                    &nbsp;&nbsp;&lt;div class="card__body"&gt;...&lt;/div&gt;<br>
+                    &lt;/article&gt;
+                </div>
+            </section>
+        </div>
+
+        <!-- DESIGN TOKENS TAB -->
+        <div class="tab__panel" role="tabpanel" id="tab-tokens" aria-labelledby="tab-btn-tokens" hidden>
+            <section class="demo-section">
+                <h2 id="tokens">Design Tokens</h2>
+                <p>All visual decisions are stored as reusable CSS custom properties (variables). They are grouped by intent – colour, spacing, typography, radius, shadows, etc.</p>
+
+                <div class="grid">
+                    <!-- COLORS -->
+                    <div class="col-12 col-md-6">
+                        <h3 class="h3 mt-4">Colours</h3>
+                        <div class="grid">
+                            <div class="col-6 col-sm-3">
+                                <div class="token-swatch" style="background:var(--color-primary)"></div>
+                                <code>--color-primary</code>
+                            </div>
+                            <div class="col-6 col-sm-3">
+                                <div class="token-swatch" style="background:var(--color-secondary)"></div>
+                                <code>--color-secondary</code>
+                            </div>
+                            <div class="col-6 col-sm-3">
+                                <div class="token-swatch" style="background:var(--color-bg)"></div>
+                                <code>--color-bg</code>
+                            </div>
+                            <div class="col-6 col-sm-3">
+                                <div class="token-swatch" style="background:var(--color-surface)"></div>
+                                <code>--color-surface</code>
+                            </div>
+                            <div class="col-6 col-sm-3">
+                                <div class="token-swatch" style="background:var(--color-accent)"></div>
+                                <code>--color-accent</code>
+                            </div>
+                            <div class="col-6 col-sm-3">
+                                <div class="token-swatch" style="background:var(--color-success)"></div>
+                                <code>--color-success</code>
+                            </div>
+                            <div class="col-6 col-sm-3">
+                                <div class="token-swatch" style="background:var(--color-warning)"></div>
+                                <code>--color-warning</code>
+                            </div>
+                            <div class="col-6 col-sm-3">
+                                <div class="token-swatch" style="background:var(--color-danger)"></div>
+                                <code>--color-danger</code>
+                            </div>
+                            <div class="col-6 col-sm-3">
+                                <div class="token-swatch" style="background:var(--color-text)"></div>
+                                <code>--color-text</code>
+                            </div>
+                            <div class="col-6 col-sm-3">
+                                <div class="token-swatch" style="background:var(--color-text-muted)"></div>
+                                <code>--color-text-muted</code>
+                            </div>
+                            <div class="col-6 col-sm-3">
+                                <div class="token-swatch" style="background:var(--color-border)"></div>
+                                <code>--color-border</code>
+                            </div>
+                        </div>
+                        <p class="mt-2">Use them with <code>color: var(--color-primary);</code> or <code>background: var(--color-surface);</code></p>
+                    </div>
+
+                    <!-- TYPOGRAPHY -->
+                    <div class="col-12 col-md-6">
+                        <h3 class="h3 mt-4">Typography</h3>
+                        <p>Font family: <strong>Inter</strong>. Scale is defined with <code>--font-size-*</code> variables.</p>
+                        <div class="typography-sample">
+                            <h1 style="font-size:var(--font-size-3xl)">Heading 1 – 40 px</h1>
+                            <h2 style="font-size:var(--font-size-2xl)">Heading 2 – 32 px</h2>
+                            <h3 style="font-size:var(--font-size-xl)">Heading 3 – 24 px</h3>
+                            <p style="font-size:var(--font-size-base)">Body text – 16 px (base)</p>
+                            <p style="font-size:var(--font-size-sm)">Small text – 14 px</p>
+                        </div>
+                        <pre class="code-block"><code>/* Example */
+h1 { font-size: var(--font-size-3xl); }
+p  { font-size: var(--font-size-base); }</code></pre>
+                    </div>
+
+                    <!-- SPACING -->
+                    <div class="col-12 col-md-6">
+                        <h3 class="h3 mt-4">Spacing</h3>
+                        <p>All spacing uses a 4‑base scale: <code>--space-1</code> (4 px) … <code>--space-8</code> (64 px).</p>
+                        <div class="grid">
+                            <div class="col-3">
+                                <div class="space-demo" style="margin:var(--space-1)"></div>
+                                <code>--space-1</code>
+                            </div>
+                            <div class="col-3">
+                                <div class="space-demo" style="margin:var(--space-2)"></div>
+                                <code>--space-2</code>
+                            </div>
+                            <div class="col-3">
+                                <div class="space-demo" style="margin:var(--space-3)"></div>
+                                <code>--space-3</code>
+                            </div>
+                            <div class="col-3">
+                                <div class="space-demo" style="margin:var(--space-4)"></div>
+                                <code>--space-4</code>
+                            </div>
+                            <div class="col-3">
+                                <div class="space-demo" style="margin:var(--space-5)"></div>
+                                <code>--space-5</code>
+                            </div>
+                            <div class="col-3">
+                                <div class="space-demo" style="margin:var(--space-6)"></div>
+                                <code>--space-6</code>
+                            </div>
+                            <div class="col-3">
+                                <div class="space-demo" style="margin:var(--space-7)"></div>
+                                <code>--space-7</code>
+                            </div>
+                            <div class="col-3">
+                                <div class="space-demo" style="margin:var(--space-8)"></div>
+                                <code>--space-8</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BORDERS & RADIUS -->
+                    <div class="col-12 col-md-6">
+                        <h3 class="h3 mt-4">Radius & Borders</h3>
+                        <div class="grid">
+                            <div class="col-4">
+                                <div class="radius-demo" style="border-radius:var(--border-radius-sm)"></div>
+                                <code>--border-radius-sm</code>
+                            </div>
+                            <div class="col-4">
+                                <div class="radius-demo" style="border-radius:var(--border-radius)"></div>
+                                <code>--border-radius</code>
+                            </div>
+                            <div class="col-4">
+                                <div class="radius-demo" style="border-radius:var(--border-radius-lg)"></div>
+                                <code>--border-radius-lg</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SHADOWS -->
+                    <div class="col-12 col-md-6">
+                        <h3 class="h3 mt-4">Shadows</h3>
+                        <div class="grid">
+                            <div class="col-4">
+                                <div class="shadow-demo" style="box-shadow:var(--shadow-sm)"></div>
+                                <code>--shadow-sm</code>
+                            </div>
+                            <div class="col-4">
+                                <div class="shadow-demo" style="box-shadow:var(--shadow-md)"></div>
+                                <code>--shadow-md</code>
+                            </div>
+                            <div class="col-4">
+                                <div class="shadow-demo" style="box-shadow:var(--shadow-lg)"></div>
+                                <code>--shadow-lg</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FLUID TYPOGRAPHY -->
+            <section class="demo-section">
+                <h2 id="typography">Fluid Typography</h2>
+                <p>All typography scales fluidly using clamp() from mobile to ultra-wide displays.</p>
+                
+                <div class="grid" style="margin-top: var(--space-4);">
+                    <div class="col-12 col-md-6">
+                        <h1 class="h1">Heading 1 (3xl)</h1>
+                        <h2 class="h2">Heading 2 (2xl)</h2>
+                        <h3 class="h3">Heading 3 (xl)</h3>
+                        <h4 class="h4">Heading 4 (lg)</h4>
+                        <h5 class="h5">Heading 5 (base)</h5>
+                        <h6 class="h6">Heading 6 (sm)</h6>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="text-xs">Extra Small Text (xs)</p>
+                        <p class="text-sm">Small Text (sm)</p>
+                        <p class="text-base">Base Text (base)</p>
+                        <p class="text-lg">Large Text (lg)</p>
+                        <p class="text-xl">Extra Large Text (xl)</p>
+                        <p class="text-2xl">2XL Text</p>
+                        <p class="text-3xl">3XL Text</p>
+                        <p class="text-4xl">4XL Text</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- LAYOUT TAB -->
+        <div class="tab__panel" role="tabpanel" id="tab-layout" aria-labelledby="tab-btn-layout" hidden>
+            <section class="demo-section">
+                <h2 id="grid">12-Column Grid System</h2>
+                <p>Responsive columns that adapt from mobile (1 col) to ultra-wide displays (4 cols).</p>
+
+                <div class="grid">
+                    <div class="col-12"><div class="demo-box">col-12 (100%)</div></div>
+                </div>
+                
+                <div class="grid">
+                    <div class="col-6"><div class="demo-box">col-6 (50%)</div></div>
+                    <div class="col-6"><div class="demo-box">col-6 (50%)</div></div>
+                </div>
+                
+                <div class="grid">
+                    <div class="col-3"><div class="demo-box">col-3 (25%)</div></div>
+                    <div class="col-3"><div class="demo-box">col-3 (25%)</div></div>
+                    <div class="col-3"><div class="demo-box">col-3 (25%)</div></div>
+                    <div class="col-3"><div class="demo-box">col-3 (25%)</div></div>
+                </div>
+            </section>
+        </div>
+
+            <h3 id="alerts" class="h3 mt-4">Alerts</h3>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <div class="alert alert--success">
+                        <strong>Success!</strong> Your data has been saved.
+                        <button class="alert__close" aria-label="Close alert">&times;</button>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="alert alert--error">
+                        <strong>Error!</strong> Something went wrong.
+                        <button class="alert__close" aria-label="Close alert">&times;</button>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="alert alert--info">
+                        <strong>Info:</strong> New features are available.
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="alert alert--warning">
+                        <strong>Warning:</strong> Check your settings.
+                    </div>
+                </div>
+            </div>
+            <div class="code-example mt-4">
+                <strong>Alert Usage:</strong><br>
+                &lt;div class="alert alert--success"&gt;<br>
+                &nbsp;&nbsp;&lt;strong&gt;Success!&lt;/strong&gt; Your data has been saved.<br>
+                &nbsp;&nbsp;&lt;button class="alert__close" aria-label="Close alert"&gt;&times;&lt;/button&gt;<br>
+                &lt;/div&gt;
+            </div>
+
+            <h3 id="badges" class="h3 mt-4">Badges</h3>
+            <p>
+                <span class="badge badge--pill">New</span>
+                <span class="badge">Default</span>
+                <span class="badge badge--pill badge--outline">Promo</span>
+            </p>
+            <div class="code-example mt-4">
+                <strong>Badge Usage:</strong><br>
+                &lt;span class="badge badge--pill"&gt;New&lt;/span&gt;
+            </div>
+
+            <h3 id="progress" class="h3 mt-4">Progress & Spinner</h3>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <div class="progress" aria-label="Upload progress">
+                        <div class="progress__bar" style="width:70%"></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="spinner" aria-hidden="true"></div>
+                </div>
+            </div>
+            <div class="code-example mt-4">
+                <strong>Progress Bar:</strong><br>
+                &lt;div class="progress"&gt;<br>
+                &nbsp;&nbsp;&lt;div class="progress__bar" style="width:70%"&gt;&lt;/div&gt;<br>
+                &lt;/div&gt;
+            </div>
+
+            <h3 class="h3 mt-4">Basic Cards</h3>
+            <div class="grid">
+                <div class="col-12 col-md-4 col-lg-3">
+                    <article class="card card--shadow-sm">
+                        <div class="card__header">
+                            <h4>Card Header</h4>
+                        </div>
+                        <div class="card__body">
+                            <p>Basic card with a subtle shadow.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="#" class="btn btn--primary btn--sm">Action</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <article class="card card--image card--shadow-md">
+                        <img src="assets/images/hero.jpg" alt="Sample image">
+                        <div class="card__body">
+                            <h4>Image Card</h4>
+                            <p>Image above content.</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <article class="card card--shadow-lg">
+                        <div class="card__header">
+                            <h4>Card with Footer</h4>
+                        </div>
+                        <div class="card__body">
+                            <p>More room for copy.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="#" class="btn btn--secondary btn--sm">Read more</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="code-example mt-4">
+                <strong>Basic Card:</strong><br>
+                &lt;article class="card card--shadow-sm"&gt;<br>
+                &nbsp;&nbsp;&lt;div class="card__header"&gt;&lt;h4&gt;Header&lt;/h4&gt;&lt;/div&gt;<br>
+                &nbsp;&nbsp;&lt;div class="card__body"&gt;…&lt;/div&gt;<br>
+                &nbsp;&nbsp;&lt;div class="card__footer"&gt;…&lt;/div&gt;<br>
+                &lt;/article&gt;
+            </div>
+
+            <h4 class="h4 mt-6">Glass Morphism Cards</h4>
+            <p>Frosted glass effect cards with backdrop blur. Works in both light and dark themes.</p>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <article class="card card--glass-solid">
+                        <div class="card__header">
+                            <h4>Solid Glass</h4>
+                        </div>
+                        <div class="card__body">
+                            <p>Solid glass morphism card with 85% opacity background and backdrop blur. Perfect for overlays and modern UI designs.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="#" class="btn btn--primary btn--sm">Action</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-6">
+                    <article class="card card--glass-outline">
+                        <div class="card__header">
+                            <h4>Outline Glass</h4>
+                        </div>
+                        <div class="card__body">
+                            <p>Outline glass morphism with transparent background and prominent border. Great for subtle content containers.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="#" class="btn btn--outline btn--sm">Action</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <p class="mt-2"><strong>Note:</strong> Glass morphism cards automatically adapt to light/dark theme. Toggle the theme above to see the dark variants.</p>
+            <div class="code-example mt-4">
+                <strong>Glass Morphism Card:</strong><br>
+                &lt;article class="card card--glass-solid"&gt;…&lt;/article&gt;<br>
+                &lt;article class="card card--glass-outline"&gt;…&lt;/article&gt;
+            </div>
+
+            <h4 class="h4 mt-6">Solid & Outline Cards</h4>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <article class="card card--solid">
+                        <div class="card__body">
+                            <h4>Solid Card</h4>
+                            <p>Card with solid background and border. Great for content that needs emphasis.</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-6">
+                    <article class="card card--outline">
+                        <div class="card__body">
+                            <h4>Outline Card</h4>
+                            <p>Card with transparent background and colored border. Subtle and modern.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <h4 class="h4 mt-6">Image on Top Cards</h4>
+            <div class="grid">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" alt="Mountain">
+                        <div class="card__body">
+                            <h4>Card Title</h4>
+                            <p>Image on top with heading and description below. Perfect for product cards or feature highlights.</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <article class="card card--image-top">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" alt="Mountain">
+                        <div class="card__body">
+                            <h4>Another Card</h4>
+                            <p>Consistent layout with image at the top and content below.</p>
+                        </div>
+                        <div class="card__footer">
+                            <a href="#" class="btn btn--primary btn--sm">Learn More</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <h4 class="h4 mt-6">Image Background Cards</h4>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <article class="card card--image-bg" style="background-image: url('assets/images/hero.jpg');">
+                        <div class="card__body">
+                            <h3>Featured Content</h3>
+                            <p>This card uses an image as the background with a gradient overlay for text readability. Great for highlighting important content.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <h4 class="h4 mt-6">Horizontal Cards</h4>
+            <div class="grid">
+                <div class="col-12">
+                    <article class="card card--horizontal">
+                        <div class="card__image">
+                            <img src="assets/images/hero.jpg" alt="Sample image">
+                        </div>
+                        <div class="card__body">
+                            <div class="card__subheading">Featured Article</div>
+                            <h3>Main Heading</h3>
+                            <p class="text-lg">Sub-heading or lead text that provides context.</p>
+                            <p>Detailed description text goes here. This card layout is perfect for blog posts, news articles, or feature highlights.</p>
+                            <div class="mt-4">
+                                <a href="#" class="btn btn--primary">Read More</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="code-example mt-4">
+                <strong>Horizontal Card:</strong><br>
+                &lt;article class="card card--horizontal"&gt;<br>
+                &nbsp;&nbsp;&lt;div class="card__image"&gt;&lt;img src="..."&gt;&lt;/div&gt;<br>
+                &nbsp;&nbsp;&lt;div class="card__body"&gt;...&lt;/div&gt;<br>
+                &lt;/article&gt;
+            </div>
+            </section>
+
+            <h3 id="modals" class="h3 mt-6">Modals</h3>
+            <button class="btn btn--primary" data-modal-target="#example-modal">Open Modal</button>
+            <div class="modal" id="example-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+                <div class="modal__overlay" data-modal-close></div>
+                <div class="modal__dialog">
+                    <div class="modal__header">
+                        <h3 id="modal-title">Modal Title</h3>
+                        <button class="modal__close" aria-label="Close" data-modal-close>&times;</button>
+                    </div>
+                    <div class="modal__body">
+                        <p>Modal body text – the overlay darkens the background and focus is trapped inside.</p>
+                    </div>
+                    <div class="modal__footer">
+                        <button class="btn btn--secondary" data-modal-close>Cancel</button>
+                        <button class="btn btn--primary" data-modal-close>Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3 id="tabs" class="h3 mt-4">Tabs</h3>
+            <div class="tabs">
+                <div class="tablist" role="tablist">
+                    <button class="tab is-active" role="tab" aria-selected="true" aria-controls="tab-panel-1">Tab 1</button>
+                    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-panel-2">Tab 2</button>
+                    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-panel-3">Tab 3</button>
+                </div>
+                <div class="tab__panel is-active" id="tab-panel-1" role="tabpanel">
+                    <p>Content for tab 1. This is the first tab panel.</p>
+                </div>
+                <div class="tab__panel" id="tab-panel-2" role="tabpanel">
+                    <p>Content for tab 2. This is the second tab panel.</p>
+                </div>
+                <div class="tab__panel" id="tab-panel-3" role="tabpanel">
+                    <p>Content for tab 3. This is the third tab panel.</p>
+                </div>
+            </div>
+
+            <h3 id="accordion" class="h3 mt-4">Accordion</h3>
+            <div class="accordion">
+                <div class="accordion__item">
+                    <button class="accordion__button" aria-expanded="false" aria-controls="acc-1">Item 1</button>
+                    <div class="accordion__panel" id="acc-1" hidden>
+                        <p>First collapsible section.</p>
+                    </div>
+                </div>
+                <div class="accordion__item">
+                    <button class="accordion__button" aria-expanded="false" aria-controls="acc-2">Item 2</button>
+                    <div class="accordion__panel" id="acc-2" hidden>
+                        <p>Second collapsible section.</p>
+                    </div>
+                </div>
+                <div class="accordion__item">
+                    <button class="accordion__button" aria-expanded="false" aria-controls="acc-3">Item 3</button>
+                    <div class="accordion__panel" id="acc-3" hidden>
+                        <p>Third collapsible section.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="code-example mt-4">
+                <strong>Accordion Usage:</strong><br>
+                &lt;div class="accordion"&gt;<br>
+                &nbsp;&nbsp;&lt;div class="accordion__item"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;button class="accordion__button" aria-expanded="false" aria-controls="acc-1"&gt;Item 1&lt;/button&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="accordion__panel" id="acc-1" hidden&gt;…&lt;/div&gt;<br>
+                &nbsp;&nbsp;&lt;/div&gt;<br>
+                &lt;/div&gt;
+            </div>
+
+            <h3 id="forms" class="h3 mt-4">Form Controls</h3>
+            <form class="form">
+                <div class="grid">
+                    <div class="col-12 col-md-6">
+                        <div class="form__row">
+                            <label for="showcase-name">Name</label>
+                            <input id="showcase-name" type="text" placeholder="Jane Doe">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form__row">
+                            <label for="showcase-email">Email</label>
+                            <input id="showcase-email" type="email" placeholder="jane@example.com">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form__row">
+                            <label for="showcase-message">Message</label>
+                            <textarea id="showcase-message" rows="4" placeholder="Your message"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="form__row">
+                            <label for="showcase-country">Country</label>
+                            <select id="showcase-country">
+                                <option>USA</option>
+                                <option>UK</option>
+                                <option>Canada</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="form__row">
+                            <label for="showcase-checkbox">
+                                <input id="showcase-checkbox" type="checkbox"> I agree to the terms
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="form__row">
+                            <label>Gender</label>
+                            <label><input name="showcase-gender" type="radio" value="f"> Female</label>
+                            <label><input name="showcase-gender" type="radio" value="m"> Male</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn--primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+            <h3 id="table" class="h3 mt-4">Table</h3>
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First</th>
+                            <th>Last</th>
+                            <th>Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@motto</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@jthornton</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Larry</td>
+                            <td>Bird</td>
+                            <td>@lbird</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="code-example mt-4">
+                <strong>Table Usage:</strong><br>
+                &lt;table class="table"&gt;…&lt;/table&gt;
+            </div>
+            </section>
+        </div>
+
+        <!-- ACCESSIBILITY TAB -->
+        <div class="tab__panel" role="tabpanel" id="tab-accessibility" aria-labelledby="tab-btn-accessibility" hidden>
+            <section class="demo-section">
+                <h2 id="a11y">Accessibility & Touch Optimization</h2>
+            
+            <h3 class="h3 mt-4">Accessibility Features</h3>
+            <ul>
+                <li><strong>Focus States:</strong> All interactive elements have visible focus indicators using <code>focus-visible</code> with 3px outline and 2px offset.</li>
+                <li><strong>Keyboard Navigation:</strong> Full keyboard support for all components. Modals trap focus and can be closed with <kbd>Esc</kbd>.</li>
+                <li><strong>ARIA Support:</strong> Modals use <code>aria-modal</code> and <code>role="dialog"</code>. Accordions use <code>aria-expanded</code>. Tabs use proper ARIA roles: <code>tablist</code>, <code>tab</code>, <code>tabpanel</code>.</li>
+                <li><strong>Color Contrast:</strong> All text meets WCAG AA standards (4.5:1 for normal text, 3:1 for large text).</li>
+                <li><strong>Semantic HTML:</strong> Proper heading hierarchy, landmark regions, and semantic elements throughout.</li>
+                <li><strong>Screen Reader Support:</strong> Tooltips visible on focus, proper labels for form controls, descriptive alt text patterns.</li>
+            </ul>
+
+            <h3 class="h3 mt-4">Touch Device Optimization</h3>
+            <ul>
+                <li><strong>Touch Targets:</strong> All interactive elements meet WCAG 2.5.5 minimum size of 44×44px (comfortable 48px).</li>
+                <li><strong>Spacing:</strong> Increased spacing between touch targets (minimum 8px) to prevent accidental taps.</li>
+                <li><strong>Tap Highlight:</strong> Removed default iOS tap highlight for cleaner interactions.</li>
+                <li><strong>Touch Scrolling:</strong> Smooth scrolling with <code>-webkit-overflow-scrolling: touch</code> for better mobile performance.</li>
+                <li><strong>Form Controls:</strong> Checkboxes and radio buttons enlarged to 20×20px on touch devices.</li>
+                <li><strong>Active States:</strong> Visual feedback on touch with scale transforms and background changes.</li>
+            </ul>
+
+            <h3 class="h3 mt-4">Interactive States</h3>
+            <p>All interactive components include comprehensive state management:</p>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <h4>Button States</h4>
+                    <ul>
+                        <li><code>:hover</code> - Subtle lift with shadow</li>
+                        <li><code>:active</code> - Pressed state (scale down)</li>
+                        <li><code>:focus-visible</code> - Keyboard focus ring</li>
+                        <li><code>:disabled</code> - Reduced opacity, no pointer events</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h4>Form States</h4>
+                    <ul>
+                        <li><code>:focus</code> - Border color change + focus ring</li>
+                        <li><code>:disabled</code> - Grayed out, not interactive</li>
+                        <li><code>:invalid</code> - Error styling (when implemented)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="code-example mt-4">
+                <strong>Example: Button with all states</strong><br>
+                <code>/* Example: Button with all states */<br>
+.btn {<br>
+&nbsp;&nbsp;/* Base styles */<br>
+&nbsp;&nbsp;min-height: 44px; /* Touch target */<br>
+&nbsp;&nbsp;transition: transform 0.2s ease;<br>
+}<br>
+<br>
+.btn:hover { transform: translateY(-1px); }<br>
+.btn:active { transform: translateY(0); }<br>
+.btn:focus-visible { outline: 3px solid var(--focus-ring-color); }<br>
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }</code>
+            </div>
+        </section>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <p>&copy; <span id="year"></span> Your School. All rights reserved.</p>
+                </div>
+                <div class="col-12 col-md-6" style="text-align: right;">
+                    <a href="showcase.html" class="nav__link">Framework Showcase</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script>
+        // Viewport info display
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            const widthSpan = document.getElementById('viewport-width');
+            const breakpointSpan = document.getElementById('breakpoint');
+            
+            widthSpan.textContent = width + 'px';
+            
+            let breakpoint = 'xs';
+            if (width >= 2400) breakpoint = 'xxxl';
+            else if (width >= 1600) breakpoint = 'xxl';
+            else if (width >= 1280) breakpoint = 'xl';
+            else if (width >= 1024) breakpoint = 'lg';
+            else if (width >= 768) breakpoint = 'md';
+            else if (width >= 600) breakpoint = 'sm';
+            
+            breakpointSpan.textContent = breakpoint;
+        }
+        
+        updateViewportInfo();
+        window.addEventListener('resize', updateViewportInfo);
+
+        // Carousel functionality
+        function initCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+
+            const track = carousel.querySelector('.carousel__track');
+            const slides = carousel.querySelectorAll('.carousel__slide');
+            const prevBtn = carousel.querySelector('[data-carousel-prev]');
+            const nextBtn = carousel.querySelector('[data-carousel-next]');
+            const indicators = carousel.querySelector('.carousel__indicators');
+            const isVertical = carousel.classList.contains('carousel--vertical');
+            
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+
+            // Create indicators
+            if (indicators) {
+                for (let i = 0; i < totalSlides; i++) {
+                    const indicator = document.createElement('button');
+                    indicator.className = 'carousel__indicator' + (i === 0 ? ' is-active' : '');
+                    indicator.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                    indicator.addEventListener('click', () => goToSlide(i));
+                    indicators.appendChild(indicator);
+                }
+            }
+
+            function updateCarousel() {
+                if (isVertical) {
+                    track.style.transform = `translateY(-${currentIndex * 100}%)`;
+                } else {
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
+
+                // Update indicators
+                if (indicators) {
+                    indicators.querySelectorAll('.carousel__indicator').forEach((ind, i) => {
+                        ind.classList.toggle('is-active', i === currentIndex);
+                    });
+                }
+
+                // Update button states
+                if (prevBtn) prevBtn.disabled = currentIndex === 0;
+                if (nextBtn) nextBtn.disabled = currentIndex === totalSlides - 1;
+            }
+
+            function goToSlide(index) {
+                currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
+                updateCarousel();
+            }
+
+            function nextSlide() {
+                if (currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            }
+
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                }
+            }
+
+            if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+            if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+            // Keyboard navigation
+            carousel.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' && !isVertical) prevSlide();
+                if (e.key === 'ArrowRight' && !isVertical) nextSlide();
+                if (e.key === 'ArrowUp' && isVertical) prevSlide();
+                if (e.key === 'ArrowDown' && isVertical) nextSlide();
+            });
+
+            // Make carousel focusable
+            carousel.setAttribute('tabindex', '0');
+
+            updateCarousel();
+        }
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all panels
+            document.querySelectorAll('.tab__panel').forEach(panel => {
+                panel.hidden = true;
+                panel.classList.remove('is-active');
+            });
+            
+            // Remove active from all tabs
+            document.querySelectorAll('.showcase-tabs .tab').forEach(tab => {
+                tab.classList.remove('is-active');
+                tab.setAttribute('aria-selected', 'false');
+            });
+            
+            // Show selected panel
+            const panel = document.getElementById(`tab-${tabName}`);
+            const tabBtn = document.getElementById(`tab-btn-${tabName}`);
+            
+            if (panel && tabBtn) {
+                panel.hidden = false;
+                panel.classList.add('is-active');
+                tabBtn.classList.add('is-active');
+                tabBtn.setAttribute('aria-selected', 'true');
+                
+                // Scroll to top of main content
+                document.querySelector('main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Initialize tabs
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set up tab click handlers
+            document.querySelectorAll('.showcase-tabs .tab').forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    const tabName = tab.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
+
+            // Initialize carousels
+            initCarousel('carousel-horizontal');
+            initCarousel('carousel-vertical');
+
+            // Slider value updates
+            const volumeSlider = document.getElementById('slider-volume');
+            const volumeValue = document.getElementById('volume-value');
+            if (volumeSlider && volumeValue) {
+                volumeSlider.addEventListener('input', (e) => {
+                    volumeValue.textContent = e.target.value;
+                });
+            }
+
+            const brightnessSlider = document.getElementById('slider-brightness');
+            const brightnessValue = document.getElementById('brightness-value');
+            if (brightnessSlider && brightnessValue) {
+                brightnessSlider.addEventListener('input', (e) => {
+                    brightnessValue.textContent = e.target.value;
+                });
+            }
+
+            const opacitySlider = document.getElementById('slider-lg-1');
+            const opacityValue = document.getElementById('opacity-value');
+            if (opacitySlider && opacityValue) {
+                opacitySlider.addEventListener('input', (e) => {
+                    opacityValue.textContent = e.target.value;
+                });
+            }
+
+            const speedSlider = document.getElementById('slider-lg-2');
+            const speedValue = document.getElementById('speed-value');
+            if (speedSlider && speedValue) {
+                speedSlider.addEventListener('input', (e) => {
+                    speedValue.textContent = e.target.value;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

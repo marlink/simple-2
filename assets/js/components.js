@@ -124,4 +124,242 @@ document.addEventListener('DOMContentLoaded', () => {
         tip.style.bottom = '100%';
         tip.style.transform = 'translate(-50%, -6px)';
     });
+
+    /* ====================== CODE COPY BUTTON ====================== */
+    /**
+     * Decode HTML entities in a string
+     * @param {string} html - HTML string with entities
+     * @returns {string} - Decoded string
+     */
+    const decodeHtmlEntities = (html) => {
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = html;
+        return textarea.value;
+    };
+
+    /**
+     * Extract text content from a code block
+     * @param {HTMLElement} codeBlock - The code block element
+     * @returns {string} - The code text to copy
+     */
+    const extractCodeText = (codeBlock) => {
+        // For .code-example, decode HTML entities and handle HTML structure
+        if (codeBlock.classList.contains('code-example')) {
+            // Clone the element to avoid modifying the original
+            const clone = codeBlock.cloneNode(true);
+            
+            // Replace <br> tags with newlines
+            clone.querySelectorAll('br').forEach(br => {
+                br.replaceWith(document.createTextNode('\n'));
+            });
+            
+            // Remove <strong> tags but keep their content, add newline after if followed by content
+            const strongTags = Array.from(clone.querySelectorAll('strong'));
+            strongTags.forEach(strong => {
+                const parent = strong.parentNode;
+                const nextSibling = strong.nextSibling;
+                
+                // Move strong content before the strong element
+                while (strong.firstChild) {
+                    parent.insertBefore(strong.firstChild, strong);
+                }
+                
+                // Add newline after strong content if there's following content
+                if (nextSibling && (nextSibling.nodeType === Node.TEXT_NODE || nextSibling.nodeType === Node.ELEMENT_NODE)) {
+                    const nextText = nextSibling.textContent ? nextSibling.textContent.trim() : '';
+                    if (nextText) {
+                        parent.insertBefore(document.createTextNode('\n'), strong);
+                    }
+                }
+                
+                parent.removeChild(strong);
+            });
+            
+            // Get text content and decode HTML entities
+            let text = clone.textContent || clone.innerText;
+            // Clean up multiple consecutive newlines (max 2)
+            text = text.replace(/\n{3,}/g, '\n\n');
+            return decodeHtmlEntities(text).trim();
+        }
+        
+        // For pre.code-block, get code element text
+        if (codeBlock.classList.contains('code-block')) {
+            const codeElement = codeBlock.querySelector('code');
+            if (codeElement) {
+                return codeElement.textContent || codeElement.innerText;
+            }
+            return codeBlock.textContent || codeBlock.innerText;
+        }
+        
+        // Fallback: get all text content
+        return codeBlock.textContent || codeBlock.innerText;
+    };
+
+    /**
+     * Copy text to clipboard
+     * @param {string} text - Text to copy
+     * @returns {Promise<boolean>} - Success status
+     */
+    const copyToClipboard = async (text) => {
+        try {
+            // Use modern Clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(text);
+                return true;
+            }
+            
+            // Fallback for older browsers
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textarea);
+                return successful;
+            } catch (err) {
+                document.body.removeChild(textarea);
+                return false;
+            }
+        } catch (err) {
+            console.error('Failed to copy text:', err);
+            return false;
+        }
+    };
+
+    /**
+     * Create and setup copy button for a code block
+     * @param {HTMLElement} codeBlock - The code block element
+     */
+    const setupCopyButton = (codeBlock) => {
+        // Skip if button already exists
+        if (codeBlock.querySelector('.code-copy-btn')) {
+            return;
+        }
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'code-copy-btn';
+        copyBtn.setAttribute('aria-label', 'Copy code');
+        copyBtn.setAttribute('type', 'button');
+        copyBtn.textContent = 'Copy';
+        
+        // Prevent text selection when tapping
+        copyBtn.addEventListener('mousedown', (e) => e.preventDefault());
+        copyBtn.addEventListener('touchstart', (e) => e.preventDefault());
+        
+        // Handle copy on click/touch
+        const handleCopy = async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const codeText = extractCodeText(codeBlock);
+            const success = await copyToClipboard(codeText);
+            
+            if (success) {
+                // Show success feedback
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            } else {
+                // Show error feedback (optional)
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Error';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+            }
+        };
+        
+        // Support both click and touch events
+        copyBtn.addEventListener('click', handleCopy);
+        copyBtn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            handleCopy(e);
+        });
+        
+        codeBlock.appendChild(copyBtn);
+    };
+
+    // Find all code blocks and add copy buttons
+    const codeBlocks = document.querySelectorAll('.code-example, pre.code-block');
+    codeBlocks.forEach(setupCopyButton);
 });
+
+/* ====================== GLOBAL TAB SWITCHING ====================== */
+/**
+ * Programmatically switch to a tab by name
+ * Works with both standard tabs and showcase tabs
+ * @param {string} tabName - The name of the tab to switch to
+ */
+window.switchTab = function(tabName) {
+    // Try showcase pattern first (tab-{name} panel, tab-btn-{name} button)
+    const showcasePanel = document.getElementById(`tab-${tabName}`);
+    const showcaseBtn = document.getElementById(`tab-btn-${tabName}`);
+    
+    if (showcasePanel && showcaseBtn) {
+        // Hide all showcase panels
+        document.querySelectorAll('.tab__panel').forEach(panel => {
+            panel.hidden = true;
+            panel.classList.remove('is-active');
+        });
+        
+        // Remove active from all showcase tabs
+        const showcaseTabs = document.querySelector('.showcase-tabs');
+        if (showcaseTabs) {
+            showcaseTabs.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('is-active');
+                tab.setAttribute('aria-selected', 'false');
+            });
+        }
+        
+        // Show selected panel
+        showcasePanel.hidden = false;
+        showcasePanel.classList.add('is-active');
+        showcaseBtn.classList.add('is-active');
+        showcaseBtn.setAttribute('aria-selected', 'true');
+        
+        // Scroll to top of main content
+        const main = document.querySelector('main');
+        if (main) {
+            main.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        return;
+    }
+    
+    // Fallback to standard tab system
+    const tabContainers = document.querySelectorAll('.tabs');
+    tabContainers.forEach(container => {
+        const tabs = container.querySelectorAll('.tab');
+        const panels = container.querySelectorAll('.tab__panel');
+        
+        tabs.forEach(tab => {
+            const panelId = tab.getAttribute('aria-controls');
+            const dataTab = tab.getAttribute('data-tab');
+            
+            if (panelId && panelId.includes(tabName) || dataTab === tabName) {
+                // Deactivate all
+                tabs.forEach(t => {
+                    t.classList.remove('is-active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                panels.forEach(p => p.classList.remove('is-active'));
+                
+                // Activate matching tab
+                tab.classList.add('is-active');
+                tab.setAttribute('aria-selected', 'true');
+                const panel = container.querySelector('#' + panelId);
+                if (panel) panel.classList.add('is-active');
+            }
+        });
+    });
+};

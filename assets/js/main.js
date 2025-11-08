@@ -84,6 +84,90 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    /* ---------- 2️⃣.7 Scroll-responsive navigation ---------- */
+    const siteHeader = document.querySelector('.site-header');
+    if (siteHeader) {
+        let ticking = false;
+        let lastScrollY = window.scrollY || window.pageYOffset;
+        let scrollTimeout = null;
+        let lastScrollDirection = 0; // 1 = down, -1 = up, 0 = none
+        const scrollThreshold = 10; // Small threshold to avoid flickering at exact top
+        const fixedThreshold = 275; // Navbar becomes fixed after this scroll distance (250-300px range)
+        const scrollStopDelay = 150; // Delay before showing navbar after scroll stops (when stopped)
+        const scrollDownDelay = 450; // Delay before showing navbar if still scrolling downward
+
+        const handleScroll = () => {
+            const scrollY = window.scrollY || window.pageYOffset;
+            const scrollDelta = scrollY - lastScrollY;
+            
+            // Handle scrolled state (for styling changes) - only applies after fixed threshold
+            // Before fixedThreshold, navbar stays as part of the page (position: relative)
+            if (scrollY > fixedThreshold) {
+                siteHeader.classList.add('site-header--scrolled');
+            } else {
+                siteHeader.classList.remove('site-header--scrolled');
+                // Always show navbar at top of page
+                siteHeader.classList.remove('site-header--hidden');
+                // Clear timeout when at top
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = null;
+                }
+            }
+            
+            // Handle auto-hide behavior (only when scrolled past fixed threshold)
+            // Before fixedThreshold, navbar stays as part of the page (position: relative)
+            if (scrollY > fixedThreshold) {
+                // Clear any existing timeout
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = null;
+                }
+                
+                // Determine scroll direction
+                if (scrollDelta > 0) {
+                    lastScrollDirection = 1; // Scrolling down
+                    siteHeader.classList.add('site-header--hidden');
+                } else if (scrollDelta < 0) {
+                    lastScrollDirection = -1; // Scrolling up
+                    siteHeader.classList.remove('site-header--hidden');
+                }
+                
+                // Set timeout to show navbar after scroll stops
+                // Use longer delay if last scroll was downward
+                const delay = lastScrollDirection === 1 ? scrollDownDelay : scrollStopDelay;
+                scrollTimeout = setTimeout(() => {
+                    siteHeader.classList.remove('site-header--hidden');
+                    scrollTimeout = null;
+                }, delay);
+            } else {
+                // Before fixedThreshold, ensure navbar is always visible
+                siteHeader.classList.remove('site-header--hidden');
+                // Clear timeout when above threshold
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = null;
+                }
+            }
+            
+            lastScrollY = scrollY;
+            ticking = false;
+        };
+
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(handleScroll);
+                ticking = true;
+            }
+        };
+
+        // Handle initial state
+        handleScroll();
+
+        // Listen to scroll events (works for both desktop and touch devices)
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('touchmove', onScroll, { passive: true });
+    }
 
     /* ---------- 3️⃣ Simple filter on the contact page ---------- */
     const filterInput = document.getElementById('filter-input');
@@ -93,10 +177,37 @@ document.addEventListener('DOMContentLoaded', () => {
             const term = e.target.value.toLowerCase().trim();
             [...filterList.children].forEach(li => {
                 const txt = li.textContent.toLowerCase();
-                li.style.display = txt.includes(term) ? '' : 'none';
+                if (txt.includes(term)) {
+                    li.classList.remove('hidden');
+                } else {
+                    li.classList.add('hidden');
+                }
             });
         });
     }
+
+    /* ---------- 3️⃣.5 Set active navigation link based on current page ---------- */
+    const setActiveNavLink = () => {
+        const navLinks = document.querySelectorAll('.nav__link');
+        const currentPath = window.location.pathname;
+        const currentPage = currentPath.split('/').pop() || 'index.html';
+        
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            // Remove is-active from all links first
+            link.classList.remove('is-active');
+            
+            // Check if this link matches the current page
+            // Handle both root "/" and "index.html" for home
+            if ((currentPage === '' || currentPage === 'index.html' || currentPath === '/' || currentPath.endsWith('/')) && href === 'index.html') {
+                link.classList.add('is-active');
+            } else if (href === currentPage) {
+                link.classList.add('is-active');
+            }
+        });
+    };
+    
+    setActiveNavLink();
 
     /* ---------- 4️⃣ Footer newsletter email validation ---------- */
     const emailInput = document.querySelector('.footer__email-input');

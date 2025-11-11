@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Typography System Demo – Fluid Typography</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Unified Responsive Framework -->
+    <link rel="stylesheet" href="assets/css/framework-unified.css">
+    <!-- Typography System -->
+    <link rel="stylesheet" href="assets/css/typography-system.css">
+    
+    <style>
+        /* Demo-specific styles */
+        .demo-section {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .demo-section:last-child {
+            border-bottom: none;
+        }
+        
+        .demo-section h2 {
+            margin-top: 0;
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-4);
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        .demo-item {
+            margin-bottom: var(--space-6);
+        }
+        
+        .demo-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .demo-label {
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-2);
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <header class="site-header">
+        <nav class="nav">
+            <a class="nav__logo" href="index.html" aria-label="Home">
+                <img src="assets/logo/mc-logo.svg" alt="Logo" class="nav__logo-img">
+            </a>
+
+            <button class="nav__burger" aria-label="Toggle menu" aria-expanded="false">
+                <span class="nav__burger-line"></span>
+                <span class="nav__burger-line"></span>
+                <span class="nav__burger-line"></span>
+            </button>
+
+            <div class="nav__menu">
+                <ul class="nav__links">
+                    <li><a href="index.html" class="nav__link nav__link--underline">Home</a></li>
+                    <li><a href="about.html" class="nav__link nav__link--underline">About</a></li>
+                    <li><a href="contact.html" class="nav__link nav__link--underline">Contact</a></li>
+                    <li><a href="blog.html" class="nav__link nav__link--underline">Blog</a></li>
+                    <li><a href="typography-demo.html" class="nav__link nav__link--underline is-active">Typography</a></li>
+                </ul>
+
+                                <!-- THEME TOGGLE -->
+                <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+                    <span class="theme-toggle__icon theme-toggle__icon--light">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" fill="currentColor"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11 0H13V4.06189C12.6724 4.02104 12.3387 4 12 4C11.6613 4 11.3276 4.02104 11 4.06189V0ZM7.0943 5.68018L4.22173 2.80761L2.80752 4.22183L5.6801 7.09441C6.09071 6.56618 6.56608 6.0908 7.0943 5.68018ZM4.06189 11H0V13H4.06189C4.02104 12.6724 4 12.3387 4 12C4 11.6613 4.02104 11.3276 4.06189 11ZM5.6801 16.9056L2.80751 19.7782L4.22173 21.1924L7.0943 18.3198C6.56608 17.9092 6.09071 17.4338 5.6801 16.9056ZM11 19.9381V24H13V19.9381C12.6724 19.979 12.3387 20 12 20C11.6613 20 11.3276 19.979 11 19.9381ZM16.9056 18.3199L19.7781 21.1924L21.1923 19.7782L18.3198 16.9057C17.9092 17.4339 17.4338 17.9093 16.9056 18.3199ZM19.9381 13H24V11H19.9381C19.979 11.3276 20 11.6613 20 12C20 12.3387 19.979 12.6724 19.9381 13ZM18.3198 7.0943L21.1923 4.22183L19.7781 2.80762L16.9056 5.6801C17.4338 6.09071 17.9092 6.56608 18.3198 7.0943Z" fill="currentColor"/>
+                        </svg>
+                    </span>
+                    <span class="theme-toggle__icon theme-toggle__icon--dark">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2256 2.00253C9.59172 1.94346 6.93894 2.9189 4.92893 4.92891C1.02369 8.83415 1.02369 15.1658 4.92893 19.071C8.83418 22.9763 15.1658 22.9763 19.0711 19.071C21.0811 17.061 22.0565 14.4082 21.9975 11.7743C21.9796 10.9772 21.8669 10.1818 21.6595 9.40643C21.0933 9.9488 20.5078 10.4276 19.9163 10.8425C18.5649 11.7906 17.1826 12.4053 15.9301 12.6837C14.0241 13.1072 12.7156 12.7156 12 12C11.2844 11.2844 10.8928 9.97588 11.3163 8.0699C11.5947 6.81738 12.2094 5.43511 13.1575 4.08368C13.5724 3.49221 14.0512 2.90664 14.5935 2.34046C13.8182 2.13305 13.0228 2.02041 12.2256 2.00253ZM17.6569 17.6568C18.9081 16.4056 19.6582 14.8431 19.9072 13.2186C16.3611 15.2643 12.638 15.4664 10.5858 13.4142C8.53361 11.362 8.73568 7.63895 10.7814 4.09281C9.1569 4.34184 7.59434 5.09193 6.34315 6.34313C3.21895 9.46732 3.21895 14.5326 6.34315 17.6568C9.46734 20.781 14.5327 20.781 17.6569 17.6568Z" fill="currentColor"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Overlay -->
+            <div class="nav__overlay"></div>
+            <div class="nav__mobile-menu">
+                <ul class="nav__links nav__links--mobile">
+                    <li><a href="index.html" class="nav__link nav__link--underline">Home</a></li>
+                    <li><a href="about.html" class="nav__link nav__link--underline">About</a></li>
+                    <li><a href="contact.html" class="nav__link nav__link--underline">Contact</a></li>
+                    <li><a href="blog.html" class="nav__link nav__link--underline">Blog</a></li>
+                    <li><a href="typography-demo.html" class="nav__link nav__link--underline is-active">Typography</a></li>
+                </ul>
+
+                                <button class="theme-toggle theme-toggle--mobile" type="button" aria-label="Toggle color theme" title="Toggle theme">
+                    <span class="theme-toggle__icon theme-toggle__icon--light">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" fill="currentColor"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11 0H13V4.06189C12.6724 4.02104 12.3387 4 12 4C11.6613 4 11.3276 4.02104 11 4.06189V0ZM7.0943 5.68018L4.22173 2.80761L2.80752 4.22183L5.6801 7.09441C6.09071 6.56618 6.56608 6.0908 7.0943 5.68018ZM4.06189 11H0V13H4.06189C4.02104 12.6724 4 12.3387 4 12C4 11.6613 4.02104 11.3276 4.06189 11ZM5.6801 16.9056L2.80751 19.7782L4.22173 21.1924L7.0943 18.3198C6.56608 17.9092 6.09071 17.4338 5.6801 16.9056ZM11 19.9381V24H13V19.9381C12.6724 19.979 12.3387 20 12 20C11.6613 20 11.3276 19.979 11 19.9381ZM16.9056 18.3199L19.7781 21.1924L21.1923 19.7782L18.3198 16.9057C17.9092 17.4339 17.4338 17.9093 16.9056 18.3199ZM19.9381 13H24V11H19.9381C19.979 11.3276 20 11.6613 20 12C20 12.3387 19.979 12.6724 19.9381 13ZM18.3198 7.0943L21.1923 4.22183L19.7781 2.80762L16.9056 5.6801C17.4338 6.09071 17.9092 6.56608 18.3198 7.0943Z" fill="currentColor"/>
+                        </svg>
+                    </span>
+                    <span class="theme-toggle__icon theme-toggle__icon--dark">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2256 2.00253C9.59172 1.94346 6.93894 2.9189 4.92893 4.92891C1.02369 8.83415 1.02369 15.1658 4.92893 19.071C8.83418 22.9763 15.1658 22.9763 19.0711 19.071C21.0811 17.061 22.0565 14.4082 21.9975 11.7743C21.9796 10.9772 21.8669 10.1818 21.6595 9.40643C21.0933 9.9488 20.5078 10.4276 19.9163 10.8425C18.5649 11.7906 17.1826 12.4053 15.9301 12.6837C14.0241 13.1072 12.7156 12.7156 12 12C11.2844 11.2844 10.8928 9.97588 11.3163 8.0699C11.5947 6.81738 12.2094 5.43511 13.1575 4.08368C13.5724 3.49221 14.0512 2.90664 14.5935 2.34046C13.8182 2.13305 13.0228 2.02041 12.2256 2.00253ZM17.6569 17.6568C18.9081 16.4056 19.6582 14.8431 19.9072 13.2186C16.3611 15.2643 12.638 15.4664 10.5858 13.4142C8.53361 11.362 8.73568 7.63895 10.7814 4.09281C9.1569 4.34184 7.59434 5.09193 6.34315 6.34313C3.21895 9.46732 3.21895 14.5326 6.34315 17.6568C9.46734 20.781 14.5327 20.781 17.6569 17.6568Z" fill="currentColor"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container py-8">
+            <h1 class="display-1">Fluid Typography System</h1>
+            <p class="lead">A complete, reusable typography system with fluid scaling, vertical rhythm, and comprehensive utilities that automatically adapt to any screen size.</p>
+
+            <!-- Display Styles -->
+            <section class="demo-section">
+                <h2>Display Styles</h2>
+                <p class="muted">Larger than h1, perfect for hero sections and banners</p>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Display 1</div>
+                    <div class="display-1">Display One: The Largest Heading</div>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Display 2</div>
+                    <div class="display-2">Display Two: Large Hero Text</div>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Display 3</div>
+                    <div class="display-3">Display Three: Prominent Heading</div>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Display 4</div>
+                    <div class="display-4">Display Four: Section Header</div>
+                </div>
+            </section>
+
+            <!-- Headings -->
+            <section class="demo-section">
+                <h2>Heading Hierarchy</h2>
+                <p class="muted">Standard headings with fluid scaling</p>
+                
+                <div class="demo-item">
+                    <h1>Heading 1: Main Page Title</h1>
+                    <p>This is a standard h1 heading using the framework's default styles.</p>
+                </div>
+                
+                <div class="demo-item">
+                    <h2>Heading 2: Section Title</h2>
+                    <p>This is a standard h2 heading for major sections.</p>
+                </div>
+                
+                <div class="demo-item">
+                    <h3>Heading 3: Subsection</h3>
+                    <p>This is a standard h3 heading for subsections.</p>
+                </div>
+                
+                <div class="demo-item">
+                    <h4>Heading 4: Minor Section</h4>
+                    <p>This is a standard h4 heading for minor sections.</p>
+                </div>
+                
+                <div class="demo-item">
+                    <h5>Heading 5: Small Heading</h5>
+                    <p>This is a standard h5 heading for small sections.</p>
+                </div>
+                
+                <div class="demo-item">
+                    <h6>Heading 6: Smallest Heading</h6>
+                    <p>This is a standard h6 heading, the smallest in the hierarchy.</p>
+                </div>
+            </section>
+
+            <!-- Enhanced Headings -->
+            <section class="demo-section">
+                <h2>Enhanced Headings</h2>
+                <p class="muted">Headings with enhanced fluid scaling (add .enhanced class)</p>
+                
+                <div class="demo-item">
+                    <h1 class="enhanced">Enhanced Heading 1</h1>
+                </div>
+                
+                <div class="demo-item">
+                    <h2 class="enhanced">Enhanced Heading 2</h2>
+                </div>
+                
+                <div class="demo-item">
+                    <h3 class="enhanced">Enhanced Heading 3</h3>
+                </div>
+            </section>
+
+            <!-- Utility Classes -->
+            <section class="demo-section">
+                <h2>Text Utilities</h2>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Lead Paragraph</div>
+                    <p class="lead">This is a lead paragraph. It's larger and more prominent than regular body text, perfect for introductions and important statements.</p>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Muted Text</div>
+                    <p>This is regular text with <span class="muted">muted text</span> for less emphasis.</p>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Strong Text</div>
+                    <p>This is regular text with <span class="strong">strong text</span> for emphasis.</p>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Text Alignment</div>
+                    <p class="text-left">Left-aligned text (default)</p>
+                    <p class="text-center">Center-aligned text</p>
+                    <p class="text-right">Right-aligned text</p>
+                    <p class="text-justify">Justified text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                </div>
+            </section>
+
+            <!-- Blockquote -->
+            <section class="demo-section">
+                <h2>Blockquote</h2>
+                
+                <div class="demo-item">
+                    <blockquote>
+                        <p>The best way to predict the future is to invent it. Design is not just what it looks like and feels like—design is how it works.</p>
+                        <cite>Steve Jobs</cite>
+                    </blockquote>
+                </div>
+                
+                <div class="demo-item">
+                    <blockquote>
+                        <p>Simplicity is the ultimate sophistication. In design, less is more, and clarity is key to effective communication.</p>
+                    </blockquote>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="demo-section">
+                <h2>Code & Pre-formatted Text</h2>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Inline Code</div>
+                    <p>Use <code>const variable = 'value'</code> for inline code snippets. You can also use <code>font-family</code> and <code>font-size</code> in CSS.</p>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Code Block</div>
+                    <pre><code>function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+const message = greet('World');
+console.log(message);</code></pre>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Code Block with Wrapper</div>
+                    <div class="code-block">
+                        <pre><code>// Typography system variables
+:root {
+    --font-family: 'Inter', system-ui, sans-serif;
+    --font-family-heading: 'Space Grotesk', sans-serif;
+    --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --line-height-base: 1.5;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lists -->
+            <section class="demo-section">
+                <h2>Lists</h2>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Unordered List</div>
+                    <ul>
+                        <li>First item in the list</li>
+                        <li>Second item with more content that might wrap to multiple lines</li>
+                        <li>Third item
+                            <ul>
+                                <li>Nested item one</li>
+                                <li>Nested item two</li>
+                            </ul>
+                        </li>
+                        <li>Fourth item</li>
+                    </ul>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Ordered List</div>
+                    <ol>
+                        <li>First step in the process</li>
+                        <li>Second step with detailed instructions</li>
+                        <li>Third step
+                            <ol>
+                                <li>Sub-step one</li>
+                                <li>Sub-step two</li>
+                            </ol>
+                        </li>
+                        <li>Fourth step</li>
+                    </ol>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Definition List</div>
+                    <dl>
+                        <dt>Typography</dt>
+                        <dd>The art and technique of arranging type to make written language legible, readable, and appealing.</dd>
+                        <dt>Fluid Typography</dt>
+                        <dd>Typography that scales smoothly between breakpoints using CSS clamp() and viewport units.</dd>
+                        <dt>Vertical Rhythm</dt>
+                        <dd>A consistent spacing system based on a baseline unit that creates visual harmony.</dd>
+                    </dl>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Unstyled List</div>
+                    <ul class="list-unstyled">
+                        <li>Item without bullet</li>
+                        <li>Another unstyled item</li>
+                        <li>Clean list appearance</li>
+                    </ul>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Inline List</div>
+                    <ul class="list-inline">
+                        <li>Home</li>
+                        <li>About</li>
+                        <li>Contact</li>
+                        <li>Blog</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Tooltip -->
+            <section class="demo-section">
+                <h2>Tooltip</h2>
+                
+                <div class="demo-item">
+                    <p>Hover over the <span class="tooltip" data-tooltip="This is a helpful tooltip that appears on hover">dotted text</span> to see a tooltip.</p>
+                    <p>Another example: <span class="tooltip" data-tooltip="Tooltips provide additional context without cluttering the interface">tooltip here</span>.</p>
+                </div>
+            </section>
+
+            <!-- Image Caption -->
+            <section class="demo-section">
+                <h2>Image Caption</h2>
+                
+                <div class="demo-item">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop" alt="Sample image">
+                        <figcaption>This is an image caption using the figcaption element. It's styled with smaller, muted text.</figcaption>
+                    </figure>
+                </div>
+                
+                <div class="demo-item">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop" alt="Sample image">
+                    <p class="caption">This is a caption using the .caption class. It works the same way as figcaption.</p>
+                </div>
+            </section>
+
+            <!-- Accessibility -->
+            <section class="demo-section">
+                <h2>Accessibility Features</h2>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Screen Reader Only</div>
+                    <p>This text is visible: "Visible content"</p>
+                    <p class="sr-only">This text is hidden visually but available to screen readers.</p>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Focus Visible</div>
+                    <p>Tab through these links to see enhanced focus indicators:</p>
+                    <p>
+                        <a href="#focus-1">Link 1</a> | 
+                        <a href="#focus-2">Link 2</a> | 
+                        <a href="#focus-3">Link 3</a>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Responsive Behavior -->
+            <section class="demo-section">
+                <h2>Responsive Behavior</h2>
+                <p class="lead">All typography scales fluidly across breakpoints. Resize your browser window to see the typography adapt in real-time.</p>
+                <p>The system uses <code>clamp()</code> functions to ensure smooth scaling between:</p>
+                <ul>
+                    <li><strong>XS:</strong> 300px</li>
+                    <li><strong>SM:</strong> 600px</li>
+                    <li><strong>MD:</strong> 768px</li>
+                    <li><strong>LG:</strong> 1024px</li>
+                    <li><strong>XL:</strong> 1280px</li>
+                    <li><strong>XXL:</strong> 1600px</li>
+                    <li><strong>XXXL:</strong> 2400px</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="grid footer__content">
+                <div class="col-12 col-md-4 footer__column">
+                    <h4>Navigation</h4>
+                    <ul class="footer__nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="typography-demo.html">Typography</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4 footer__column">
+                    <h4>Typography System</h4>
+                    <p class="text-sm muted">Fluid, responsive typography that adapts to any screen size.</p>
+                </div>
+                <div class="col-12 col-md-4 footer__column">
+                    <div class="footer__newsletter">
+                        <h4>Documentation</h4>
+                        <p class="text-sm muted">See <code>docs/TYPOGRAPHY-SYSTEM.md</code> for integration guide.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__copyright">
+                <p>@ 2025 Design System LTD | Fluid Typography System</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+

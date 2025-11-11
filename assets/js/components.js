@@ -1,10 +1,49 @@
 /**
- * components.js – tiny JS for tabs, accordion, modal, tooltips.
- * No framework – plain DOM API, uses data attributes.
+ * ============================================================================
+ * COMPONENTS.JS - Reusable UI Components
+ * ============================================================================
+ * 
+ * Lightweight, framework-free component library using plain DOM API
+ * All components use data attributes for configuration (no JavaScript config needed)
+ * 
+ * Components included:
+ * - Tabs: Multi-panel tab interface with ARIA support
+ * - Accordion: Expandable/collapsible content sections
+ * - Modal: Overlay dialogs with focus trapping and keyboard navigation
+ * - Tooltip: Hover tooltips with automatic positioning
+ * - Code Copy Button: One-click code copying with visual feedback
+ * 
+ * Performance:
+ * - No external dependencies
+ * - Minimal DOM queries (cached where possible)
+ * - Event delegation where appropriate
+ * - Accessible (ARIA attributes, keyboard navigation)
+ * 
+ * @author Your School
+ * @version 1.0.0
+ * ============================================================================
  */
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ====================== TABS ====================== */
+    /* ========================================================================
+     * TABS COMPONENT
+     * ========================================================================
+     * Multi-panel tab interface
+     * 
+     * HTML Structure:
+     * <div class="tabs">
+     *   <button class="tab" aria-controls="panel-1" aria-selected="true">Tab 1</button>
+     *   <button class="tab" aria-controls="panel-2" aria-selected="false">Tab 2</button>
+     *   <div id="panel-1" class="tab__panel is-active">Content 1</div>
+     *   <div id="panel-2" class="tab__panel">Content 2</div>
+     * </div>
+     * 
+     * Features:
+     * - ARIA attributes for accessibility
+     * - Keyboard navigation support
+     * - Smooth transitions (handled by CSS)
+     */
     const tabContainers = document.querySelectorAll('.tabs');
     tabContainers.forEach(container => {
         const tabs = container.querySelectorAll('.tab');
@@ -29,7 +68,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /* ====================== ACCORDION ====================== */
+    /* ========================================================================
+     * ACCORDION COMPONENT
+     * ========================================================================
+     * Expandable/collapsible content sections (FAQ-style)
+     * 
+     * HTML Structure:
+     * <div class="accordion">
+     *   <div class="accordion__item">
+     *     <button class="accordion__button" aria-expanded="false">Question</button>
+     *     <div class="accordion__panel" hidden>Answer</div>
+     *   </div>
+     * </div>
+     * 
+     * Features:
+     * - ARIA expanded state management
+     * - Uses native `hidden` attribute for accessibility
+     * - Independent item expansion (multiple can be open)
+     */
     const accordions = document.querySelectorAll('.accordion');
     accordions.forEach(accordion => {
         const items = accordion.querySelectorAll('.accordion__item');
@@ -45,7 +101,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /* ====================== MODAL ====================== */
+    /* ========================================================================
+     * MODAL COMPONENT
+     * ========================================================================
+     * Overlay dialog with focus trapping and keyboard navigation
+     * 
+     * HTML Structure:
+     * <div class="modal" id="my-modal" hidden>
+     *   <div class="modal__overlay"></div>
+     *   <div class="modal__dialog">
+     *     <button data-modal-close>Close</button>
+     *     <h2>Modal Title</h2>
+     *     <p>Modal content</p>
+     *   </div>
+     * </div>
+     * 
+     * Trigger:
+     * <button data-modal-target="#my-modal">Open Modal</button>
+     * 
+     * Features:
+     * - Focus trapping (Tab key cycles within modal)
+     * - Escape key closes modal
+     * - Overlay click closes modal
+     * - Restores focus to trigger element on close
+     * - Prevents body scroll when open
+     */
     const openTriggers = document.querySelectorAll('[data-modal-target]');
     const modals = document.querySelectorAll('.modal');
     
@@ -112,7 +192,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /* ====================== TOOLTIP ====================== */
+    /* ========================================================================
+     * TOOLTIP COMPONENT
+     * ========================================================================
+     * Simple hover tooltips
+     * 
+     * HTML Structure:
+     * <button data-tooltip="Tooltip text">Hover me</button>
+     * 
+     * Features:
+     * - Automatically positioned above element
+     * - Created dynamically on page load
+     * - Simple CSS-based positioning
+     */
     const tooltipTriggers = document.querySelectorAll('[data-tooltip]');
     tooltipTriggers.forEach(trigger => {
         const tip = document.createElement('span');
@@ -125,7 +217,26 @@ document.addEventListener('DOMContentLoaded', () => {
         tip.style.transform = 'translate(-50%, -6px)';
     });
 
-    /* ====================== CODE COPY BUTTON ====================== */
+    /* ========================================================================
+     * CODE COPY BUTTON COMPONENT
+     * ========================================================================
+     * Adds copy-to-clipboard functionality to code blocks
+     * 
+     * HTML Structure:
+     * <pre class="code-block">
+     *   <code>code content</code>
+     * </pre>
+     * OR
+     * <div class="code-example">code content</div>
+     * 
+     * Features:
+     * - One-click code copying
+     * - Visual feedback ("Copied!" message)
+     * - Handles HTML entities and formatting
+     * - Works with both <pre><code> and <div class="code-example">
+     * - Touch-friendly (prevents text selection on tap)
+     */
+    
     /**
      * Decode HTML entities in a string
      * @param {string} html - HTML string with entities
@@ -295,11 +406,21 @@ document.addEventListener('DOMContentLoaded', () => {
     codeBlocks.forEach(setupCopyButton);
 });
 
-/* ====================== GLOBAL TAB SWITCHING ====================== */
-/**
+/* ========================================================================
+ * GLOBAL TAB SWITCHING FUNCTION
+ * ========================================================================
  * Programmatically switch to a tab by name
- * Works with both standard tabs and showcase tabs
+ * Available globally as window.switchTab()
+ * 
+ * Usage:
+ * window.switchTab('photos'); // Switches to tab with data-tab="photos"
+ * 
+ * Works with:
+ * - Standard tabs (aria-controls pattern)
+ * - Showcase tabs (tab-{name} panel, tab-btn-{name} button pattern)
+ * 
  * @param {string} tabName - The name of the tab to switch to
+ * @global
  */
 window.switchTab = function(tabName) {
     // Try showcase pattern first (tab-{name} panel, tab-btn-{name} button)

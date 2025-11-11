@@ -1,0 +1,46 @@
+# Project Context
+This is a static HTML/CSS/JS website with a custom responsive CSS framework.
+
+## Key Files
+- `assets/css/framework-unified.css` - Main framework with design tokens
+- `assets/css/typography-system.css` - Typography system
+- `assets/js/main.js` - Core site functionality
+- Design tokens use CSS custom properties (--baseline, --gutter-*, etc.)
+
+## Coding Standards
+- Mobile-first responsive design
+- Use CSS custom properties for all design tokens
+- Follow baseline rhythm system (8px units)
+- Maintain accessibility (ARIA labels, semantic HTML)
+- Support light/dark themes
+- Use semantic HTML5 elements
+- Vanilla JavaScript (no frameworks)
+
+## File Structure
+- HTML pages in root
+- CSS in `assets/css/`
+- JS in `assets/js/`
+- Images in `assets/images/`
+- Icons in `assets/icons/`
+- Documentation in `docs/`
+
+## Important Patterns
+- Grid system: `.container` > `.grid` > `.col-*`
+- Theme toggle: `.theme-toggle` with `data-theme` attribute
+- Navigation: `.nav` with mobile menu overlay
+- Cards: `.card` with variants like `.card--glass-outline`
+
+## Color Guidelines
+- Always check colors work on both light and dark themes
+- Use CSS custom properties for theme-aware colors
+- Test contrast ratios for accessibility
+
+## Responsive Breakpoints
+- xs: 300px
+- sm: 600px
+- md: 768px
+- lg: 1024px
+- xl: 1280px
+- xxl: 1600px
+- xxxl: 2400px
+

@@ -1,0 +1,722 @@
+/* =========================================
+   FLUID TYPOGRAPHY SYSTEM
+   Complete typography system with fluid scaling,
+   vertical rhythm, and comprehensive utilities
+   ========================================= */
+
+/* =========================================
+   TYPOGRAPHY VARIABLES
+   Extends existing framework variables
+   ========================================= */
+:root {
+    /* Base font size */
+    --font-base: 16px;
+    
+    /* Typography scale factors for fluid calculation */
+    --scale-factor-xs: 0.8;   /* 300px */
+    --scale-factor-sm: 0.9;   /* 600px */
+    --scale-factor-md: 1.0;   /* 768px */
+    --scale-factor-lg: 1.1;   /* 1024px */
+    --scale-factor-xl: 1.2;   /* 1280px */
+    --scale-factor-xxl: 1.3;  /* 1600px */
+    --scale-factor-xxxl: 1.4; /* 2400px */
+    
+    /* Line height multipliers */
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+    --line-height-display: 1.1;
+    
+    /* Vertical rhythm multiplier */
+    --typography-rhythm: 1.5;
+    
+    /* Display font sizes - larger than h1 */
+    --font-size-display-1: clamp(3.5rem, 3rem + 3vw, 6rem);      /* 56-96px */
+    --font-size-display-2: clamp(3rem, 2.5rem + 2.5vw, 5rem);     /* 48-80px */
+    --font-size-display-3: clamp(2.5rem, 2rem + 2.5vw, 4rem);     /* 40-64px */
+    --font-size-display-4: clamp(2rem, 1.75rem + 1.25vw, 3.5rem); /* 32-56px */
+    
+    /* Enhanced heading sizes with better fluid scaling */
+    --font-size-h1-enhanced: clamp(2.75rem, 2.25rem + 2.5vw, 4.5rem);  /* 44-72px */
+    --font-size-h2-enhanced: clamp(2.25rem, 1.875rem + 1.875vw, 3.5rem); /* 36-56px */
+    --font-size-h3-enhanced: clamp(1.875rem, 1.5rem + 1.875vw, 2.75rem); /* 30-44px */
+    --font-size-h4-enhanced: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);   /* 24-36px */
+    --font-size-h5-enhanced: clamp(1.25rem, 1.125rem + 0.625vw, 1.75rem); /* 20-28px */
+    --font-size-h6-enhanced: clamp(1.125rem, 1rem + 0.625vw, 1.5rem);    /* 18-24px */
+    
+    /* Lead paragraph size */
+    --font-size-lead: clamp(1.125rem, 1.05rem + 0.375vw, 1.375rem); /* 18-22px */
+    
+    /* Code and pre-formatted text */
+    --font-size-code: 0.875em;
+    --font-family-code: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    
+    /* Blockquote styling */
+    --blockquote-border-width: 4px;
+    --blockquote-border-color: var(--color-primary);
+    --blockquote-padding-left: var(--space-6);
+    --blockquote-font-size: clamp(1.125rem, 1.05rem + 0.375vw, 1.375rem);
+    --blockquote-font-style: italic;
+    
+    /* Tooltip */
+    --tooltip-bg: var(--color-text);
+    --tooltip-color: var(--color-bg);
+    --tooltip-padding: var(--space-2) var(--space-3);
+    --tooltip-radius: var(--border-radius);
+    --tooltip-font-size: var(--font-size-sm);
+    
+    /* Caption */
+    --caption-font-size: var(--font-size-xs);
+    --caption-color: var(--color-text-muted);
+}
+
+/* =========================================
+   DISPLAY STYLES
+   Larger than h1, for hero sections and banners
+   ========================================= */
+.display-1 {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-display-1);
+    font-weight: 600;
+    line-height: var(--line-height-display);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+    color: var(--color-text);
+    /* Radial gradient text effect - sophisticated edge fade */
+    background: radial-gradient(ellipse 100% 80% at 50% 50%, 
+        currentColor 0%, 
+        currentColor 60%, 
+        rgba(0, 0, 0, 0.85) 85%, 
+        rgba(0, 0, 0, 0.7) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body[data-theme="dark"] .display-1 {
+    background: radial-gradient(ellipse 100% 80% at 50% 50%, 
+        currentColor 0%, 
+        currentColor 60%, 
+        rgba(255, 255, 255, 0.85) 85%, 
+        rgba(255, 255, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.display-2 {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-display-2);
+    font-weight: 600;
+    line-height: var(--line-height-display);
+    letter-spacing: -0.015em;
+    margin-bottom: var(--space-5);
+    color: var(--color-text);
+    /* Radial gradient text effect - sophisticated edge fade */
+    background: radial-gradient(ellipse 100% 80% at 50% 50%, 
+        currentColor 0%, 
+        currentColor 60%, 
+        rgba(0, 0, 0, 0.85) 85%, 
+        rgba(0, 0, 0, 0.7) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body[data-theme="dark"] .display-2 {
+    background: radial-gradient(ellipse 100% 80% at 50% 50%, 
+        currentColor 0%, 
+        currentColor 60%, 
+        rgba(255, 255, 255, 0.85) 85%, 
+        rgba(255, 255, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.display-3 {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-display-3);
+    font-weight: 600;
+    line-height: var(--line-height-display);
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+}
+
+.display-4 {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-display-4);
+    font-weight: 600;
+    line-height: var(--line-height-heading);
+    letter-spacing: -0.005em;
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+}
+
+/* =========================================
+   ENHANCED HEADING STYLES
+   Fluid scaling across all breakpoints
+   ========================================= */
+h1.enhanced,
+.h1.enhanced {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-h1-enhanced);
+    font-weight: 600;
+    line-height: var(--line-height-heading);
+    margin-bottom: var(--space-5);
+    color: var(--color-text);
+}
+
+h2.enhanced,
+.h2.enhanced {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-h2-enhanced);
+    font-weight: 600;
+    line-height: var(--line-height-heading);
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+}
+
+h3.enhanced,
+.h3.enhanced {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-h3-enhanced);
+    font-weight: 600;
+    line-height: var(--line-height-heading);
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+}
+
+h4.enhanced,
+.h4.enhanced {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-h4-enhanced);
+    font-weight: 600;
+    line-height: var(--line-height-heading);
+    margin-bottom: var(--space-3);
+    color: var(--color-text);
+}
+
+h5.enhanced,
+.h5.enhanced {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-h5-enhanced);
+    font-weight: 600;
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--space-3);
+    color: var(--color-text);
+}
+
+h6.enhanced,
+.h6.enhanced {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-h6-enhanced);
+    font-weight: 600;
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--space-2);
+    color: var(--color-text);
+}
+
+/* =========================================
+   UTILITY CLASSES
+   ========================================= */
+
+/* Lead paragraph - larger, more prominent */
+.lead {
+    font-size: var(--font-size-lead);
+    font-weight: 400;
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+}
+
+/* Text color utilities */
+.muted {
+    color: var(--color-text-muted);
+}
+
+.strong {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* Text alignment */
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+/* =========================================
+   BLOCKQUOTE
+   ========================================= */
+blockquote {
+    margin: var(--space-6) 0;
+    padding-left: var(--blockquote-padding-left);
+    border-left: var(--blockquote-border-width) solid var(--blockquote-border-color);
+    font-size: var(--blockquote-font-size);
+    font-style: var(--blockquote-font-style);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+    position: relative;
+}
+
+blockquote p {
+    margin-bottom: var(--space-3);
+}
+
+blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--space-3);
+    font-size: var(--font-size-base);
+    font-style: normal;
+    color: var(--color-text-muted);
+}
+
+blockquote cite::before {
+    content: '— ';
+}
+
+/* =========================================
+   CODE AND PRE-FORMATTED TEXT
+   ========================================= */
+
+/* Inline code */
+code {
+    font-family: var(--font-family-code);
+    font-size: var(--font-size-code);
+    background: var(--color-surface);
+    color: var(--color-text);
+    padding: 0.125em 0.375em;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-border);
+}
+
+/* Code blocks */
+pre {
+    font-family: var(--font-family-code);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: var(--space-4);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--code-border);
+    overflow-x: auto;
+    margin: var(--space-4) 0;
+    tab-size: 2;
+}
+
+pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: none;
+    font-size: inherit;
+}
+
+/* Code block wrapper */
+.code-block {
+    position: relative;
+    margin: var(--space-6) 0;
+    background: var(--code-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--code-border);
+    overflow: hidden;
+}
+
+.code-block pre {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+}
+
+/* Code block scrollbar styling */
+.code-block pre::-webkit-scrollbar {
+    height: 8px;
+}
+
+.code-block pre::-webkit-scrollbar-track {
+    background: var(--code-scrollbar-track);
+}
+
+.code-block pre::-webkit-scrollbar-thumb {
+    background: var(--code-scrollbar-thumb);
+    border-radius: var(--border-radius-sm);
+}
+
+.code-block pre::-webkit-scrollbar-thumb:hover {
+    background: rgba(234, 244, 244, 0.3);
+}
+
+/* =========================================
+   ENHANCED LIST STYLES
+   ========================================= */
+
+/* Unordered lists */
+ul {
+    margin: var(--space-4) 0;
+    padding-left: var(--space-6);
+    list-style-type: disc;
+}
+
+ul ul {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+    list-style-type: circle;
+}
+
+ul ul ul {
+    list-style-type: square;
+}
+
+ul li {
+    margin-bottom: var(--space-2);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+}
+
+/* Ordered lists */
+ol {
+    margin: var(--space-4) 0;
+    padding-left: var(--space-6);
+    list-style-type: decimal;
+}
+
+ol ol {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+    list-style-type: lower-alpha;
+}
+
+ol ol ol {
+    list-style-type: lower-roman;
+}
+
+ol li {
+    margin-bottom: var(--space-2);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+}
+
+/* Definition lists */
+dl {
+    margin: var(--space-4) 0;
+}
+
+dt {
+    font-weight: 600;
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-1);
+    color: var(--color-text);
+}
+
+dt:first-child {
+    margin-top: 0;
+}
+
+dd {
+    margin-left: var(--space-4);
+    margin-bottom: var(--space-2);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+}
+
+/* List utilities */
+.list-unstyled {
+    list-style: none;
+    padding-left: 0;
+}
+
+.list-inline {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.list-inline li {
+    margin-bottom: 0;
+}
+
+/* =========================================
+   TOOLTIP
+   ========================================= */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+    border-bottom: 1px dotted var(--color-text-muted);
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: var(--space-2);
+    padding: var(--tooltip-padding);
+    background: var(--tooltip-bg);
+    color: var(--tooltip-color);
+    font-size: var(--tooltip-font-size);
+    line-height: var(--line-height-normal);
+    white-space: nowrap;
+    border-radius: var(--tooltip-radius);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 1000;
+}
+
+.tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: calc(var(--space-2) - 4px);
+    border: 4px solid transparent;
+    border-top-color: var(--tooltip-bg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 1001;
+}
+
+.tooltip:hover::after,
+.tooltip:hover::before {
+    opacity: 1;
+}
+
+/* =========================================
+   IMAGE CAPTION
+   ========================================= */
+.caption,
+figcaption {
+    font-size: var(--caption-font-size);
+    color: var(--caption-color);
+    line-height: var(--line-height-normal);
+    margin-top: var(--space-2);
+    text-align: center;
+    font-style: italic;
+}
+
+figure {
+    margin: var(--space-6) 0;
+}
+
+figure img {
+    width: 100%;
+    height: auto;
+}
+
+/* =========================================
+   ACCESSIBILITY FEATURES
+   ========================================= */
+
+/* Screen reader only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus visible - enhanced focus indicators */
+:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+    border-radius: var(--border-radius-sm);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text: #000000;
+        --color-bg: #ffffff;
+        --color-text-muted: #333333;
+        --color-border: #000000;
+    }
+    
+    body[data-theme="dark"] {
+        --color-text: #ffffff;
+        --color-bg: #000000;
+        --color-text-muted: #cccccc;
+        --color-border: #ffffff;
+    }
+    
+    code,
+    pre {
+        border-width: 2px;
+    }
+    
+    blockquote {
+        border-left-width: 6px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .tooltip::after,
+    .tooltip::before {
+        transition: none;
+    }
+}
+
+/* =========================================
+   RESPONSIVE TYPOGRAPHY ADJUSTMENTS
+   ========================================= */
+
+/* Extra small screens (300px+) */
+@media (min-width: 300px) {
+    .display-1 {
+        letter-spacing: -0.025em;
+    }
+    
+    .display-2 {
+        letter-spacing: -0.02em;
+    }
+}
+
+/* Small screens (600px+) */
+@media (min-width: 600px) {
+    blockquote {
+        padding-left: var(--space-8);
+    }
+    
+    .code-block {
+        margin: var(--space-8) 0;
+    }
+}
+
+/* Medium screens (768px+) */
+@media (min-width: 768px) {
+    .lead {
+        font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+    }
+    
+    blockquote {
+        font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+    }
+}
+
+/* Large screens (1024px+) */
+@media (min-width: 1024px) {
+    .display-1 {
+        margin-bottom: var(--space-8);
+    }
+    
+    .display-2 {
+        margin-bottom: var(--space-6);
+    }
+}
+
+/* Extra large screens (1280px+) */
+@media (min-width: 1280px) {
+    pre {
+        font-size: var(--font-size-base);
+    }
+}
+
+/* 2X Large screens (1600px+) */
+@media (min-width: 1600px) {
+    .code-block {
+        margin: var(--space-10) 0;
+    }
+}
+
+/* 3X Large screens (2400px+) */
+@media (min-width: 2400px) {
+    .display-1 {
+        letter-spacing: -0.03em;
+    }
+    
+    .display-2 {
+        letter-spacing: -0.025em;
+    }
+}
+
+/* =========================================
+   DARK THEME ADJUSTMENTS
+   ========================================= */
+body[data-theme="dark"] {
+    --code-bg: #0a0a0a;
+    --code-border: #1a1a1a;
+    --code-text: #d1d5db;
+    --code-scrollbar-track: rgba(234, 244, 244, 0.03);
+    --code-scrollbar-thumb: rgba(234, 244, 244, 0.15);
+    
+    --tooltip-bg: var(--color-text);
+    --tooltip-color: var(--color-bg);
+}
+
+body[data-theme="dark"] code {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+}
+
+body[data-theme="dark"] blockquote {
+    border-left-color: var(--color-primary);
+}
+
+/* =========================================
+   PRINT STYLES
+   ========================================= */
+@media print {
+    .display-1,
+    .display-2,
+    .display-3,
+    .display-4 {
+        page-break-after: avoid;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+    }
+    
+    blockquote {
+        page-break-inside: avoid;
+    }
+    
+    pre,
+    .code-block {
+        page-break-inside: avoid;
+        white-space: pre-wrap;
+    }
+    
+    .tooltip::after,
+    .tooltip::before {
+        display: none;
+    }
+}
+

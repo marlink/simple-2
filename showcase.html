@@ -5,15 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Framework Showcase – Your School</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
     <!-- Unified Responsive Framework -->
     <link rel="stylesheet" href="assets/css/framework-unified.css">
+    <!-- Typography System -->
+    <link rel="stylesheet" href="assets/css/typography-system.css">
+    <style>
+        .demo-section {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .demo-section:last-child {
+            border-bottom: none;
+        }
+        .demo-section h2 {
+            margin-top: 0;
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-4);
+            border-bottom: 2px solid var(--color-border);
+        }
+        .demo-item {
+            margin-bottom: var(--space-6);
+        }
+        .demo-item:last-child {
+            margin-bottom: 0;
+        }
+        .demo-label {
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-2);
+        }
+        .color-swatch {
+            width: 100%;
+            height: 80px;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--color-border);
+            margin-bottom: var(--space-2);
+        }
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: var(--space-4);
+        }
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--space-3);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+        .icon-item img {
+            width: 32px;
+            height: 32px;
+            margin-bottom: var(--space-2);
+        }
+        /* Photo Stats Counter - Inspired by Cursor Settings */
+        .stat-counter {
+            text-align: center;
+            padding: var(--space-4);
+        }
+        .stat-counter__value {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 600;
+            font-family: var(--font-family-heading);
+            color: var(--color-primary);
+            line-height: 1.2;
+            margin-bottom: var(--space-2);
+            transition: transform 0.2s ease;
+        }
+        .stat-counter__label {
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: var(--space-1);
+        }
+        .stat-counter__subtitle {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+        }
+        .photo-item {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .photo-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        body[data-theme="dark"] .stat-counter__value {
+            color: var(--color-primary);
+        }
+    </style>
 </head>
 <body data-theme="light">
     <div class="viewport-info" id="viewport-info">
-        Viewport: <span id="viewport-width">0px</span> | Breakpoint: <span id="breakpoint">xs</span>
+        w: <span id="viewport-width">0px</span> | <span id="breakpoint">XS</span>
     </div>
 
     <header class="site-header">
@@ -22,32 +119,70 @@
                 <img src="assets/logo/mc-logo.svg" alt="YourSchool" class="nav__logo-img">
             </a>
 
-            <!-- THEME TOGGLE -->
-            <div class="theme-toggle" role="group" aria-label="Color theme">
-                <input type="radio" name="theme" id="theme-light-showcase" value="light" checked>
-                <label for="theme-light-showcase" class="theme-toggle__label" title="Light theme">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" fill="currentColor"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11 0H13V4.06189C12.6724 4.02104 12.3387 4 12 4C11.6613 4 11.3276 4.02104 11 4.06189V0ZM7.0943 5.68018L4.22173 2.80761L2.80752 4.22183L5.6801 7.09441C6.09071 6.56618 6.56608 6.0908 7.0943 5.68018ZM4.06189 11H0V13H4.06189C4.02104 12.6724 4 12.3387 4 12C4 11.6613 4.02104 11.3276 4.06189 11ZM5.6801 16.9056L2.80751 19.7782L4.22173 21.1924L7.0943 18.3198C6.56608 17.9092 6.09071 17.4338 5.6801 16.9056ZM11 19.9381V24H13V19.9381C12.6724 19.979 12.3387 20 12 20C11.6613 20 11.3276 19.979 11 19.9381ZM16.9056 18.3199L19.7781 21.1924L21.1923 19.7782L18.3198 16.9057C17.9092 17.4339 17.4338 17.9093 16.9056 18.3199ZM19.9381 13H24V11H19.9381C19.979 11.3276 20 11.6613 20 12C20 12.3387 19.979 12.6724 19.9381 13ZM18.3198 7.0943L21.1923 4.22183L19.7781 2.80762L16.9056 5.6801C17.4338 6.09071 17.9092 6.56608 18.3198 7.0943Z" fill="currentColor"/>
-                    </svg>
-                </label>
+            <button class="nav__burger" aria-label="Toggle menu" aria-expanded="false">
+                <span class="nav__burger-line"></span>
+                <span class="nav__burger-line"></span>
+                <span class="nav__burger-line"></span>
+            </button>
 
-                <input type="radio" name="theme" id="theme-dark-showcase" value="dark">
-                <label for="theme-dark-showcase" class="theme-toggle__label" title="Dark theme">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2256 2.00253C9.59172 1.94346 6.93894 2.9189 4.92893 4.92891C1.02369 8.83415 1.02369 15.1658 4.92893 19.071C8.83418 22.9763 15.1658 22.9763 19.0711 19.071C21.0811 17.061 22.0565 14.4082 21.9975 11.7743C21.9796 10.9772 21.8669 10.1818 21.6595 9.40643C21.0933 9.9488 20.5078 10.4276 19.9163 10.8425C18.5649 11.7906 17.1826 12.4053 15.9301 12.6837C14.0241 13.1072 12.7156 12.7156 12 12C11.2844 11.2844 10.8928 9.97588 11.3163 8.0699C11.5947 6.81738 12.2094 5.43511 13.1575 4.08368C13.5724 3.49221 14.0512 2.90664 14.5935 2.34046C13.8182 2.13305 13.0228 2.02041 12.2256 2.00253ZM17.6569 17.6568C18.9081 16.4056 19.6582 14.8431 19.9072 13.2186C16.3611 15.2643 12.638 15.4664 10.5858 13.4142C8.53361 11.362 8.73568 7.63895 10.7814 4.09281C9.1569 4.34184 7.59434 5.09193 6.34315 6.34313C3.21895 9.46732 3.21895 14.5326 6.34315 17.6568C9.46734 20.781 14.5327 20.781 17.6569 17.6568Z" fill="currentColor"/>
-                    </svg>
-                </label>
+            <div class="nav__menu">
+                <ul class="nav__links">
+                    <li><a href="index.html" class="nav__link nav__link--underline">Home</a></li>
+                    <li><a href="about.html" class="nav__link nav__link--underline">About</a></li>
+                    <li><a href="solutions.html" class="nav__link nav__link--underline">Solutions</a></li>
+                    <li><a href="contact.html" class="nav__link nav__link--underline">Contact</a></li>
+                    <li><a href="blog.html" class="nav__link nav__link--underline">Blog</a></li>
+                    <li><a href="showcase.html" class="nav__link nav__link--underline is-active">Showcase</a></li>
+                    <li><a href="calendar.html" class="nav__link nav__link--underline">Tech Calendar</a></li>
+                </ul>
+
+                <!-- THEME TOGGLE -->
+                <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+                    <span class="theme-toggle__icon theme-toggle__icon--light">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" fill="currentColor"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11 0H13V4.06189C12.6724 4.02104 12.3387 4 12 4C11.6613 4 11.3276 4.02104 11 4.06189V0ZM7.0943 5.68018L4.22173 2.80761L2.80752 4.22183L5.6801 7.09441C6.09071 6.56618 6.56608 6.0908 7.0943 5.68018ZM4.06189 11H0V13H4.06189C4.02104 12.6724 4 12.3387 4 12C4 11.6613 4.02104 11.3276 4.06189 11ZM5.6801 16.9056L2.80751 19.7782L4.22173 21.1924L7.0943 18.3198C6.56608 17.9092 6.09071 17.4338 5.6801 16.9056ZM11 19.9381V24H13V19.9381C12.6724 19.979 12.3387 20 12 20C11.6613 20 11.3276 19.979 11 19.9381ZM16.9056 18.3199L19.7781 21.1924L21.1923 19.7782L18.3198 16.9057C17.9092 17.4339 17.4338 17.9093 16.9056 18.3199ZM19.9381 13H24V11H19.9381C19.979 11.3276 20 11.6613 20 12C20 12.3387 19.979 12.6724 19.9381 13ZM18.3198 7.0943L21.1923 4.22183L19.7781 2.80762L16.9056 5.6801C17.4338 6.09071 17.9092 6.56608 18.3198 7.0943Z" fill="currentColor"/>
+                        </svg>
+                    </span>
+                    <span class="theme-toggle__icon theme-toggle__icon--dark">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2256 2.00253C9.59172 1.94346 6.93894 2.9189 4.92893 4.92891C1.02369 8.83415 1.02369 15.1658 4.92893 19.071C8.83418 22.9763 15.1658 22.9763 19.0711 19.071C21.0811 17.061 22.0565 14.4082 21.9975 11.7743C21.9796 10.9772 21.8669 10.1818 21.6595 9.40643C21.0933 9.9488 20.5078 10.4276 19.9163 10.8425C18.5649 11.7906 17.1826 12.4053 15.9301 12.6837C14.0241 13.1072 12.7156 12.7156 12 12C11.2844 11.2844 10.8928 9.97588 11.3163 8.0699C11.5947 6.81738 12.2094 5.43511 13.1575 4.08368C13.5724 3.49221 14.0512 2.90664 14.5935 2.34046C13.8182 2.13305 13.0228 2.02041 12.2256 2.00253ZM17.6569 17.6568C18.9081 16.4056 19.6582 14.8431 19.9072 13.2186C16.3611 15.2643 12.638 15.4664 10.5858 13.4142C8.53361 11.362 8.73568 7.63895 10.7814 4.09281C9.1569 4.34184 7.59434 5.09193 6.34315 6.34313C3.21895 9.46732 3.21895 14.5326 6.34315 17.6568C9.46734 20.781 14.5327 20.781 17.6569 17.6568Z" fill="currentColor"/>
+                        </svg>
+                    </span>
+                </button>
+
+                <a href="#" class="btn btn--outline">Collect free website</a>
             </div>
 
-            <ul class="nav__links">
-                <li><a href="index.html" class="nav__link nav__link--underline">Home</a></li>
-                <li><a href="about.html" class="nav__link nav__link--underline">About</a></li>
-                <li><a href="contact.html" class="nav__link nav__link--underline">Contact</a></li>
-                <li><a href="blog.html" class="nav__link nav__link--underline">Blog</a></li>
-            </ul>
+            <!-- Mobile Menu Overlay -->
+            <div class="nav__overlay"></div>
+            <div class="nav__mobile-menu">
+                <ul class="nav__links nav__links--mobile">
+                    <li><a href="index.html" class="nav__link nav__link--underline">Home</a></li>
+                    <li><a href="about.html" class="nav__link nav__link--underline">About</a></li>
+                    <li><a href="solutions.html" class="nav__link nav__link--underline">Solutions</a></li>
+                    <li><a href="contact.html" class="nav__link nav__link--underline">Contact</a></li>
+                    <li><a href="blog.html" class="nav__link nav__link--underline">Blog</a></li>
+                    <li><a href="showcase.html" class="nav__link nav__link--underline is-active">Showcase</a></li>
+                    <li><a href="calendar.html" class="nav__link nav__link--underline">Tech Calendar</a></li>
+                </ul>
 
-            <a href="#" class="btn btn--outline">Collect free website</a>
+                <button class="theme-toggle theme-toggle--mobile" type="button" aria-label="Toggle color theme" title="Toggle theme">
+                    <span class="theme-toggle__icon theme-toggle__icon--light">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" fill="currentColor"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11 0H13V4.06189C12.6724 4.02104 12.3387 4 12 4C11.6613 4 11.3276 4.02104 11 4.06189V0ZM7.0943 5.68018L4.22173 2.80761L2.80752 4.22183L5.6801 7.09441C6.09071 6.56618 6.56608 6.0908 7.0943 5.68018ZM4.06189 11H0V13H4.06189C4.02104 12.6724 4 12.3387 4 12C4 11.6613 4.02104 11.3276 4.06189 11ZM5.6801 16.9056L2.80751 19.7782L4.22173 21.1924L7.0943 18.3198C6.56608 17.9092 6.09071 17.4338 5.6801 16.9056ZM11 19.9381V24H13V19.9381C12.6724 19.979 12.3387 20 12 20C11.6613 20 11.3276 19.979 11 19.9381ZM16.9056 18.3199L19.7781 21.1924L21.1923 19.7782L18.3198 16.9057C17.9092 17.4339 17.4338 17.9093 16.9056 18.3199ZM19.9381 13H24V11H19.9381C19.979 11.3276 20 11.6613 20 12C20 12.3387 19.979 12.6724 19.9381 13ZM18.3198 7.0943L21.1923 4.22183L19.7781 2.80762L16.9056 5.6801C17.4338 6.09071 17.9092 6.56608 18.3198 7.0943Z" fill="currentColor"/>
+                        </svg>
+                    </span>
+                    <span class="theme-toggle__icon theme-toggle__icon--dark">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2256 2.00253C9.59172 1.94346 6.93894 2.9189 4.92893 4.92891C1.02369 8.83415 1.02369 15.1658 4.92893 19.071C8.83418 22.9763 15.1658 22.9763 19.0711 19.071C21.0811 17.061 22.0565 14.4082 21.9975 11.7743C21.9796 10.9772 21.8669 10.1818 21.6595 9.40643C21.0933 9.9488 20.5078 10.4276 19.9163 10.8425C18.5649 11.7906 17.1826 12.4053 15.9301 12.6837C14.0241 13.1072 12.7156 12.7156 12 12C11.2844 11.2844 10.8928 9.97588 11.3163 8.0699C11.5947 6.81738 12.2094 5.43511 13.1575 4.08368C13.5724 3.49221 14.0512 2.90664 14.5935 2.34046C13.8182 2.13305 13.0228 2.02041 12.2256 2.00253ZM17.6569 17.6568C18.9081 16.4056 19.6582 14.8431 19.9072 13.2186C16.3611 15.2643 12.638 15.4664 10.5858 13.4142C8.53361 11.362 8.73568 7.63895 10.7814 4.09281C9.1569 4.34184 7.59434 5.09193 6.34315 6.34313C3.21895 9.46732 3.21895 14.5326 6.34315 17.6568C9.46734 20.781 14.5327 20.781 17.6569 17.6568Z" fill="currentColor"/>
+                        </svg>
+                    </span>
+                </button>
+
+                <a href="#" class="btn btn--outline btn--mobile">Collect free website</a>
+            </div>
 
         </nav>
     </header>
@@ -56,9 +191,9 @@
     <section class="hero" style="background-image: url('assets/images/hero.jpg');">
         <div class="hero__overlay"></div>
         <div class="hero__content">
-            <h1 class="hero__title">Framework Showcase</h1>
-            <p class="hero__subtitle">
-                Complete design system with interactive components, carousels, and responsive layouts.
+            <h1 class="hero__title display-1">Framework Showcase</h1>
+            <p class="hero__subtitle lead">
+                Complete design system with fluid typography, interactive components, carousels, and responsive layouts.
             </p>
         </div>
     </section>
@@ -74,6 +209,10 @@
                 <button class="tab" role="tab" aria-selected="false" aria-controls="tab-tokens" id="tab-btn-tokens" data-tab="tokens">Design Tokens</button>
                 <button class="tab" role="tab" aria-selected="false" aria-controls="tab-layout" id="tab-btn-layout" data-tab="layout">Layout</button>
                 <button class="tab" role="tab" aria-selected="false" aria-controls="tab-accessibility" id="tab-btn-accessibility" data-tab="accessibility">Accessibility</button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab-typography" id="tab-btn-typography" data-tab="typography">Typography</button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab-icons" id="tab-btn-icons" data-tab="icons">Icons</button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab-utilities" id="tab-btn-utilities" data-tab="utilities">Utilities</button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab-photos" id="tab-btn-photos" data-tab="photos">Photos</button>
             </div>
         </div>
 
@@ -87,7 +226,7 @@
                 
                 <h3 class="h3 mt-4">Quick Links</h3>
                 <div class="grid">
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 col-xxxl-3">
                         <article class="card">
                             <div class="card__body">
                                 <h4>Components</h4>
@@ -96,7 +235,7 @@
                             </div>
                         </article>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 col-xxxl-3">
                         <article class="card">
                             <div class="card__body">
                                 <h4>Cards</h4>
@@ -105,7 +244,7 @@
                             </div>
                         </article>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 col-xxxl-3">
                         <article class="card">
                             <div class="card__body">
                                 <h4>Design Tokens</h4>
@@ -136,10 +275,23 @@
                             <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&h=600&fit=crop" alt="Slide 4" style="width: 100%; height: 400px; object-fit: cover;">
                         </div>
                     </div>
-                    <div class="carousel__controls">
-                        <button class="carousel__button" data-carousel-prev="carousel-horizontal">← Prev</button>
-                        <button class="carousel__button" data-carousel-next="carousel-horizontal">Next →</button>
-                    </div>
+                    <!-- 
+                        Carousel navigation buttons support:
+                        - Optional icons (remove .carousel__nav-icon element to have icon-less button)
+                        - Icon positioning: carousel__nav-button--icon-left or carousel__nav-button--icon-right
+                        - Icon types via data-icon attribute: 'chevron-right', 'chevron-right-o', 'chevron-right-r', 'arrow-right'
+                        Example: data-icon="chevron-right-o" for outlined chevron
+                    -->
+                    <button class="carousel__nav-button carousel__nav-button--prev carousel__nav-button--icon-left" data-carousel-prev="carousel-horizontal" data-icon="chevron-right" aria-label="Previous slide">
+                        <svg class="carousel__nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M10.5858 6.34317L12 4.92896L19.0711 12L12 19.0711L10.5858 17.6569L16.2427 12L10.5858 6.34317Z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                    <button class="carousel__nav-button carousel__nav-button--next carousel__nav-button--icon-right" data-carousel-next="carousel-horizontal" data-icon="chevron-right" aria-label="Next slide">
+                        <svg class="carousel__nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M10.5858 6.34317L12 4.92896L19.0711 12L12 19.0711L10.5858 17.6569L16.2427 12L10.5858 6.34317Z" fill="currentColor"/>
+                        </svg>
+                    </button>
                     <div class="carousel__indicators" id="indicators-horizontal"></div>
                 </div>
 
@@ -209,16 +361,16 @@
                 
                 <h4 class="h4 mt-4">Button Styles</h4>
                 <div class="grid">
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <button class="btn btn--primary">Primary</button>
                         <button class="btn btn--secondary">Secondary</button>
                         <button class="btn btn--outline">Outline</button>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <button class="btn btn--ghost">Ghost</button>
                         <button class="btn btn--text">Text</button>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <button class="btn btn--primary btn--sm">Small</button>
                         <button class="btn btn--primary">Medium</button>
                         <button class="btn btn--primary btn--lg">Large</button>
@@ -406,13 +558,13 @@
                 <p>Interactive tooltips that appear on hover or focus. Hover over the elements below:</p>
             
             <div class="grid" style="margin-top: var(--space-4);">
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                     <button class="btn btn--primary" data-tooltip="This is a primary button tooltip">Primary Button</button>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                     <button class="btn btn--secondary" data-tooltip="Secondary button with helpful information">Secondary Button</button>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                     <button class="btn btn--outline" data-tooltip="Outline button tooltip example">Outline Button</button>
                 </div>
             </div>
@@ -457,6 +609,132 @@
                 &lt;button data-tooltip="Your tooltip text here"&gt;Button&lt;/button&gt;<br>
                 &lt;a href="#" data-tooltip="Link description"&gt;Link&lt;/a&gt;<br>
                 &lt;span data-tooltip="Helpful hint"&gt;Text&lt;/span&gt;
+            </div>
+
+            <h3 id="accordion" class="h3 mt-6">Accordion (FAQ)</h3>
+            <p>Expandable/collapsible sections perfect for FAQs and content organization.</p>
+            <div class="accordion">
+                <div class="accordion__item">
+                    <button class="accordion__button" aria-expanded="false" aria-controls="accordion-panel-1">
+                        What is this framework?
+                    </button>
+                    <div class="accordion__panel" id="accordion-panel-1" hidden>
+                        <p>This is a unified responsive CSS framework with a 12-column grid system, fluid typography, and comprehensive component library. It supports viewports from 300px to 3600px.</p>
+                    </div>
+                </div>
+                <div class="accordion__item">
+                    <button class="accordion__button" aria-expanded="false" aria-controls="accordion-panel-2">
+                        How do I use the grid system?
+                    </button>
+                    <div class="accordion__panel" id="accordion-panel-2" hidden>
+                        <p>Use the grid classes like <code>.col-12</code>, <code>.col-md-6</code>, <code>.col-lg-4</code> to create responsive layouts. The grid is mobile-first and uses a 12-column system.</p>
+                    </div>
+                </div>
+                <div class="accordion__item">
+                    <button class="accordion__button" aria-expanded="false" aria-controls="accordion-panel-3">
+                        Does it support dark mode?
+                    </button>
+                    <div class="accordion__panel" id="accordion-panel-3" hidden>
+                        <p>Yes! The framework includes full dark mode support. Use the theme toggle in the navigation or set <code>data-theme="dark"</code> on the body element.</p>
+                    </div>
+                </div>
+                <div class="accordion__item">
+                    <button class="accordion__button" aria-expanded="false" aria-controls="accordion-panel-4">
+                        What browsers are supported?
+                    </button>
+                    <div class="accordion__panel" id="accordion-panel-4" hidden>
+                        <p>The framework supports all modern browsers including Chrome, Firefox, Safari, and Edge. It includes graceful fallbacks for older browsers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 id="modals" class="h3 mt-6">Modals</h3>
+            <p>Modal dialogs with focus trapping and keyboard support.</p>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <button class="btn btn--primary" data-modal-target="modal-example-1">Open Modal</button>
+                </div>
+                <div class="col-12 col-md-6">
+                    <button class="btn btn--secondary" data-modal-target="modal-example-2">Open Confirmation</button>
+                </div>
+            </div>
+
+            <!-- Modal Example 1 -->
+            <div class="modal" id="modal-example-1" hidden>
+                <div class="modal__overlay" data-modal-close></div>
+                <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title-1">
+                    <div class="modal__header">
+                        <h3 id="modal-title-1">Modal Example</h3>
+                        <button class="modal__close" data-modal-close aria-label="Close modal">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal__body">
+                        <p>This is a modal dialog example. It includes focus trapping, keyboard support (ESC to close), and backdrop click to close.</p>
+                        <p>Modals are perfect for confirmations, forms, and important information.</p>
+                    </div>
+                    <div class="modal__footer">
+                        <button class="btn btn--primary" data-modal-close>Confirm</button>
+                        <button class="btn btn--outline" data-modal-close>Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Example 2 -->
+            <div class="modal" id="modal-example-2" hidden>
+                <div class="modal__overlay" data-modal-close></div>
+                <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title-2">
+                    <div class="modal__header">
+                        <h3 id="modal-title-2">Confirm Action</h3>
+                        <button class="modal__close" data-modal-close aria-label="Close modal">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal__body">
+                        <p>Are you sure you want to perform this action? This cannot be undone.</p>
+                    </div>
+                    <div class="modal__footer">
+                        <button class="btn btn--danger" data-modal-close>Delete</button>
+                        <button class="btn btn--outline" data-modal-close>Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3 id="spinners-progress" class="h3 mt-6">Spinners & Progress Bars</h3>
+            <div class="grid">
+                <div class="col-12 col-md-6">
+                    <div class="demo-label">Loading Spinner</div>
+                    <div class="spinner"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="demo-label">Progress Bar Examples</div>
+                    <div class="progress mb-3">
+                        <div class="progress__bar" style="width: 25%;"></div>
+                    </div>
+                    <div class="progress mb-3">
+                        <div class="progress__bar" style="width: 50%;"></div>
+                    </div>
+                    <div class="progress mb-3">
+                        <div class="progress__bar" style="width: 75%;"></div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress__bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 id="links" class="h3 mt-6">Links</h3>
+            <div class="demo-item">
+                <div class="demo-label">Link Styles</div>
+                <p>This is a <a href="#">default link</a> with standard styling.</p>
+                <p>Links support hover, focus, active, and visited states. Hover over the links to see the effects.</p>
+                <p>You can also use links in buttons: <a href="#" class="btn btn--primary">Link Button</a></p>
             </div>
         </section>
 
@@ -634,27 +912,48 @@
             </div>
         </section>
 
-            <h3 id="modals" class="h3 mt-6">Modals</h3>
-            <button class="btn btn--primary" data-modal-target="#example-modal">Open Modal</button>
-            <div class="modal" id="example-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
-                <div class="modal__overlay" data-modal-close></div>
-                <div class="modal__dialog">
-                    <div class="modal__header">
-                        <h3 id="modal-title">Modal Title</h3>
-                        <button class="modal__close" aria-label="Close" data-modal-close>&times;</button>
-                    </div>
-                    <div class="modal__body">
-                        <p>Modal body text – the overlay darkens the background and focus is trapped inside.</p>
-                    </div>
-                    <div class="modal__footer">
-                        <button class="btn btn--secondary" data-modal-close>Cancel</button>
-                        <button class="btn btn--primary" data-modal-close>Save</button>
+            <h3 id="timeline" class="h3 mt-6">Timeline</h3>
+            <p>Vertical timeline component for showcasing work experience, milestones, or events.</p>
+            <div class="timeline">
+                <div class="container py-4">
+                    <div class="timeline__wrapper">
+                        <!-- Timeline Item 1: Left -->
+                        <div class="timeline__item timeline__item--left">
+                            <div class="timeline__column timeline__column--left">
+                                <div class="timeline__content">
+                                    <div class="timeline__logo">
+                                        <img src="" alt="Company 1" class="timeline__logo-img">
+                                    </div>
+                                    <h3 class="timeline__role">Senior Designer</h3>
+                                    <p class="timeline__company">Company Name | <em>2020 – 2023</em></p>
+                                    <ul class="timeline__achievements">
+                                        <li>Led design initiatives resulting in <strong>300% increase</strong> in user engagement.</li>
+                                        <li>Built comprehensive design system used across all products.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline__column timeline__column--spacer"></div>
+                        </div>
+
+                        <!-- Timeline Item 2: Right -->
+                        <div class="timeline__item timeline__item--right">
+                            <div class="timeline__column timeline__column--spacer"></div>
+                            <div class="timeline__column timeline__column--right">
+                                <div class="timeline__content">
+                                    <div class="timeline__logo">
+                                        <img src="" alt="Company 2" class="timeline__logo-img">
+                                    </div>
+                                    <h3 class="timeline__role">Design Lead</h3>
+                                    <p class="timeline__company">Another Company | <em>2018 – 2020</em></p>
+                                    <ul class="timeline__achievements">
+                                        <li>Scaled design team from 5 to 20 members.</li>
+                                        <li>Delivered projects <strong>2 months ahead</strong> of schedule.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="code-example mt-4">
-                <strong>Modal Usage:</strong><br>
-                &lt;button class="btn btn--primary" data-modal-target="#example-modal"&gt;Open Modal&lt;/button&gt;
             </div>
 
             <h3 id="tabs" class="h3 mt-6">Tabs</h3>
@@ -737,7 +1036,7 @@
                             <textarea id="showcase-message" rows="4" placeholder="Your message"></textarea>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <div class="form__row">
                             <label for="showcase-country">Country</label>
                             <select id="showcase-country">
@@ -747,14 +1046,14 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <div class="form__row">
                             <label for="showcase-checkbox">
                                 <input id="showcase-checkbox" type="checkbox"> I agree to the terms
                             </label>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <div class="form__row">
                             <label>Gender</label>
                             <label><input name="showcase-gender" type="radio" value="f"> Female</label>
@@ -824,7 +1123,7 @@
 
                 <h3 class="h3 mt-4">Basic Cards</h3>
                 <div class="grid">
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <article class="card card--shadow-sm">
                             <div class="card__header">
                                 <h4>Card Header</h4>
@@ -837,7 +1136,7 @@
                             </div>
                         </article>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <article class="card card--image card--shadow-md">
                             <img src="assets/images/hero.jpg" alt="Sample image">
                             <div class="card__body">
@@ -846,7 +1145,7 @@
                             </div>
                         </article>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <article class="card card--shadow-lg">
                             <div class="card__header">
                                 <h4>Card with Footer</h4>
@@ -928,7 +1227,7 @@
 
                 <h3 class="h3 mt-6">Image on Top Cards</h3>
                 <div class="grid">
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <article class="card card--image-top">
                             <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" alt="Mountain">
                             <div class="card__body">
@@ -937,7 +1236,7 @@
                             </div>
                         </article>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <article class="card card--image-top">
                             <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" alt="Mountain">
                             <div class="card__body">
@@ -1053,24 +1352,33 @@
 
                     <!-- TYPOGRAPHY -->
                     <div class="col-12 col-md-6">
-                        <h3 class="h3 mt-4">Typography</h3>
-                        <p>Font family: <strong>Inter</strong>. Scale is defined with <code>--font-size-*</code> variables.</p>
+                        <h3 class="h3 mt-4">Typography (Fully Fluid)</h3>
+                        <p>Font families: <strong>Space Grotesk</strong> (headings), <strong>Inter</strong> (body). All sizes use <code>clamp()</code> for fluid scaling across breakpoints.</p>
                         <div class="typography-sample">
-                            <h1 style="font-size:var(--font-size-3xl)">Heading 1 – 40 px</h1>
-                            <h2 style="font-size:var(--font-size-2xl)">Heading 2 – 32 px</h2>
-                            <h3 style="font-size:var(--font-size-xl)">Heading 3 – 24 px</h3>
-                            <p style="font-size:var(--font-size-base)">Body text – 16 px (base)</p>
-                            <p style="font-size:var(--font-size-sm)">Small text – 14 px</p>
+                            <div class="display-1" style="margin-bottom: var(--space-4);">Display 1</div>
+                            <h1 style="font-size:var(--font-size-3xl)">Heading 1</h1>
+                            <h2 style="font-size:var(--font-size-2xl)">Heading 2</h2>
+                            <h3 style="font-size:var(--font-size-xl)">Heading 3</h3>
+                            <p style="font-size:var(--font-size-base)">Body text (base)</p>
+                            <p class="lead">Lead paragraph</p>
+                            <p style="font-size:var(--font-size-sm)">Small text</p>
+                            <p style="font-size:var(--font-size-xs)">Extra small text</p>
                         </div>
-                        <pre class="code-block"><code>/* Example */
-h1 { font-size: var(--font-size-3xl); }
-p  { font-size: var(--font-size-base); }</code></pre>
+                        <pre class="code-block"><code>/* Fluid Typography Example */
+h1 { 
+    font-size: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+    /* Scales from 40px to 64px */
+}
+.lead {
+    font-size: clamp(1.125rem, 1.05rem + 0.375vw, 1.375rem);
+    /* Scales from 18px to 22px */
+}</code></pre>
                     </div>
 
                     <!-- SPACING -->
                     <div class="col-12 col-md-6">
-                        <h3 class="h3 mt-4">Spacing</h3>
-                        <p>All spacing uses a 4‑base scale: <code>--space-1</code> (4 px) … <code>--space-8</code> (64 px).</p>
+                        <h3 class="h3 mt-4">Spacing (Baseline Rhythm)</h3>
+                        <p>All spacing uses an 8px baseline: <code>--space-1</code> (8px) … <code>--space-8</code> (64px).</p>
                         <div class="grid">
                             <div class="col-3">
                                 <div class="space-demo" style="margin:var(--space-1)"></div>
@@ -1263,7 +1571,7 @@ p  { font-size: var(--font-size-base); }</code></pre>
 
             <h3 class="h3 mt-4">Basic Cards</h3>
             <div class="grid">
-                <div class="col-12 col-md-4 col-lg-3">
+                <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                     <article class="card card--shadow-sm">
                         <div class="card__header">
                             <h4>Card Header</h4>
@@ -1276,7 +1584,7 @@ p  { font-size: var(--font-size-base); }</code></pre>
                         </div>
                     </article>
                 </div>
-                <div class="col-12 col-md-4 col-lg-3">
+                <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                     <article class="card card--image card--shadow-md">
                         <img src="assets/images/hero.jpg" alt="Sample image">
                         <div class="card__body">
@@ -1285,7 +1593,7 @@ p  { font-size: var(--font-size-base); }</code></pre>
                         </div>
                     </article>
                 </div>
-                <div class="col-12 col-md-4 col-lg-3">
+                <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                     <article class="card card--shadow-lg">
                         <div class="card__header">
                             <h4>Card with Footer</h4>
@@ -1367,7 +1675,7 @@ p  { font-size: var(--font-size-base); }</code></pre>
 
             <h4 class="h4 mt-6">Image on Top Cards</h4>
             <div class="grid">
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                     <article class="card card--image-top">
                         <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" alt="Mountain">
                         <div class="card__body">
@@ -1376,7 +1684,7 @@ p  { font-size: var(--font-size-base); }</code></pre>
                         </div>
                     </article>
                 </div>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                     <article class="card card--image-top">
                         <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" alt="Mountain">
                         <div class="card__body">
@@ -1519,7 +1827,7 @@ p  { font-size: var(--font-size-base); }</code></pre>
                             <textarea id="showcase-message" rows="4" placeholder="Your message"></textarea>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <div class="form__row">
                             <label for="showcase-country">Country</label>
                             <select id="showcase-country">
@@ -1529,14 +1837,14 @@ p  { font-size: var(--font-size-base); }</code></pre>
                             </select>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <div class="form__row">
                             <label for="showcase-checkbox">
                                 <input id="showcase-checkbox" type="checkbox"> I agree to the terms
                             </label>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-xxxl-3">
                         <div class="form__row">
                             <label>Gender</label>
                             <label><input name="showcase-gender" type="radio" value="f"> Female</label>
@@ -1653,6 +1961,354 @@ p  { font-size: var(--font-size-base); }</code></pre>
         </section>
         </div>
 
+        <!-- TYPOGRAPHY TAB -->
+        <div class="tab__panel" role="tabpanel" id="tab-typography" aria-labelledby="tab-btn-typography" hidden>
+            <section class="demo-section">
+                <h2>Fluid Typography System</h2>
+                <p class="lead">All typography uses fluid clamp() scaling across all breakpoints (300px - 2400px).</p>
+
+                <h3 class="mt-6">Display Styles</h3>
+                <div class="demo-item">
+                    <div class="demo-label">Display 1</div>
+                    <div class="display-1">Display One: The Largest Heading</div>
+                </div>
+                <div class="demo-item">
+                    <div class="demo-label">Display 2</div>
+                    <div class="display-2">Display Two: Large Hero Text</div>
+                </div>
+                <div class="demo-item">
+                    <div class="demo-label">Display 3</div>
+                    <div class="display-3">Display Three: Prominent Heading</div>
+                </div>
+                <div class="demo-item">
+                    <div class="demo-label">Display 4</div>
+                    <div class="display-4">Display Four: Section Header</div>
+                </div>
+
+                <h3 class="mt-6">Heading Hierarchy</h3>
+                <div class="demo-item">
+                    <h1>Heading 1: Main Page Title</h1>
+                    <h2>Heading 2: Section Title</h2>
+                    <h3>Heading 3: Subsection</h3>
+                    <h4>Heading 4: Minor Section</h4>
+                    <h5>Heading 5: Small Heading</h5>
+                    <h6>Heading 6: Smallest Heading</h6>
+                </div>
+
+                <h3 class="mt-6">Enhanced Headings</h3>
+                <div class="demo-item">
+                    <h1 class="enhanced">Enhanced Heading 1</h1>
+                    <h2 class="enhanced">Enhanced Heading 2</h2>
+                    <h3 class="enhanced">Enhanced Heading 3</h3>
+                </div>
+
+                <h3 class="mt-6">Text Utilities</h3>
+                <div class="demo-item">
+                    <div class="demo-label">Lead Paragraph</div>
+                    <p class="lead">This is a lead paragraph. It's larger and more prominent than regular body text, perfect for introductions and important statements.</p>
+                </div>
+                <div class="demo-item">
+                    <div class="demo-label">Muted and Strong Text</div>
+                    <p>This is regular text with <span class="muted">muted text</span> for less emphasis and <span class="strong">strong text</span> for emphasis.</p>
+                </div>
+                <div class="demo-item">
+                    <div class="demo-label">Text Alignment</div>
+                    <p class="text-left">Left-aligned text (default)</p>
+                    <p class="text-center">Center-aligned text</p>
+                    <p class="text-right">Right-aligned text</p>
+                    <p class="text-justify">Justified text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                </div>
+
+                <h3 class="mt-6">Font Size Utilities</h3>
+                <div class="demo-item">
+                    <p class="text-xs">Extra Small (.text-xs)</p>
+                    <p class="text-sm">Small (.text-sm)</p>
+                    <p class="text-base">Base (.text-base)</p>
+                    <p class="text-lg">Large (.text-lg)</p>
+                    <p class="text-xl">Extra Large (.text-xl)</p>
+                    <p class="text-2xl">2X Large (.text-2xl)</p>
+                    <p class="text-3xl">3X Large (.text-3xl)</p>
+                    <p class="text-4xl">4X Large (.text-4xl)</p>
+                </div>
+
+                <h3 class="mt-6">Blockquote</h3>
+                <div class="demo-item">
+                    <blockquote>
+                        <p>The best way to predict the future is to invent it. Design is not just what it looks like and feels like—design is how it works.</p>
+                        <cite>Steve Jobs</cite>
+                    </blockquote>
+                </div>
+
+                <h3 class="mt-6">Code</h3>
+                <div class="demo-item">
+                    <div class="demo-label">Inline Code</div>
+                    <p>Use <code>const variable = 'value'</code> for inline code snippets.</p>
+                </div>
+                <div class="demo-item">
+                    <div class="demo-label">Code Block</div>
+                    <pre><code>function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+const message = greet('World');
+console.log(message);</code></pre>
+                </div>
+
+                <h3 class="mt-6">Lists</h3>
+                <div class="demo-item">
+                    <div class="grid">
+                        <div class="col-12 col-md-6">
+                            <div class="demo-label">Unordered List</div>
+                            <ul>
+                                <li>First item in the list</li>
+                                <li>Second item with more content</li>
+                                <li>Third item
+                                    <ul>
+                                        <li>Nested item one</li>
+                                        <li>Nested item two</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="demo-label">Ordered List</div>
+                            <ol>
+                                <li>First step in the process</li>
+                                <li>Second step with detailed instructions</li>
+                                <li>Third step
+                                    <ol>
+                                        <li>Sub-step one</li>
+                                        <li>Sub-step two</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ICONS TAB -->
+        <div class="tab__panel" role="tabpanel" id="tab-icons" aria-labelledby="tab-btn-icons" hidden>
+            <section class="demo-section">
+                <h2>Icon Library</h2>
+                <p class="lead">Complete icon set available in the assets/icons/ folder.</p>
+
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <img src="assets/icons/arrow-right.svg" alt="Arrow Right">
+                        <div class="text-sm mt-2">arrow-right</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/chevron-right.svg" alt="Chevron Right">
+                        <div class="text-sm mt-2">chevron-right</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/chevron-right-o.svg" alt="Chevron Right Outlined">
+                        <div class="text-sm mt-2">chevron-right-o</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/chevron-right-r.svg" alt="Chevron Right Rounded">
+                        <div class="text-sm mt-2">chevron-right-r</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/comment.svg" alt="Comment">
+                        <div class="text-sm mt-2">comment</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/dribbble.svg" alt="Dribbble">
+                        <div class="text-sm mt-2">dribbble</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/facebook.svg" alt="Facebook">
+                        <div class="text-sm mt-2">facebook</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/figma.svg" alt="Figma">
+                        <div class="text-sm mt-2">figma</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/framer.svg" alt="Framer">
+                        <div class="text-sm mt-2">framer</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/instagram.svg" alt="Instagram">
+                        <div class="text-sm mt-2">instagram</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/log-in.svg" alt="Log In">
+                        <div class="text-sm mt-2">log-in</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/moon.svg" alt="Moon">
+                        <div class="text-sm mt-2">moon</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/notes.svg" alt="Notes">
+                        <div class="text-sm mt-2">notes</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/phone.svg" alt="Phone">
+                        <div class="text-sm mt-2">phone</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/smartphone.svg" alt="Smartphone">
+                        <div class="text-sm mt-2">smartphone</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/sun.svg" alt="Sun">
+                        <div class="text-sm mt-2">sun</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="assets/icons/trophy.svg" alt="Trophy">
+                        <div class="text-sm mt-2">trophy</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- UTILITIES TAB -->
+        <div class="tab__panel" role="tabpanel" id="tab-utilities" aria-labelledby="tab-btn-utilities" hidden>
+            <section class="demo-section">
+                <h2>Utility Classes</h2>
+                <p class="lead">Spacing, display, and other utility classes for rapid development.</p>
+
+                <h3 class="mt-6">Spinners</h3>
+                <div class="demo-item">
+                    <div class="demo-label">Loading Spinner</div>
+                    <div class="spinner"></div>
+                </div>
+
+                <h3 class="mt-6">Progress Bars</h3>
+                <div class="demo-item">
+                    <div class="demo-label">Progress Bar (25%)</div>
+                    <div class="progress">
+                        <div class="progress__bar" style="width: 25%;"></div>
+                    </div>
+                </div>
+                <div class="demo-item">
+                    <div class="demo-label">Progress Bar (50%)</div>
+                    <div class="progress">
+                        <div class="progress__bar" style="width: 50%;"></div>
+                    </div>
+                </div>
+                <div class="demo-item">
+                    <div class="demo-label">Progress Bar (75%)</div>
+                    <div class="progress">
+                        <div class="progress__bar" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="demo-item">
+                    <div class="demo-label">Progress Bar (100%)</div>
+                    <div class="progress">
+                        <div class="progress__bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <h3 class="mt-6">Links</h3>
+                <div class="demo-item">
+                    <div class="demo-label">Default Link</div>
+                    <p>This is a <a href="#">default link</a> with standard styling.</p>
+                </div>
+                <div class="demo-item">
+                    <div class="demo-label">Link States</div>
+                    <p>
+                        <a href="#">Default link</a> | 
+                        <a href="#" style="color: var(--color-text-muted);">Visited link</a> | 
+                        <a href="#" style="text-decoration: underline;">Active link</a>
+                    </p>
+                </div>
+
+                <h3 class="mt-6">Spacing Utilities</h3>
+                <div class="demo-item">
+                    <div class="demo-label">Margin Top</div>
+                    <div class="mt-1" style="background: var(--color-surface); padding: var(--space-2);">.mt-1</div>
+                    <div class="mt-2" style="background: var(--color-surface); padding: var(--space-2);">.mt-2</div>
+                    <div class="mt-4" style="background: var(--color-surface); padding: var(--space-2);">.mt-4</div>
+                    <div class="mt-6" style="background: var(--color-surface); padding: var(--space-2);">.mt-6</div>
+                </div>
+                <div class="demo-item">
+                    <div class="demo-label">Padding</div>
+                    <div class="py-2" style="background: var(--color-surface);">.py-2 (vertical padding)</div>
+                    <div class="py-4" style="background: var(--color-surface);">.py-4 (vertical padding)</div>
+                    <div class="py-6" style="background: var(--color-surface);">.py-6 (vertical padding)</div>
+                </div>
+
+                <h3 class="mt-6">Display Utilities</h3>
+                <div class="demo-item">
+                    <div class="demo-label">Hidden</div>
+                    <p>Use <code>.hidden</code> to hide elements: <span class="hidden">This text is hidden</span></p>
+                </div>
+            </section>
+        </div>
+
+        <!-- PHOTOS TAB -->
+        <div class="tab__panel" role="tabpanel" id="tab-photos" aria-labelledby="tab-btn-photos" hidden>
+            <section class="demo-section">
+                <h2>Photo Gallery & Usage Stats</h2>
+                <p class="lead">Image gallery with live consumption counter inspired by modern settings interfaces.</p>
+
+                <!-- Stats Counter Section -->
+                <div class="photo-stats" style="margin: var(--space-6) 0; padding: var(--space-6); background: var(--color-surface); border-radius: var(--border-radius-lg); border: 1px solid var(--color-border);">
+                    <div class="grid" style="gap: var(--space-4);">
+                        <div class="col-12 col-md-4">
+                            <div class="stat-counter">
+                                <div class="stat-counter__value" id="photos-consumed">0</div>
+                                <div class="stat-counter__label">Photos Consumed</div>
+                                <div class="stat-counter__subtitle">Total images processed</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="stat-counter">
+                                <div class="stat-counter__value" id="images-processed">0</div>
+                                <div class="stat-counter__label">Images Processed</div>
+                                <div class="stat-counter__subtitle">Optimized & compressed</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="stat-counter">
+                                <div class="stat-counter__value" id="storage-used">0 MB</div>
+                                <div class="stat-counter__label">Storage Used</div>
+                                <div class="stat-counter__subtitle">Total file size</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mt-6">Photo Gallery</h3>
+                <div class="photo-gallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-4); margin: var(--space-4) 0;">
+                    <div class="photo-item" style="position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--border-radius); border: 1px solid var(--color-border); background: var(--color-surface);">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop" alt="Mountain landscape" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                    </div>
+                    <div class="photo-item" style="position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--border-radius); border: 1px solid var(--color-border); background: var(--color-surface);">
+                        <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400&h=400&fit=crop" alt="Ocean waves" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                    </div>
+                    <div class="photo-item" style="position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--border-radius); border: 1px solid var(--color-border); background: var(--color-surface);">
+                        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400&h=400&fit=crop" alt="Forest path" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                    </div>
+                    <div class="photo-item" style="position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--border-radius); border: 1px solid var(--color-border); background: var(--color-surface);">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=400&fit=crop" alt="Desert dunes" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                    </div>
+                    <div class="photo-item" style="position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--border-radius); border: 1px solid var(--color-border); background: var(--color-surface);">
+                        <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400&h=400&fit=crop" alt="City skyline" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                    </div>
+                    <div class="photo-item" style="position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--border-radius); border: 1px solid var(--color-border); background: var(--color-surface);">
+                        <img src="https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=400&fit=crop" alt="Sunset" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                    </div>
+                </div>
+
+                <div class="demo-item" style="margin-top: var(--space-6);">
+                    <div class="demo-label">Gallery Features</div>
+                    <ul style="list-style: disc; padding-left: var(--space-5);">
+                        <li>Responsive grid layout that adapts to viewport size</li>
+                        <li>Live counter updates as images load</li>
+                        <li>Hover effects for better interactivity</li>
+                        <li>Optimized image loading with aspect ratio preservation</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
     </main>
 
     <footer class="site-footer">
@@ -1664,9 +2320,11 @@ p  { font-size: var(--font-size-base); }</code></pre>
                     <ul class="footer__nav">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
+                        <li><a href="solutions.html">Solutions</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="showcase.html">Showcase</a></li>
+                        <li><a href="calendar.html">Tech Calendar</a></li>
                     </ul>
                 </div>
 
@@ -1716,187 +2374,6 @@ p  { font-size: var(--font-size-base); }</code></pre>
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/components.js"></script>
-    <script>
-        // Viewport info display
-        function updateViewportInfo() {
-            const width = window.innerWidth;
-            const widthSpan = document.getElementById('viewport-width');
-            const breakpointSpan = document.getElementById('breakpoint');
-            
-            widthSpan.textContent = width + 'px';
-            
-            let breakpoint = 'xs';
-            if (width >= 2400) breakpoint = 'xxxl';
-            else if (width >= 1600) breakpoint = 'xxl';
-            else if (width >= 1280) breakpoint = 'xl';
-            else if (width >= 1024) breakpoint = 'lg';
-            else if (width >= 768) breakpoint = 'md';
-            else if (width >= 600) breakpoint = 'sm';
-            
-            breakpointSpan.textContent = breakpoint;
-        }
-        
-        updateViewportInfo();
-        window.addEventListener('resize', updateViewportInfo);
-
-        // Carousel functionality
-        function initCarousel(carouselId) {
-            const carousel = document.getElementById(carouselId);
-            if (!carousel) return;
-
-            const track = carousel.querySelector('.carousel__track');
-            const slides = carousel.querySelectorAll('.carousel__slide');
-            const prevBtn = carousel.querySelector('[data-carousel-prev]');
-            const nextBtn = carousel.querySelector('[data-carousel-next]');
-            const indicators = carousel.querySelector('.carousel__indicators');
-            const isVertical = carousel.classList.contains('carousel--vertical');
-            
-            let currentIndex = 0;
-            const totalSlides = slides.length;
-
-            // Create indicators
-            if (indicators) {
-                for (let i = 0; i < totalSlides; i++) {
-                    const indicator = document.createElement('button');
-                    indicator.className = 'carousel__indicator' + (i === 0 ? ' is-active' : '');
-                    indicator.setAttribute('aria-label', `Go to slide ${i + 1}`);
-                    indicator.addEventListener('click', () => goToSlide(i));
-                    indicators.appendChild(indicator);
-                }
-            }
-
-            function updateCarousel() {
-                if (isVertical) {
-                    track.style.transform = `translateY(-${currentIndex * 100}%)`;
-                } else {
-                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                }
-
-                // Update indicators
-                if (indicators) {
-                    indicators.querySelectorAll('.carousel__indicator').forEach((ind, i) => {
-                        ind.classList.toggle('is-active', i === currentIndex);
-                    });
-                }
-
-                // Update button states
-                if (prevBtn) prevBtn.disabled = currentIndex === 0;
-                if (nextBtn) nextBtn.disabled = currentIndex === totalSlides - 1;
-            }
-
-            function goToSlide(index) {
-                currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
-                updateCarousel();
-            }
-
-            function nextSlide() {
-                if (currentIndex < totalSlides - 1) {
-                    currentIndex++;
-                    updateCarousel();
-                }
-            }
-
-            function prevSlide() {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateCarousel();
-                }
-            }
-
-            if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-            if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-
-            // Keyboard navigation
-            carousel.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft' && !isVertical) prevSlide();
-                if (e.key === 'ArrowRight' && !isVertical) nextSlide();
-                if (e.key === 'ArrowUp' && isVertical) prevSlide();
-                if (e.key === 'ArrowDown' && isVertical) nextSlide();
-            });
-
-            // Make carousel focusable
-            carousel.setAttribute('tabindex', '0');
-
-            updateCarousel();
-        }
-
-        // Tab switching functionality
-        function switchTab(tabName) {
-            // Hide all panels
-            document.querySelectorAll('.tab__panel').forEach(panel => {
-                panel.hidden = true;
-                panel.classList.remove('is-active');
-            });
-            
-            // Remove active from all tabs
-            document.querySelectorAll('.showcase-tabs .tab').forEach(tab => {
-                tab.classList.remove('is-active');
-                tab.setAttribute('aria-selected', 'false');
-            });
-            
-            // Show selected panel
-            const panel = document.getElementById(`tab-${tabName}`);
-            const tabBtn = document.getElementById(`tab-btn-${tabName}`);
-            
-            if (panel && tabBtn) {
-                panel.hidden = false;
-                panel.classList.add('is-active');
-                tabBtn.classList.add('is-active');
-                tabBtn.setAttribute('aria-selected', 'true');
-                
-                // Scroll to top of main content
-                document.querySelector('main').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-
-        // Initialize tabs
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set up tab click handlers
-            document.querySelectorAll('.showcase-tabs .tab').forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    const tabName = tab.getAttribute('data-tab');
-                    switchTab(tabName);
-                });
-            });
-
-            // Initialize carousels
-            initCarousel('carousel-horizontal');
-            initCarousel('carousel-vertical');
-
-            // Slider value updates
-            const volumeSlider = document.getElementById('slider-volume');
-            const volumeValue = document.getElementById('volume-value');
-            if (volumeSlider && volumeValue) {
-                volumeSlider.addEventListener('input', (e) => {
-                    volumeValue.textContent = e.target.value;
-                });
-            }
-
-            const brightnessSlider = document.getElementById('slider-brightness');
-            const brightnessValue = document.getElementById('brightness-value');
-            if (brightnessSlider && brightnessValue) {
-                brightnessSlider.addEventListener('input', (e) => {
-                    brightnessValue.textContent = e.target.value;
-                });
-            }
-
-            const opacitySlider = document.getElementById('slider-lg-1');
-            const opacityValue = document.getElementById('opacity-value');
-            if (opacitySlider && opacityValue) {
-                opacitySlider.addEventListener('input', (e) => {
-                    opacityValue.textContent = e.target.value;
-                });
-            }
-
-            const speedSlider = document.getElementById('slider-lg-2');
-            const speedValue = document.getElementById('speed-value');
-            if (speedSlider && speedValue) {
-                speedSlider.addEventListener('input', (e) => {
-                    speedValue.textContent = e.target.value;
-                });
-            }
-        });
-    </script>
+    <script src="assets/js/showcase.js"></script>
 </body>
 </html>
-

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>About – Your School</title>
+    <title>Tech Calendar – Your School</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,195 @@
 
     <!-- Unified Responsive Framework -->
     <link rel="stylesheet" href="assets/css/framework-unified.css">
+    
+    <style>
+        .calendar {
+            padding: var(--space-8) 0;
+        }
+        
+        .calendar__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-6);
+            flex-wrap: wrap;
+            gap: var(--space-4);
+        }
+        
+        .calendar__controls {
+            display: flex;
+            gap: var(--space-3);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .calendar__month-year {
+            font-size: var(--font-size-2xl);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        
+        .calendar__grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: var(--space-2);
+            margin-bottom: var(--space-6);
+        }
+        
+        .calendar__day-header {
+            text-align: center;
+            font-weight: 600;
+            padding: var(--space-2);
+            color: var(--color-text);
+            font-size: var(--font-size-sm);
+            text-transform: uppercase;
+        }
+        
+        .calendar__day {
+            aspect-ratio: 1;
+            border: var(--border-width) solid var(--color-border);
+            border-radius: var(--border-radius-sm);
+            padding: var(--space-2);
+            background: var(--color-bg);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 80px;
+        }
+        
+        .calendar__day:hover {
+            background: var(--color-surface);
+            border-color: var(--color-primary);
+        }
+        
+        .calendar__day--other-month {
+            opacity: 0.4;
+        }
+        
+        .calendar__day--today {
+            border-color: var(--color-primary);
+            background: var(--color-surface);
+        }
+        
+        .calendar__day-number {
+            font-weight: 600;
+            margin-bottom: var(--space-1);
+        }
+        
+        .calendar__event {
+            font-size: var(--font-size-xs);
+            padding: 2px var(--space-1);
+            margin-bottom: 2px;
+            border-radius: 2px;
+            background: var(--color-primary);
+            color: var(--color-bg);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .calendar__event:hover {
+            opacity: 0.8;
+        }
+        
+        .calendar__actions {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+        }
+        
+        .events-list {
+            margin-top: var(--space-8);
+        }
+        
+        .events-list__item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-4);
+            border: var(--border-width) solid var(--color-border);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--space-3);
+            background: var(--color-bg);
+            transition: all 0.2s ease;
+        }
+        
+        .events-list__item:hover {
+            background: var(--color-surface);
+            border-color: var(--color-primary);
+        }
+        
+        .events-list__content {
+            flex: 1;
+        }
+        
+        .events-list__title {
+            font-weight: 600;
+            margin-bottom: var(--space-1);
+            color: var(--color-text);
+        }
+        
+        .events-list__date {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+        }
+        
+        .events-list__actions {
+            display: flex;
+            gap: var(--space-2);
+        }
+        
+        .modal__form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+        
+        .share-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+        
+        .share-option {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+        
+        .share-option__input {
+            flex: 1;
+        }
+        
+        .share-option__button {
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 767px) {
+            .calendar__day {
+                min-height: 60px;
+            }
+            
+            .calendar__event {
+                font-size: 10px;
+                padding: 1px 2px;
+            }
+            
+            .events-list__item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-3);
+            }
+            
+            .events-list__actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+    </style>
 </head>
 <body data-theme="light">
     <header class="site-header">
@@ -29,14 +218,14 @@
             <div class="nav__menu">
                 <ul class="nav__links">
                     <li><a href="index.html" class="nav__link nav__link--underline">Home</a></li>
-                    <li><a href="about.html" class="nav__link nav__link--underline is-active">About</a></li>
+                    <li><a href="about.html" class="nav__link nav__link--underline">About</a></li>
                     <li><a href="solutions.html" class="nav__link nav__link--underline">Solutions</a></li>
                     <li><a href="contact.html" class="nav__link nav__link--underline">Contact</a></li>
                     <li><a href="blog.html" class="nav__link nav__link--underline">Blog</a></li>
-                    <li><a href="calendar.html" class="nav__link nav__link--underline">Tech Calendar</a></li>
+                    <li><a href="calendar.html" class="nav__link nav__link--underline is-active">Tech Calendar</a></li>
                 </ul>
 
-                                <!-- THEME TOGGLE -->
+                <!-- THEME TOGGLE -->
                 <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
                     <span class="theme-toggle__icon theme-toggle__icon--light">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,14 +248,14 @@
             <div class="nav__mobile-menu">
                 <ul class="nav__links nav__links--mobile">
                     <li><a href="index.html" class="nav__link nav__link--underline">Home</a></li>
-                    <li><a href="about.html" class="nav__link nav__link--underline is-active">About</a></li>
+                    <li><a href="about.html" class="nav__link nav__link--underline">About</a></li>
                     <li><a href="solutions.html" class="nav__link nav__link--underline">Solutions</a></li>
                     <li><a href="contact.html" class="nav__link nav__link--underline">Contact</a></li>
                     <li><a href="blog.html" class="nav__link nav__link--underline">Blog</a></li>
-                    <li><a href="calendar.html" class="nav__link nav__link--underline">Tech Calendar</a></li>
+                    <li><a href="calendar.html" class="nav__link nav__link--underline is-active">Tech Calendar</a></li>
                 </ul>
 
-                                <button class="theme-toggle theme-toggle--mobile" type="button" aria-label="Toggle color theme" title="Toggle theme">
+                <button class="theme-toggle theme-toggle--mobile" type="button" aria-label="Toggle color theme" title="Toggle theme">
                     <span class="theme-toggle__icon theme-toggle__icon--light">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" fill="currentColor"/>
@@ -87,127 +276,100 @@
     </header>
 
     <main>
-        <!-- HERO SECTION -->
-        <section class="hero" style="background-image: url('assets/images/hero.jpg');">
-            <div class="hero__overlay"></div>
-            <div class="hero__content">
-                <h1 class="hero__title">About Us</h1>
-                <p class="hero__subtitle">Learn more about our mission, values, and commitment to education.</p>
-            </div>
-        </section>
+        <section class="calendar">
+            <div class="container">
+                <h1 class="display-1 mb-6">Tech Calendar</h1>
+                <p class="lead mb-8">Manage and share your tech events. Add, edit, and organize your calendar.</p>
 
-        <!-- ABOUT CONTENT -->
-        <section class="about">
-            <div class="container py-8">
-                <div class="grid">
-                    <div class="col-12 col-md-8">
-                        <h2>Our Mission</h2>
-                        <p>Provide a brief paragraph about your school's mission, values, or any special programmes you offer. This section can be expanded with more detailed information about your educational philosophy, history, and goals.</p>
-
-                        <h3 class="mt-6">Our Values</h3>
-                        <p>Describe the core values that guide your school's approach to education. What principles do you stand for? How do these values shape the learning experience for your students?</p>
-
-                        <h3 class="mt-6">Our History</h3>
-                        <p>Share the story of your school. When was it founded? What milestones have you achieved? How has your school evolved over the years?</p>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="card card--solid">
-                            <div class="card__body">
-                                <h4>Quick Facts</h4>
-                                <ul class="list-unstyled">
-                                    <li class="mb-2"><strong>Founded:</strong> [Year]</li>
-                                    <li class="mb-2"><strong>Students:</strong> [Number]</li>
-                                    <li class="mb-2"><strong>Faculty:</strong> [Number]</li>
-                                    <li class="mb-2"><strong>Programmes:</strong> [List]</li>
-                                </ul>
-                            </div>
-                        </div>
+                <!-- Calendar Header with Controls -->
+                <div class="calendar__header">
+                    <div class="calendar__month-year" id="calendar-month-year"></div>
+                    <div class="calendar__controls">
+                        <button class="btn btn--secondary" id="prev-month" aria-label="Previous month">←</button>
+                        <button class="btn btn--secondary" id="today-btn">Today</button>
+                        <button class="btn btn--secondary" id="next-month" aria-label="Next month">→</button>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- TIMELINE SECTION -->
-        <section class="timeline">
-            <div class="container py-8">
-                <div class="timeline__wrapper">
-                    <!-- Timeline Item 1: Movemeback (Left) -->
-                    <div class="timeline__item timeline__item--left">
-                        <div class="timeline__column timeline__column--left">
-                            <div class="timeline__content">
-                                <div class="timeline__logo">
-                                    <img src="" alt="Movemeback" class="timeline__logo-img">
-                                </div>
-                                <h3 class="timeline__role">Lead Product Designer</h3>
-                                <p class="timeline__company">Movemeback | <em>Sep 2020 – Aug 2023</em></p>
-                                <ul class="timeline__achievements">
-                                    <li>Spearheaded the end-to-end redesign of a cross-continent recruitment platform, resulting in a <strong>300% increase in user registrations</strong>.</li>
-                                    <li>Launched a new web platform and mobile app prototype featuring AI-driven job matching and reputation scoring.</li>
-                                    <li>Directed a full brand refresh, boosting brand awareness by <strong>28%</strong> through redesigned marketing assets.</li>
-                                    <li>Scaled the design team from 10 to 20 members, implementing a mentorship program that reduced onboarding time by <strong>50%</strong>.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="timeline__column timeline__column--spacer"></div>
-                    </div>
+                <!-- Action Buttons -->
+                <div class="calendar__actions mb-6">
+                    <button class="btn btn--primary" id="add-event-btn">Add Event</button>
+                    <button class="btn btn--outline" id="share-calendar-btn">Share Calendar</button>
+                </div>
 
-                    <!-- Timeline Item 2: Superbet (Right) -->
-                    <div class="timeline__item timeline__item--right">
-                        <div class="timeline__column timeline__column--spacer"></div>
-                        <div class="timeline__column timeline__column--right">
-                            <div class="timeline__content">
-                                <div class="timeline__logo">
-                                    <img src="" alt="Superbet" class="timeline__logo-img">
-                                </div>
-                                <h3 class="timeline__role">Lead UI Designer</h3>
-                                <p class="timeline__company">Superbet | <em>Nov 2019 – Apr 2020</em></p>
-                                <ul class="timeline__achievements">
-                                    <li>Led UI design for a new iOS betting app from concept to MVP in 8 weeks, defining core user flows like the Betting Basket and Odds Selector.</li>
-                                    <li>Established a lean, iterative process with weekly user testing, improving first-time user conversion by <strong>22%</strong>.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Calendar Grid -->
+                <div class="calendar__grid" id="calendar-grid"></div>
 
-                    <!-- Timeline Item 3: Costa Coffee (Left) -->
-                    <div class="timeline__item timeline__item--left">
-                        <div class="timeline__column timeline__column--left">
-                            <div class="timeline__content">
-                                <div class="timeline__logo">
-                                    <img src="" alt="Costa Coffee" class="timeline__logo-img">
-                                </div>
-                                <h3 class="timeline__role">Design System Manager</h3>
-                                <p class="timeline__company">Costa Coffee | <em>Dec 2018 – Apr 2019</em></p>
-                                <ul class="timeline__achievements">
-                                    <li>Architected and delivered the first global design system for web, iOS, and Android, achieving <strong>100% WCAG AAA compliance</strong>.</li>
-                                    <li>Streamlined development by integrating Sketch libraries with Zeplin and Storybook, delivering the project <strong>2 months ahead of schedule</strong>.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="timeline__column timeline__column--spacer"></div>
-                    </div>
-
-                    <!-- Timeline Item 4: Barclays (Right) -->
-                    <div class="timeline__item timeline__item--right">
-                        <div class="timeline__column timeline__column--spacer"></div>
-                        <div class="timeline__column timeline__column--right">
-                            <div class="timeline__content">
-                                <div class="timeline__logo">
-                                    <img src="" alt="Barclays" class="timeline__logo-img">
-                                </div>
-                                <h3 class="timeline__role">UI/UX Designer</h3>
-                                <p class="timeline__company">Barclays | <em>Jun 2018 – Sep 2018</em></p>
-                                <ul class="timeline__achievements">
-                                    <li>Designed the user experience for <em>Barclays Now</em>, an internal employee platform consolidating 100+ tools.</li>
-                                    <li>Launched a mobile-first beta, reducing task completion time for employees by <strong>35%</strong>.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Events List -->
+                <div class="events-list">
+                    <h2 class="h2 mb-4">Upcoming Events</h2>
+                    <div id="events-list-container"></div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- Add/Edit Event Modal -->
+    <div class="modal" id="event-modal" role="dialog" aria-labelledby="event-modal-title" aria-hidden="true" hidden>
+        <div class="modal__overlay"></div>
+        <div class="modal__dialog">
+            <div class="modal__header">
+                <h2 class="h2" id="event-modal-title">Add Event</h2>
+                <button class="modal__close" aria-label="Close modal">×</button>
+            </div>
+            <div class="modal__body">
+                <form class="modal__form" id="event-form">
+                    <input type="hidden" id="event-id">
+                    <div class="form__row">
+                        <label for="event-title">Event Title</label>
+                        <input type="text" id="event-title" required placeholder="e.g., Tech Conference 2025">
+                    </div>
+                    <div class="form__row">
+                        <label for="event-date">Date</label>
+                        <input type="date" id="event-date" required>
+                    </div>
+                    <div class="form__row">
+                        <label for="event-time">Time (optional)</label>
+                        <input type="time" id="event-time">
+                    </div>
+                    <div class="form__row">
+                        <label for="event-description">Description (optional)</label>
+                        <textarea id="event-description" rows="4" placeholder="Add event details..."></textarea>
+                    </div>
+                    <div class="form__actions">
+                        <button type="submit" class="btn btn--primary">Save Event</button>
+                        <button type="button" class="btn btn--secondary" id="cancel-event-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Calendar Modal -->
+    <div class="modal" id="share-modal" role="dialog" aria-labelledby="share-modal-title" aria-hidden="true" hidden>
+        <div class="modal__overlay"></div>
+        <div class="modal__dialog">
+            <div class="modal__header">
+                <h2 class="h2" id="share-modal-title">Share Calendar</h2>
+                <button class="modal__close" aria-label="Close modal">×</button>
+            </div>
+            <div class="modal__body">
+                <div class="share-options">
+                    <div class="share-option">
+                        <label for="share-link">Calendar Link</label>
+                        <div style="display: flex; gap: var(--space-2); width: 100%;">
+                            <input type="text" id="share-link" class="share-option__input" readonly value="">
+                            <button type="button" class="btn btn--secondary share-option__button" id="copy-link-btn">Copy</button>
+                        </div>
+                    </div>
+                    <div class="share-option">
+                        <button type="button" class="btn btn--outline" id="export-json-btn">Export as JSON</button>
+                        <button type="button" class="btn btn--outline" id="export-ics-btn">Export as ICS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="site-footer">
         <div class="container">
@@ -271,6 +433,7 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/calendar.js"></script>
 </body>
 </html>
 

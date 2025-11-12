@@ -311,7 +311,9 @@ body.navbar-fixed {
 }
 
 /* Adjust padding when navbar is scrolled (shrunk) to prevent jump */
-/* Padding adjusted via body class - handled in JS */
+body.navbar-fixed.navbar-scrolled {
+  padding-top: calc(var(--nav-height-normal) - var(--nav-height-shrink) - 4px);
+}
 
 /* Skip to content link - accessibility feature */
 .skip-link {
@@ -1257,6 +1259,7 @@ p {
   /* No background when at top of page */
   background: transparent;
   backdrop-filter: none;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: none;
   border-bottom: none;
   position: static; /* Static initially, becomes fixed after hero section */
@@ -1320,6 +1323,7 @@ body[data-theme="dark"] .site-header {
   /* Glass effect only when scrolled - Light theme */
   background: var(--glass-bg-light);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: blur(var(--glass-blur))
     saturate(var(--glass-saturation));
   border-bottom: none;
@@ -1338,6 +1342,7 @@ body[data-theme="dark"] .site-header {
 body[data-theme="dark"] .site-header--scrolled {
   background: var(--glass-bg-dark);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: blur(var(--glass-blur))
     saturate(var(--glass-saturation));
   border-bottom: none;
@@ -3367,9 +3372,10 @@ body[data-theme="dark"] .badge {
 /* CARDS: overflow hidden prevents content from breaking rounded corners */
 .card {
   background: var(--color-bg);
-  /* Thinner border for elegance */
-  border: 1px solid;
-  border-color: rgba(0, 0, 0, 0.08);
+  /* Fixed border width to prevent layout shift on hover */
+  border: 2px solid;
+  /* Slightly reduced opacity to maintain visual weight with 2px border */
+  border-color: rgba(0, 0, 0, 0.06);
   /* Smoother radius for premium feel */
   border-radius: var(--space-2);
   overflow: hidden; /* Clips content to border-radius */
@@ -3383,22 +3389,22 @@ body[data-theme="dark"] .badge {
 }
 
 body[data-theme="dark"] .card {
-  border-color: rgba(255, 255, 255, 0.06);
+  /* Slightly reduced opacity to maintain visual weight with 2px border */
+  border-color: rgba(255, 255, 255, 0.04);
 }
 
 .card:hover {
   transform: translateY(-2px); /* Gentle lift */
   box-shadow: var(--elevation-3);
-  border-color: var(--color-text-muted);
-  border-width: 2px;
+  border-color: var(--color-accent-hover); /* Green hover from style guide */
 }
 
 body[data-theme="dark"] .card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--color-accent-hover); /* Green hover from style guide */
 }
 
 body[data-theme="light"] .card:hover {
-  border-color: rgba(0, 0, 0, 0.15);
+  border-color: var(--color-accent-hover); /* Green hover from style guide */
 }
 
 /* Prevent buttons inside cards from lifting (avoid double lift) */
@@ -3454,6 +3460,7 @@ body[data-theme="light"] .card:hover {
 .glass {
   background: var(--glass-bg-light);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: blur(var(--glass-blur))
     saturate(var(--glass-saturation));
   border: var(--border-width) solid var(--glass-border-light);
@@ -3486,6 +3493,7 @@ body[data-theme="dark"] .glass {
 .card--glass-solid {
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(12px) saturate(180%); /* Modern glass effect */
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: blur(12px) saturate(180%); /* Safari prefix */
   border: 2px solid rgba(241, 245, 249, 0.35);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
@@ -3500,9 +3508,10 @@ body[data-theme="dark"] .card--glass-solid {
   background: rgba(0, 0, 0, 0.5);
   /* Refined blur for premium effect */
   backdrop-filter: blur(24px) saturate(150%);
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: blur(24px) saturate(150%);
-  /* Subtler border */
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Fixed border width to prevent layout shift on hover */
+  border: 2px solid rgba(255, 255, 255, 0.08);
   /* More layered shadow for sophisticated depth */
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.12),
@@ -3529,11 +3538,10 @@ body[data-theme="light"] .card--glass-outline {
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Hover only: Nice border change effect */
+/* Hover only: Green border from style guide */
 .card--glass-outline:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.2);
-  border-width: 2px;
+  border-color: var(--color-accent-hover); /* Green hover from style guide */
   box-shadow:
     0 12px 48px rgba(0, 0, 0, 0.16),
     0 4px 12px rgba(0, 0, 0, 0.1),
@@ -3542,7 +3550,7 @@ body[data-theme="light"] .card--glass-outline {
 }
 
 body[data-theme="dark"] .card--glass-outline:hover {
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: var(--color-accent-hover); /* Green hover from style guide */
   box-shadow:
     0 12px 48px rgba(0, 0, 0, 0.25),
     0 4px 12px rgba(0, 0, 0, 0.15),
@@ -3551,7 +3559,7 @@ body[data-theme="dark"] .card--glass-outline:hover {
 }
 
 body[data-theme="light"] .card--glass-outline:hover {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--color-accent-hover); /* Green hover from style guide */
   box-shadow:
     0 12px 48px rgba(0, 0, 0, 0.16),
     0 4px 12px rgba(0, 0, 0, 0.1),
@@ -3597,10 +3605,11 @@ body[data-theme="dark"] .card--glass-outline .card__footer {
   background: transparent;
   border: 2px solid var(--color-primary);
   box-shadow: none;
+  transition: all 0.35s var(--ease-out-smooth);
 }
 .card--outline:hover {
   background: var(--color-surface);
-  border-width: 2px;
+  border-color: var(--color-accent-hover); /* Green hover from style guide */
   box-shadow: var(--shadow-sm);
 }
 
@@ -3630,8 +3639,10 @@ body[data-theme="dark"] .card--glass-outline .card__footer {
   padding: var(--space-5) var(--space-4);
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(20px) saturate(180%);
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Fixed border width to prevent layout shift on hover */
+  border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius-lg);
   box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.2),
@@ -3650,7 +3661,8 @@ body[data-theme="dark"] .card--glass-outline .card__footer {
 /* Dark theme stat cards - black glass effect */
 body[data-theme="dark"] .about__stat-card {
   background: rgba(0, 0, 0, 0.6);
-  border-color: rgba(255, 255, 255, 0.08);
+  /* Slightly reduced opacity to maintain visual weight with 2px border */
+  border-color: rgba(255, 255, 255, 0.06);
   box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.3),
     0 1px 4px rgba(0, 0, 0, 0.2);
@@ -3658,17 +3670,17 @@ body[data-theme="dark"] .about__stat-card {
 
 body[data-theme="light"] .about__stat-card {
   background: rgba(0, 0, 0, 0.4);
-  border-color: rgba(255, 255, 255, 0.12);
+  /* Slightly reduced opacity to maintain visual weight with 2px border */
+  border-color: rgba(255, 255, 255, 0.08);
   box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.15),
     0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Hover only: Nice border change effect */
+/* Hover only: Green border from style guide */
 .about__stat-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.25);
-  border-width: 2px;
+  border-color: var(--color-accent-hover); /* Green hover from style guide */
   box-shadow:
     0 6px 20px rgba(0, 0, 0, 0.25),
     0 2px 6px rgba(0, 0, 0, 0.15);
@@ -3676,7 +3688,7 @@ body[data-theme="light"] .about__stat-card {
 }
 
 body[data-theme="dark"] .about__stat-card:hover {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--color-accent-hover); /* Green hover from style guide */
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.4),
     0 2px 8px rgba(0, 0, 0, 0.3);
@@ -3684,7 +3696,7 @@ body[data-theme="dark"] .about__stat-card:hover {
 }
 
 body[data-theme="light"] .about__stat-card:hover {
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: var(--color-accent-hover); /* Green hover from style guide */
   box-shadow:
     0 6px 20px rgba(0, 0, 0, 0.2),
     0 2px 6px rgba(0, 0, 0, 0.15);
@@ -4091,6 +4103,7 @@ body[data-theme="light"] .about__stat-card:hover {
   background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
   /* Enhanced backdrop blur for premium feel */
   backdrop-filter: blur(8px) saturate(120%);
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: blur(8px) saturate(120%);
   /* Smooth fade-in animation */
   animation: fadeIn 0.3s var(--ease-out-smooth);
@@ -4217,6 +4230,7 @@ select {
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-appearance: none; /* Removes browser default styling */
   appearance: none;
 }
@@ -5624,6 +5638,7 @@ body[data-theme="dark"] .page-spinner__logo {
   transition: opacity 0.3s var(--ease-out-smooth), transform 0.3s var(--ease-out-smooth), background 0.3s;
   pointer-events: none;
   backdrop-filter: blur(10px);
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: blur(10px);
 }
 

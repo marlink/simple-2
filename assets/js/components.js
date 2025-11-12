@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
          * VIDEO COVER COMPONENT
          * ========================================================================
          * Video elements with static cover images that reveal video on interaction
-         * 
+         *
          * HTML Structure:
          * <div class="video-cover" data-video-cover>
          *   <video class="video-cover__video" loop muted playsinline>
@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
          *   <div class="video-cover__play-icon" aria-hidden="true">▶</div>
          *   <!-- Content here -->
          * </div>
-         * 
+         *
          * Features:
          * - Desktop: Hover shows play icon, click plays video
          * - Mobile: Tap shows play icon, second tap plays video
@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
          */
 
         const videoCovers = safeQueryAll('[data-video-cover]')
-        
+
         if (videoCovers && videoCovers.length > 0) {
             // Detect if device has fine pointer (desktop/mouse)
             const hasFinePointer = window.matchMedia('(pointer: fine)').matches
@@ -473,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  */
                 const showPlayIcon = () => {
                     container.classList.add('video-cover--show-icon')
-                    
+
                     // Auto-hide after 2 seconds if not played
                     clearTimeout(showIconTimeout)
                     showIconTimeout = setTimeout(() => {
@@ -492,15 +492,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     // Mobile: First tap shows icon, second tap plays
                     let tapped = false
-                    
+
                     container.addEventListener('click', (e) => {
                         e.preventDefault()
-                        
+
                         if (!tapped && !isPlaying) {
                             // First tap: show icon
                             tapped = true
                             showPlayIcon()
-                            
+
                             // Reset tapped state after 3 seconds
                             setTimeout(() => {
                                 tapped = false

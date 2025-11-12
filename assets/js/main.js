@@ -38,7 +38,7 @@
      * Spinner must exist in HTML before this script runs
      */
     const removeSpinner = () => {
-        const spinner = document.getElementById('page-spinner')
+        const spinner = safeQuery('.page-spinner')
         if (spinner) {
             spinner.classList.add('hidden')
             // Remove from DOM after transition completes
@@ -294,8 +294,10 @@
                     // Handle scrolled state (for styling changes) - only applies after fixed threshold
                     if (scrollY > fixedThreshold) {
                         siteHeader.classList.add('site-header--scrolled')
+                        document.body.classList.add('navbar-scrolled')
                     } else {
                         siteHeader.classList.remove('site-header--scrolled')
+                        document.body.classList.remove('navbar-scrolled')
                     }
 
                     // Ensure navbar is always visible (remove any hidden state)

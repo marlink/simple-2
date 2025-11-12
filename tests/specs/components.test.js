@@ -55,7 +55,7 @@ module.exports = {
     {
       name: 'should open modal on trigger click',
       run: async (page, helpers) => {
-        const { goto, click, isVisible, $ } = helpers;
+        const { goto, click, $ } = helpers;
         await goto(page, '/showcase.html');
         await page.waitForTimeout(500); // Wait for page to load
         
@@ -76,7 +76,7 @@ module.exports = {
         }
         
         // Check if trigger is actually visible
-        const triggerVisible = await isVisible(page, '[data-modal-target]');
+        const triggerVisible = await helpers.isVisible(page, '[data-modal-target]');
         if (!triggerVisible) {
           // Skip if trigger is hidden
           return;
@@ -86,25 +86,26 @@ module.exports = {
         if (!modalId) {
           return;
         }
-        const modalSelector = modalId.replace('#', '.modal');
+        const modalSelector = modalId.replace('#', '');
         
-        // Check modal is initially hidden
-        const initiallyVisible = await isVisible(page, modalSelector);
-        helpers.expect(initiallyVisible).toBeFalsy();
+        // Check modal is initially hidden (has hidden attribute)
+        const modal = await page.locator(`#${modalSelector}`).first();
+        const initiallyHidden = await modal.getAttribute('hidden');
+        helpers.expect(initiallyHidden).notToBeNull();
         
         // Click trigger
         await click(page, '[data-modal-target]');
         await page.waitForTimeout(500); // Wait for animation
         
-        // Check modal is visible
-        const afterClick = await isVisible(page, modalSelector);
-        helpers.expect(afterClick).toBeTruthy();
+        // Check modal is visible (hidden attribute removed)
+        const afterClickHidden = await modal.getAttribute('hidden');
+        helpers.expect(afterClickHidden).toBeNull();
       }
     },
     {
       name: 'should close modal on close button click',
       run: async (page, helpers) => {
-        const { goto, click, isVisible, $ } = helpers;
+        const { goto, click, $ } = helpers;
         await goto(page, '/showcase.html');
         await page.waitForTimeout(500); // Wait for page to load
         
@@ -120,25 +121,36 @@ module.exports = {
         if (!trigger) return;
         
         // Check if trigger is visible
-        const triggerVisible = await isVisible(page, '[data-modal-target]');
+        const triggerVisible = await helpers.isVisible(page, '[data-modal-target]');
         if (!triggerVisible) return;
         
         const modalId = await trigger.getAttribute('data-modal-target');
         if (!modalId) return;
-        const modalSelector = modalId.replace('#', '.modal');
+        const modalSelector = modalId.replace('#', '');
         
         // Open modal
         await click(page, '[data-modal-target]');
         await page.waitForTimeout(500); // Wait for animation
         
-        // Close modal - wait for close button to be visible
-        await page.waitForSelector('[data-modal-close]', { timeout: 2000 });
-        await click(page, '[data-modal-close]');
+        // Get modal element
+        const modal = await page.locator(`#${modalSelector}`).first();
+        
+        // Verify modal is open (no hidden attribute)
+        const isOpen = await modal.getAttribute('hidden');
+        helpers.expect(isOpen).toBeNull();
+        
+        // Close modal - click on button with data-modal-close (not overlay)
+        // Find button inside modal dialog, not the overlay
+        await page.waitForSelector(`#${modalSelector} .modal__dialog [data-modal-close]`, { 
+          timeout: 2000,
+          state: 'visible'
+        });
+        await click(page, `#${modalSelector} .modal__dialog button[data-modal-close]`);
         await page.waitForTimeout(500); // Wait for animation
         
-        // Check modal is hidden
-        const isHidden = await isVisible(page, modalSelector);
-        helpers.expect(isHidden).toBeFalsy();
+        // Check modal is hidden (has hidden attribute)
+        const isHidden = await modal.getAttribute('hidden');
+        helpers.expect(isHidden).notToBeNull();
       }
     },
     {

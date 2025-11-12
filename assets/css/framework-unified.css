@@ -184,9 +184,14 @@ body {
     background-color: var(--color-bg);
     /* Prevent horizontal scroll: common mobile issue */
     overflow-x: hidden;
-    /* Account for fixed navbar */
-    padding-top: var(--nav-height-normal);
+    /* No padding-top by default - navbar is static initially */
+    padding-top: 0;
     position: relative; /* For skip link positioning */
+}
+
+/* Add padding-top only when navbar becomes fixed */
+body.navbar-fixed {
+    padding-top: var(--nav-height-normal);
 }
 
 /* Skip to content link - accessibility feature */
@@ -775,16 +780,24 @@ p {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border-bottom: none;
-    position: fixed;  /* Fixed from start to prevent jump */
+    position: static;  /* Static initially, becomes fixed after hero section */
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;  /* Above other content */
     box-shadow: none;
-    will-change: opacity, backdrop-filter;
+    will-change: opacity, backdrop-filter, position;
     transition: opacity 450ms ease-out, background 250ms ease-out, backdrop-filter 250ms ease-out, border-bottom 250ms ease-out, box-shadow 250ms ease-out;
     opacity: 1;
     height: var(--nav-height-normal);
+}
+
+/* Navbar becomes fixed after scrolling past hero section */
+.site-header--fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 /* Dark theme: no background when at top */
@@ -942,103 +955,110 @@ body[data-theme="dark"] .nav__logo-img {
 }
 
 
-/* Theme toggle: single button with circular outline container */
+/* =========================================
+   THEME TOGGLE - REBUILT
+   ========================================= */
+
+/* Theme toggle button */
 .theme-toggle {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     margin-right: var(--space-3);
     background: transparent;
-    border: 2px solid var(--color-primary);
+    border: 2px solid var(--color-text);
     border-radius: 50%;
-    padding: var(--space-3);
+    padding: 0;
     width: var(--touch-target-min);
     height: var(--touch-target-min);
     min-width: var(--touch-target-min);
     min-height: var(--touch-target-min);
     cursor: pointer;
     position: relative;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
     -webkit-tap-highlight-color: transparent;
-    box-shadow: 0 0 0 0 rgba(183, 240, 77, 0);
+    overflow: hidden;
 }
 
 /* Light theme: dark border */
 body[data-theme="light"] .theme-toggle {
     border-color: var(--color-text);
-    color: var(--color-text);
 }
 
 /* Dark theme: primary color border */
 body[data-theme="dark"] .theme-toggle {
     border-color: var(--color-primary);
-    color: var(--color-primary);
 }
 
 .theme-toggle:hover {
-    opacity: 0.9;
-    transform: scale(1.02);
-    box-shadow: 0 0 0 2px rgba(183, 240, 77, 0.15);
-}
-
-body[data-theme="light"] .theme-toggle:hover {
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-}
-
-body[data-theme="dark"] .theme-toggle:hover {
-    box-shadow: 0 0 0 2px rgba(183, 240, 77, 0.2);
+    opacity: 0.8;
+    transform: scale(1.05);
 }
 
 .theme-toggle:active {
-    transform: scale(0.98);
+    transform: scale(0.95);
 }
 
 .theme-toggle:focus-visible {
     outline: var(--focus-ring-width) solid var(--focus-ring-color);
     outline-offset: var(--focus-ring-offset);
-    transform: scale(1.02);
 }
 
-/* Icon containers - only show the current theme icon */
+/* Icon containers - positioned absolutely, only one visible at a time */
 .theme-toggle__icon {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(100% - var(--space-3) * 2);
-    height: calc(100% - var(--space-3) * 2);
+    width: 20px;
+    height: 20px;
     opacity: 0;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.3s ease;
     pointer-events: none;
 }
 
-.theme-toggle__icon svg,
-.theme-toggle__icon img {
+.theme-toggle__icon img,
+.theme-toggle__icon svg {
     width: 20px;
     height: 20px;
     display: block;
+    object-fit: contain;
 }
 
-/* Light theme: off-black icons */
-body[data-theme="light"] .theme-toggle__icon img {
-    filter: brightness(0) saturate(100%) opacity(0.75);
-    opacity: 1;
-}
-
-/* Dark theme: off-black icons with slight warmth */
-body[data-theme="dark"] .theme-toggle__icon img {
-    filter: brightness(0) saturate(100%) opacity(0.7);
-    opacity: 1;
-}
-
-/* Show light icon when in light theme */
+/* Light theme: show sun icon, hide moon icon */
 body[data-theme="light"] .theme-toggle__icon--light {
     opacity: 1;
+    visibility: visible;
 }
 
-/* Show dark icon when in dark theme */
+body[data-theme="light"] .theme-toggle__icon--dark {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Dark theme: show moon icon, hide sun icon */
 body[data-theme="dark"] .theme-toggle__icon--dark {
     opacity: 1;
+    visibility: visible;
+}
+
+body[data-theme="dark"] .theme-toggle__icon--light {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Icon colors - make them visible */
+body[data-theme="light"] .theme-toggle__icon--light img {
+    filter: brightness(0) saturate(100%);
+    opacity: 0.9;
+}
+
+body[data-theme="dark"] .theme-toggle__icon--dark img {
+    filter: brightness(0) saturate(100%) invert(1);
+    opacity: 0.95;
 }
 
 /* =========================================

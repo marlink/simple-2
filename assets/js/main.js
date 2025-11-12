@@ -24,8 +24,27 @@
 
 // Import utility functions from utils.js (loaded globally)
 // Note: utils.js must be loaded before this file
-const safeQuery = window.safeQuery;
-const safeQueryAll = window.safeQueryAll;
+// Use functions directly from window to avoid redeclaration errors
+(function() {
+    'use strict';
+    // Create local references to avoid redeclaration conflicts
+    const safeQuery = window.safeQuery || function(selector, context) {
+        try {
+            return (context || document).querySelector(selector);
+        } catch (e) {
+            console.warn('Invalid selector:', selector, e);
+            return null;
+        }
+    };
+    
+    const safeQueryAll = window.safeQueryAll || function(selector, context) {
+        try {
+            return Array.from((context || document).querySelectorAll(selector));
+        } catch (e) {
+            console.warn('Invalid selector:', selector, e);
+            return [];
+        }
+    };
 
 document.addEventListener('DOMContentLoaded', () => {
     try {
@@ -46,107 +65,156 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ========================================================================
-     * 2️⃣ THEME MANAGEMENT SYSTEM
+     * 2️⃣ THEME MANAGEMENT SYSTEM - REBUILT
      * ========================================================================
-     * Handles light/dark theme switching with smooth transitions
+     * Simple, reliable theme switching
      * - Persists theme preference in localStorage
      * - Smooth hero image fade transitions
      * - Preloads opposite theme image for instant switching
      */
-    const themeToggles = safeQueryAll('.theme-toggle');
     
     /**
      * Apply theme to the document
      * @param {string} theme - 'light' or 'dark'
-     * 
-     * For pages with hero images, uses opacity fade for smooth transition:
-     * 1. Fade out current hero image
-     * 2. Change theme (triggers CSS background-image change)
-     * 3. Fade in new hero image
-     * 
-     * For pages without hero, applies theme immediately
      */
     const applyTheme = (theme) => {
+        console.log('Applying theme:', theme);
+        
+        if (!document.body) {
+            console.error('Body element not found!');
+            return;
+        }
+        
+        // Set theme attribute immediately
+        document.body.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-theme', theme); // Also set on html for extra specificity
+        
+        // Save to localStorage
+        try {
+            localStorage.setItem('theme', theme);
+        } catch (e) {
+            console.warn('Could not save theme to localStorage:', e);
+        }
+        
+        // Verify it was set
+        const verifyTheme = document.body.getAttribute('data-theme');
+        console.log('Theme verified on body:', verifyTheme);
+        
+        // Force reflow to ensure CSS updates
+        void document.body.offsetHeight;
+        void document.documentElement.offsetHeight;
+        
+        // Handle hero image transition if present
         const hero = safeQuery('.hero');
         if (hero) {
-            // Smooth transition: fade out → change theme → fade in
             hero.style.setProperty('--transition-opacity', '0');
             setTimeout(() => {
-                document.body.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                // Force reflow to ensure theme change is applied before fade-in
-                void hero.offsetHeight;
+                void hero.offsetHeight; // Force reflow
                 setTimeout(() => {
                     hero.style.setProperty('--transition-opacity', '1');
                 }, 10);
             }, 100);
-        } else {
-            // No hero image: apply theme immediately
-            document.body.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
         }
     };
     
     /**
      * Toggle between light and dark themes
      */
-    const toggleTheme = () => {
-        const currentTheme = document.body.getAttribute('data-theme') || 'light';
+    const toggleTheme = (e) => {
+        console.log('Theme toggle clicked!', e);
+        
+        // Don't prevent default - let button work normally
+        if (e) {
+            e.stopPropagation();
+        }
+        
+        const currentTheme = document.body?.getAttribute('data-theme') || 'dark';
+        console.log('Current theme:', currentTheme);
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        console.log('Switching to theme:', newTheme);
         applyTheme(newTheme);
+        
+        return false;
     };
     
-    // Load saved theme preference on page load
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.body.setAttribute('data-theme', savedTheme);
+    // Load saved theme preference on page load (before DOM is ready)
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (document.body) {
+        document.body.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.setAttribute('data-theme', savedTheme);
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        });
+    }
     
     /**
      * Preload the opposite theme's hero image
-     * This ensures instant image switching when theme changes
-     * Runs after page load to avoid blocking initial render
      */
     const preloadThemeImage = () => {
-        const currentTheme = document.body.getAttribute('data-theme');
+        const currentTheme = document.body.getAttribute('data-theme') || 'dark';
         const otherTheme = currentTheme === 'light' ? 'dark' : 'light';
         const imagePath = otherTheme === 'light' 
             ? 'assets/images/heros/white-rider-lg.jpg'
             : 'assets/images/heros/black-rider-lg.jpg';
         
-        // Preload image in browser cache
         const img = new Image();
         img.src = imagePath;
     };
     
-    // Preload after page is fully loaded (non-blocking)
+    // Preload after page is fully loaded
     if (document.readyState === 'complete') {
         preloadThemeImage();
     } else {
         window.addEventListener('load', preloadThemeImage);
     }
 
-    // Attach click handlers to all theme toggle buttons
-    if (themeToggles && themeToggles.length > 0) {
-        themeToggles.forEach(toggle => {
-            if (toggle) {
-                try {
-                    toggle.addEventListener('click', toggleTheme);
-                } catch (error) {
-                    console.error('Error attaching theme toggle handler:', error);
-                }
+    // Attach click handlers using event delegation (most reliable)
+    document.addEventListener('click', (e) => {
+        const toggle = e.target.closest('.theme-toggle');
+        if (toggle) {
+            console.log('Theme toggle clicked via delegation');
+            toggleTheme(e);
+        }
+    });
+    
+    // Also attach directly to existing toggles as backup
+    const initThemeToggles = () => {
+        const themeToggles = safeQueryAll('.theme-toggle');
+        console.log('Initializing theme toggles, found:', themeToggles.length);
+        
+        themeToggles.forEach((toggle, index) => {
+            if (toggle && !toggle.dataset.themeListenerAttached) {
+                toggle.addEventListener('click', toggleTheme);
+                toggle.dataset.themeListenerAttached = 'true';
+                console.log(`Theme toggle ${index} attached directly`);
             }
         });
+    };
+    
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initThemeToggles);
+    } else {
+        initThemeToggles();
     }
+    
+    // Also re-initialize after a short delay to catch dynamically added toggles
+    setTimeout(initThemeToggles, 100);
 
     /* ========================================================================
      * 2️⃣.7 SCROLL-RESPONSIVE NAVIGATION
      * ========================================================================
      * Auto-hide/show navigation bar based on scroll direction
+     * - Navbar is static initially, becomes fixed after scrolling past hero section
      * - Hides navbar when scrolling down (more screen space)
      * - Shows navbar when scrolling up (easy access to navigation)
      * - Always visible at top of page
      * - Uses requestAnimationFrame for smooth 60fps performance
      * 
      * Behavior:
+     * - Navbar position: static until past hero section, then fixed
      * - At top (scrollY === 0): Always visible
      * - Scrolling down: Hide instantly
      * - Scrolling up: Show after 450ms delay (prevents flicker)
@@ -166,6 +234,41 @@ document.addEventListener('DOMContentLoaded', () => {
         let isScrolling = false;       // Track if user is actively scrolling
         let scrollStopTimeout = null;  // Timeout for detecting scroll stop
         
+        // Get hero section to calculate when to make navbar fixed
+        const hero = safeQuery('.hero');
+        let heroHeight = 0;
+        let heroOffsetTop = 0;
+        
+        // Calculate hero dimensions (recalculate on resize)
+        const calculateHeroDimensions = () => {
+            if (hero) {
+                const rect = hero.getBoundingClientRect();
+                heroHeight = rect.height;
+                heroOffsetTop = rect.top + window.scrollY;
+            }
+        };
+        
+        // Initial calculation - wait for page to be fully loaded for accurate hero dimensions
+        if (document.readyState === 'complete') {
+            calculateHeroDimensions();
+        } else {
+            window.addEventListener('load', () => {
+                calculateHeroDimensions();
+                // Initial scroll check after hero dimensions are calculated
+                handleScroll();
+            });
+        }
+        
+        // Recalculate on resize (hero height may change with viewport)
+        window.addEventListener('resize', () => {
+            calculateHeroDimensions();
+            // Re-check scroll position after resize
+            if (!ticking) {
+                window.requestAnimationFrame(handleScroll);
+                ticking = true;
+            }
+        }, { passive: true });
+        
         // Configuration constants
         const fixedThreshold = 275;    // Navbar becomes fixed after this scroll distance (px)
         const showDelay = 450;         // Delay before showing navbar when scrolling up (ms)
@@ -173,6 +276,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const handleScroll = () => {
             const scrollY = window.scrollY || window.pageYOffset;
             const scrollDelta = scrollY - lastScrollY;
+            
+            // Make navbar fixed only after scrolling past hero section
+            if (hero) {
+                const heroBottom = heroOffsetTop + heroHeight;
+                if (scrollY >= heroBottom) {
+                    siteHeader.classList.add('site-header--fixed');
+                    document.body.classList.add('navbar-fixed');
+                } else {
+                    siteHeader.classList.remove('site-header--fixed');
+                    document.body.classList.remove('navbar-fixed');
+                }
+            } else {
+                // No hero section: make fixed immediately (for pages without hero)
+                siteHeader.classList.add('site-header--fixed');
+                document.body.classList.add('navbar-fixed');
+            }
             
             // Handle scrolled state (for styling changes) - only applies after fixed threshold
             if (scrollY > fixedThreshold) {
@@ -242,8 +361,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Handle initial state
-        handleScroll();
+        // Handle initial state - check after a brief delay to ensure hero dimensions are calculated
+        setTimeout(() => {
+            calculateHeroDimensions();
+            handleScroll();
+        }, 100);
 
             // Listen to scroll events (works for both desktop and touch devices)
             window.addEventListener('scroll', onScroll, { passive: true });
@@ -277,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Currently handled by CSS, but function exists for future enhancements
      */
     const syncMobileTheme = () => {
-        const currentTheme = document.body.getAttribute('data-theme') || 'light';
+        const currentTheme = document.body.getAttribute('data-theme') || 'dark';
         const mobileThemeToggle = mobileMenu?.querySelector('.theme-toggle');
         
         if (mobileThemeToggle) {
@@ -683,3 +805,5 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error initializing newsletter subscription:', error);
     }
 });
+
+})(); // Close IIFE to scope safeQuery and safeQueryAll

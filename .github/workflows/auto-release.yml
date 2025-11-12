@@ -1,0 +1,99 @@
+name: Auto Release Every 3 Commits
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history to count commits
+    
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+    
+      - name: Read version
+        id: version
+        run: |
+          VERSION=$(node -p "require('./version.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Current version: $VERSION"
+    
+      - name: Count commits since last release
+        id: commits
+        run: |
+          # Get the latest release tag
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          
+          if [ -z "$LAST_TAG" ]; then
+            # No releases yet, count all commits
+            COMMIT_COUNT=$(git rev-list --count HEAD)
+            echo "No previous release found. Total commits: $COMMIT_COUNT"
+          else
+            # Count commits since last release
+            COMMIT_COUNT=$(git rev-list --count ${LAST_TAG}..HEAD)
+            echo "Commits since $LAST_TAG: $COMMIT_COUNT"
+          fi
+          
+          echo "count=$COMMIT_COUNT" >> $GITHUB_OUTPUT
+          echo "last_tag=$LAST_TAG" >> $GITHUB_OUTPUT
+    
+      - name: Check if release needed
+        id: check
+        run: |
+          COMMIT_COUNT=${{ steps.commits.outputs.count }}
+          COMMIT_COUNT_INT=${COMMIT_COUNT:-0}
+          
+          if [ $COMMIT_COUNT_INT -ge 3 ]; then
+            echo "should_release=true" >> $GITHUB_OUTPUT
+            echo "✅ $COMMIT_COUNT_INT commits detected - creating release"
+          else
+            echo "should_release=false" >> $GITHUB_OUTPUT
+            echo "⏳ Only $COMMIT_COUNT_INT commits since last release (need 3)"
+          fi
+    
+      - name: Create GitHub Release
+        if: steps.check.outputs.should_release == 'true'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          release_name: Release v${{ steps.version.outputs.version }}
+          body: |
+            ## Release v${{ steps.version.outputs.version }}
+            
+            This is an automated release created after 3 commits.
+            
+            ### Changes
+            - Commits since last release: ${{ steps.commits.outputs.count }}
+            - Version: ${{ steps.version.outputs.version }}
+            
+            ### Full Changelog
+            See the [full commit history](https://github.com/${{ github.repository }}/compare/${{ steps.commits.outputs.last_tag }}...HEAD) for details.
+          draft: false
+          prerelease: false
+    
+      - name: Summary
+        run: |
+          if [ "${{ steps.check.outputs.should_release }}" == "true" ]; then
+            echo "## ✅ Release Created" >> $GITHUB_STEP_SUMMARY
+            echo "Created release **v${{ steps.version.outputs.version }}**" >> $GITHUB_STEP_SUMMARY
+            echo "Commits since last release: ${{ steps.commits.outputs.count }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## ⏳ No Release Needed" >> $GITHUB_STEP_SUMMARY
+            echo "Commits since last release: ${{ steps.commits.outputs.count }}/3" >> $GITHUB_STEP_SUMMARY
+            echo "Next release will be created after 3 commits." >> $GITHUB_STEP_SUMMARY
+          fi
+

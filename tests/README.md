@@ -1,6 +1,6 @@
 # Browser Testing Framework
 
-This directory contains browser-based tests for the static website. The tests use Puppeteer for browser automation and can also work with MCP browser tools.
+This directory contains browser-based tests for the static website. The tests use Playwright for browser automation and can also work with MCP browser tools.
 
 ## Test Structure
 
@@ -140,4 +140,4 @@ Or use `HEADLESS=false` environment variable or set `headless: false` in `tests/
 headless: false; // or use "new" for new headless mode (default)
 ```
 
-**Note:** By default, tests use the new headless mode (`headless: "new"`), which is recommended by Puppeteer.
+**Note:** By default, tests use headless mode. Set `HEADLESS=false` to see the browser during tests. You can also change the browser using `BROWSER=firefox` or `BROWSER=webkit` environment variables.

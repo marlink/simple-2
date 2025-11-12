@@ -8,14 +8,19 @@ module.exports = {
     // Base URL for the website (change if using different port)
     baseUrl: process.env.TEST_BASE_URL || "http://localhost:8000",
 
-    // Browser options
+    // Browser options (Playwright)
     browser: {
-        // Use "new" headless mode (recommended by Puppeteer)
+        // Browser to use: 'chromium', 'firefox', or 'webkit'
+        browserName: process.env.BROWSER || "chromium",
         // Set HEADLESS=false to see browser (non-headless mode)
-        headless: process.env.HEADLESS === "false" ? false : "new",
-        slowMo: 0, // Slow down operations by X ms (useful for debugging)
-        devtools: false, // Open DevTools
-        args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+        headless: process.env.HEADLESS !== "false",
+        // Slow down operations by X ms (useful for debugging)
+        slowMo: parseInt(process.env.SLOW_MO || "0", 10),
+        // Playwright launch options
+        launchOptions: {
+            args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+            timeout: 60000, // 60 second timeout for browser launch
+        },
     },
 
     // Viewport sizes for responsive testing

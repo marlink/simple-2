@@ -1,4 +1,5 @@
 # UI/UX Improvement Recommendations
+
 ## Project Review: Sophisticated Design Enhancement
 
 **Date:** November 12, 2025  
@@ -12,6 +13,7 @@
 After comprehensive review of the codebase, the current framework demonstrates strong fundamentals with a clean, functional design. This document outlines strategic improvements to elevate the design to a more sophisticated, premium aesthetic while preserving the project's emphasis on subtle, calm interactions.
 
 **Current Strengths:**
+
 - Solid responsive grid system (12-column, 7 breakpoints)
 - Comprehensive design token system
 - Good accessibility foundation (ARIA labels, focus states)
@@ -20,6 +22,7 @@ After comprehensive review of the codebase, the current framework demonstrates s
 - Mobile-first approach
 
 **Areas for Enhancement:**
+
 - Visual refinement and micro-interactions
 - Elevated spacing and breathing room
 - Enhanced depth hierarchy
@@ -32,6 +35,7 @@ After comprehensive review of the codebase, the current framework demonstrates s
 ## 1. Typography Enhancement: Premium Refinement
 
 ### Current State
+
 - Good fluid scaling with clamp()
 - Radial gradient text effect on headings
 - Proper line heights and spacing
@@ -39,6 +43,7 @@ After comprehensive review of the codebase, the current framework demonstrates s
 ### Recommended Improvements
 
 #### 1.1 Letter Spacing Refinement
+
 **Rationale:** Premium brands use precise optical spacing for sophistication
 
 ```css
@@ -52,25 +57,37 @@ After comprehensive review of the codebase, the current framework demonstrates s
 }
 
 /* Apply to headings for optical refinement */
-h1, .h1, .display-1, .display-2 {
+h1,
+.h1,
+.display-1,
+.display-2 {
     letter-spacing: var(--letter-spacing-tighter);
 }
 
-h2, .h2, .display-3 {
+h2,
+.h2,
+.display-3 {
     letter-spacing: var(--letter-spacing-tight);
 }
 
-h3, .h3, h4, .h4 {
+h3,
+.h3,
+h4,
+.h4 {
     letter-spacing: var(--letter-spacing-normal);
 }
 
 /* Premium body copy */
-p, .lead {
+p,
+.lead {
     letter-spacing: -0.002em; /* Subtle tightening */
 }
 
 /* Small text and labels - add breathing room */
-.badge, .caption, small, .demo-label {
+.badge,
+.caption,
+small,
+.demo-label {
     letter-spacing: var(--letter-spacing-wide);
     text-transform: uppercase;
     font-weight: 500;
@@ -78,25 +95,48 @@ p, .lead {
 ```
 
 #### 1.2 Heading Weight Hierarchy
+
 **Rationale:** Varied weights create visual sophistication
 
 ```css
-h1, .h1 { font-weight: 700; } /* Bold for impact */
-h2, .h2 { font-weight: 650; } /* Semi-bold */
-h3, .h3 { font-weight: 600; } /* Current weight */
-h4, .h4 { font-weight: 550; } /* Slightly lighter */
-h5, .h5 { font-weight: 500; } /* Medium */
-h6, .h6 { font-weight: 500; }
+h1,
+.h1 {
+    font-weight: 700;
+} /* Bold for impact */
+h2,
+.h2 {
+    font-weight: 650;
+} /* Semi-bold */
+h3,
+.h3 {
+    font-weight: 600;
+} /* Current weight */
+h4,
+.h4 {
+    font-weight: 550;
+} /* Slightly lighter */
+h5,
+.h5 {
+    font-weight: 500;
+} /* Medium */
+h6,
+.h6 {
+    font-weight: 500;
+}
 ```
 
 #### 1.3 Enhanced Text Rendering
+
 ```css
 body {
     /* Enhanced anti-aliasing for premium feel */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    font-feature-settings:
+        "kern" 1,
+        "liga" 1,
+        "calt" 1;
 }
 ```
 
@@ -105,12 +145,14 @@ body {
 ## 2. Spacing & Rhythm: Luxury Breathing Room
 
 ### Current State
+
 - 8px baseline rhythm (good foundation)
 - Space scale from 8px to 128px
 
 ### Recommended Improvements
 
 #### 2.1 Expanded Luxury Spacing Scale
+
 **Rationale:** Premium designs need more generous spacing
 
 ```css
@@ -127,12 +169,12 @@ body {
     --space-10: 80px;
     --space-12: 96px;
     --space-16: 128px;
-    
+
     /* NEW: Luxury spacing additions */
     --space-20: 160px;
     --space-24: 192px;
     --space-32: 256px;
-    
+
     /* Micro-spacing for refined details */
     --space-0-5: 4px;
     --space-1-5: 12px;
@@ -140,22 +182,29 @@ body {
 ```
 
 #### 2.2 Section Spacing Enhancement
+
 ```css
 /* Premium section spacing */
-.about, .hero, section {
+.about,
+.hero,
+section {
     padding-top: var(--space-16);
     padding-bottom: var(--space-16);
 }
 
 @media (min-width: 768px) {
-    .about, .hero, section {
+    .about,
+    .hero,
+    section {
         padding-top: var(--space-20);
         padding-bottom: var(--space-20);
     }
 }
 
 @media (min-width: 1280px) {
-    .about, .hero, section {
+    .about,
+    .hero,
+    section {
         padding-top: var(--space-24);
         padding-bottom: var(--space-24);
     }
@@ -163,6 +212,7 @@ body {
 ```
 
 #### 2.3 Component Internal Spacing
+
 ```css
 /* More generous card padding for premium feel */
 .card__body {
@@ -190,70 +240,55 @@ body {
 ## 3. Enhanced Depth & Shadows: Sophisticated Layering
 
 ### Current State
+
 - Basic shadow system (sm, md, lg)
 - Simple shadow values
 
 ### Recommended Improvements
 
 #### 3.1 Multi-Layer Shadow System
+
 **Rationale:** Premium designs use layered shadows for realistic depth
 
 ```css
 :root {
     /* Light theme shadows - multi-layer for realism */
-    --shadow-xs: 
-        0 1px 2px rgba(0, 0, 0, 0.04),
-        0 1px 1px rgba(0, 0, 0, 0.02);
-    
-    --shadow-sm: 
-        0 2px 4px rgba(0, 0, 0, 0.04),
-        0 1px 2px rgba(0, 0, 0, 0.02),
-        0 0 1px rgba(0, 0, 0, 0.02);
-    
-    --shadow-md: 
-        0 4px 8px rgba(0, 0, 0, 0.06),
-        0 2px 4px rgba(0, 0, 0, 0.04),
-        0 0 1px rgba(0, 0, 0, 0.04);
-    
-    --shadow-lg: 
-        0 12px 24px rgba(0, 0, 0, 0.08),
-        0 4px 8px rgba(0, 0, 0, 0.04),
-        0 0 1px rgba(0, 0, 0, 0.04);
-    
-    --shadow-xl: 
-        0 20px 40px rgba(0, 0, 0, 0.10),
-        0 8px 16px rgba(0, 0, 0, 0.06),
-        0 0 1px rgba(0, 0, 0, 0.04);
-    
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.02);
+
+    --shadow-sm:
+        0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02), 0 0 1px rgba(0, 0, 0, 0.02);
+
+    --shadow-md:
+        0 4px 8px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04), 0 0 1px rgba(0, 0, 0, 0.04);
+
+    --shadow-lg:
+        0 12px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 1px rgba(0, 0, 0, 0.04);
+
+    --shadow-xl:
+        0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.04);
+
     /* Inner shadows for depth */
     --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
-    
+
     /* Glow effects for interactions */
     --shadow-glow-sm: 0 0 12px rgba(183, 240, 77, 0.15);
-    --shadow-glow-md: 0 0 24px rgba(183, 240, 77, 0.20);
+    --shadow-glow-md: 0 0 24px rgba(183, 240, 77, 0.2);
 }
 
 body[data-theme="dark"] {
     /* Dark theme shadows - deeper and more pronounced */
-    --shadow-sm: 
-        0 2px 4px rgba(0, 0, 0, 0.20),
-        0 1px 2px rgba(0, 0, 0, 0.12);
-    
-    --shadow-md: 
-        0 4px 8px rgba(0, 0, 0, 0.30),
-        0 2px 4px rgba(0, 0, 0, 0.20);
-    
-    --shadow-lg: 
-        0 12px 24px rgba(0, 0, 0, 0.40),
-        0 4px 8px rgba(0, 0, 0, 0.25);
-    
-    --shadow-xl: 
-        0 20px 40px rgba(0, 0, 0, 0.50),
-        0 8px 16px rgba(0, 0, 0, 0.35);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.12);
+
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.25);
+
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.35);
 }
 ```
 
 #### 3.2 Elevation System
+
 ```css
 /* Define elevation levels for consistent depth hierarchy */
 :root {
@@ -266,10 +301,18 @@ body[data-theme="dark"] {
 }
 
 /* Apply to components */
-.card { box-shadow: var(--elevation-2); }
-.card:hover { box-shadow: var(--elevation-3); }
-.modal__dialog { box-shadow: var(--elevation-5); }
-.site-header--scrolled { box-shadow: var(--elevation-2); }
+.card {
+    box-shadow: var(--elevation-2);
+}
+.card:hover {
+    box-shadow: var(--elevation-3);
+}
+.modal__dialog {
+    box-shadow: var(--elevation-5);
+}
+.site-header--scrolled {
+    box-shadow: var(--elevation-2);
+}
 ```
 
 ---
@@ -277,6 +320,7 @@ body[data-theme="dark"] {
 ## 4. Button Refinement: Subtle Sophistication
 
 ### Current State
+
 - Good basic button styles
 - Pill-shaped (9999px radius)
 - Simple hover states
@@ -284,26 +328,26 @@ body[data-theme="dark"] {
 ### Recommended Improvements
 
 #### 4.1 Enhanced Button Padding & Proportions
+
 **Rationale:** Premium buttons have balanced, generous proportions
 
 ```css
 .btn {
     /* More refined padding ratio (1:2.5 vertical:horizontal) */
     padding: calc(var(--space-3) + 2px) calc(var(--space-5) + var(--space-1));
-    
+
     /* Subtle shadow for depth */
-    box-shadow: 
+    box-shadow:
         0 1px 3px rgba(0, 0, 0, 0.08),
         0 0 1px rgba(0, 0, 0, 0.05);
-    
+
     /* Smoother transitions */
-    transition:
-        all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn:hover {
     transform: translateY(-2px); /* More pronounced lift */
-    box-shadow: 
+    box-shadow:
         0 6px 12px rgba(0, 0, 0, 0.12),
         0 2px 4px rgba(0, 0, 0, 0.08),
         var(--shadow-glow-sm);
@@ -316,12 +360,13 @@ body[data-theme="dark"] {
 ```
 
 #### 4.2 Outline Button Refinement
+
 ```css
 .btn--outline {
     /* Thinner border for elegance */
     border-width: 1.5px;
     padding: calc(var(--space-3) + 2.5px) calc(var(--space-5) + var(--space-1) + 0.5px);
-    
+
     /* Subtle background on rest state */
     background: rgba(255, 255, 255, 0.02);
 }
@@ -333,7 +378,7 @@ body[data-theme="light"] .btn--outline {
 .btn--outline:hover {
     background: rgba(183, 240, 77, 0.08); /* More subtle */
     border-color: var(--color-accent-hover);
-    box-shadow: 
+    box-shadow:
         0 4px 8px rgba(0, 0, 0, 0.08),
         0 0 0 1px rgba(183, 240, 77, 0.1),
         var(--shadow-glow-sm);
@@ -341,6 +386,7 @@ body[data-theme="light"] .btn--outline {
 ```
 
 #### 4.3 Ghost Button Enhancement
+
 ```css
 .btn--ghost {
     /* Nearly invisible at rest for sophistication */
@@ -364,24 +410,26 @@ body[data-theme="light"] .btn--ghost:hover {
 ## 5. Card Component: Premium Elevation
 
 ### Current State
+
 - Basic card structure
 - Glass-outline variant with hover effects
 
 ### Recommended Improvements
 
 #### 5.1 Default Card Refinement
+
 ```css
 .card {
     /* Thinner border for elegance */
     border-width: 1px;
     border-color: rgba(0, 0, 0, 0.08);
-    
+
     /* Subtle default elevation */
     box-shadow: var(--elevation-1);
-    
+
     /* Smoother radius */
     border-radius: var(--space-2); /* 16px */
-    
+
     /* Smooth transitions */
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -398,15 +446,16 @@ body[data-theme="dark"] .card {
 ```
 
 #### 5.2 Glass Card Enhancement
+
 ```css
 .card--glass-outline {
     /* Refined blur for premium effect */
     backdrop-filter: blur(24px) saturate(150%);
     -webkit-backdrop-filter: blur(24px) saturate(150%);
-    
+
     /* Subtler border */
     border: 1px solid rgba(255, 255, 255, 0.08);
-    
+
     /* More layered shadow */
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.12),
@@ -416,12 +465,12 @@ body[data-theme="dark"] .card {
 
 .card--glass-outline:hover {
     transform: translateY(-4px);
-    
+
     /* Refined green glow */
     border-color: rgba(183, 240, 77, 0.25);
     box-shadow:
         0 12px 48px rgba(0, 0, 0, 0.16),
-        0 4px 12px rgba(0, 0, 0, 0.10),
+        0 4px 12px rgba(0, 0, 0, 0.1),
         0 0 0 1px rgba(183, 240, 77, 0.15),
         var(--shadow-glow-md),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -429,6 +478,7 @@ body[data-theme="dark"] .card {
 ```
 
 #### 5.3 New Card Variant: Subtle Elevated
+
 ```css
 /* New premium card variant */
 .card--elevated {
@@ -436,25 +486,20 @@ body[data-theme="dark"] .card {
     border: 1px solid rgba(0, 0, 0, 0.04);
     border-radius: var(--space-2);
     box-shadow: var(--elevation-2);
-    
+
     /* Subtle gradient overlay for depth */
     position: relative;
     overflow: hidden;
 }
 
 .card--elevated::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.1) 50%,
-        transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1) 50%, transparent);
 }
 
 body[data-theme="dark"] .card--elevated {
@@ -472,29 +517,31 @@ body[data-theme="dark"] .card--elevated {
 ## 6. Form Elements: Refined Input Experience
 
 ### Current State
+
 - Basic form styling
 - Standard input appearance
 
 ### Recommended Improvements
 
 #### 6.1 Enhanced Input Fields
+
 ```css
 .form__input,
 .form__textarea,
 .form__select {
     /* More generous padding */
     padding: var(--space-3) var(--space-4);
-    
+
     /* Thinner border */
     border: 1.5px solid var(--color-border);
     border-radius: var(--space-2);
-    
+
     /* Subtle shadow for depth */
     box-shadow: var(--shadow-inner);
-    
+
     /* Smooth transition */
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     /* Better typography */
     font-size: var(--font-size-base);
     line-height: var(--line-height-normal);
@@ -512,7 +559,7 @@ body[data-theme="dark"] .card--elevated {
 .form__select:focus {
     outline: none;
     border-color: var(--color-accent-hover);
-    box-shadow: 
+    box-shadow:
         var(--shadow-inner),
         0 0 0 3px rgba(183, 240, 77, 0.08),
         var(--shadow-glow-sm);
@@ -520,6 +567,7 @@ body[data-theme="dark"] .card--elevated {
 ```
 
 #### 6.2 Label Typography
+
 ```css
 .form__label {
     /* Premium label styling */
@@ -537,12 +585,14 @@ body[data-theme="dark"] .card--elevated {
 ## 7. Micro-Interactions: Subtle Delight
 
 ### Current State
+
 - Basic transitions (0.2s ease)
 - Simple hover effects
 
 ### Recommended Improvements
 
 #### 7.1 Enhanced Easing Functions
+
 **Rationale:** Premium interfaces use sophisticated easing
 
 ```css
@@ -570,6 +620,7 @@ body[data-theme="dark"] .card--elevated {
 ```
 
 #### 7.2 Staggered Hover Effects
+
 ```css
 /* Subtle scale on hover for cards */
 .card:hover {
@@ -584,6 +635,7 @@ body[data-theme="dark"] .card--elevated {
 ```
 
 #### 7.3 Loading State Refinement
+
 ```css
 /* Premium loading spinner */
 .spinner {
@@ -595,8 +647,12 @@ body[data-theme="dark"] .card--elevated {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 ```
 
@@ -605,17 +661,19 @@ body[data-theme="dark"] .card--elevated {
 ## 8. Navigation Refinement: Elegant Header
 
 ### Current State
+
 - Glass navbar with scroll behavior
 - Good functionality
 
 ### Recommended Improvements
 
 #### 8.1 Enhanced Navigation Links
+
 ```css
 .nav__link {
     /* More refined padding */
     padding: var(--space-2) var(--space-3);
-    
+
     /* Subtle background by default */
     background: transparent;
     position: relative;
@@ -624,7 +682,7 @@ body[data-theme="dark"] .card--elevated {
 
 /* Animated underline on hover */
 .nav__link::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -645,10 +703,11 @@ body[data-theme="dark"] .card--elevated {
 ```
 
 #### 8.2 Logo Refinement
+
 ```css
 .nav__logo-img {
     /* Smooth scaling with momentum */
-    transition: 
+    transition:
         transform 0.4s var(--ease-out-expo),
         opacity 0.3s ease;
 }
@@ -664,12 +723,14 @@ body[data-theme="dark"] .card--elevated {
 ## 9. Color Sophistication: Refined Palette
 
 ### Current State
+
 - Good theme system
 - Basic color tokens
 
 ### Recommended Improvements
 
 #### 9.1 Enhanced Color Tokens
+
 ```css
 :root {
     /* More sophisticated neutrals */
@@ -683,7 +744,7 @@ body[data-theme="dark"] .card--elevated {
     --color-gray-700: #404040;
     --color-gray-800: #262626;
     --color-gray-900: #171717;
-    
+
     /* Refined surface colors */
     --color-surface-raised: rgba(255, 255, 255, 0.6);
     --color-surface-overlay: rgba(255, 255, 255, 0.9);
@@ -696,9 +757,11 @@ body[data-theme="dark"] {
 ```
 
 #### 9.2 Subtle Gradient Backgrounds
+
 ```css
 /* Premium section backgrounds */
-.about, section {
+.about,
+section {
     /* Subtle gradient for depth */
     background: linear-gradient(
         180deg,
@@ -713,12 +776,14 @@ body[data-theme="dark"] {
 ## 10. Accessibility Enhancements: Premium & Inclusive
 
 ### Current State
+
 - Good ARIA implementation
 - Basic focus states
 
 ### Recommended Improvements
 
 #### 10.1 Enhanced Focus Indicators
+
 ```css
 :root {
     --focus-ring-width: 2px;
@@ -731,15 +796,16 @@ body[data-theme="dark"] {
     outline: var(--focus-ring-width) solid var(--focus-ring-color);
     outline-offset: var(--focus-ring-offset);
     border-radius: var(--border-radius-sm);
-    
+
     /* Subtle glow for premium feel */
-    box-shadow: 
+    box-shadow:
         0 0 0 var(--focus-ring-offset) rgba(183, 240, 77, 0.1),
         var(--shadow-glow-sm);
 }
 ```
 
 #### 10.2 Reduced Motion Respect
+
 ```css
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -750,7 +816,7 @@ body[data-theme="dark"] {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
-    
+
     /* Maintain transforms but remove animation */
     .card:hover {
         transform: none;
@@ -771,17 +837,21 @@ body[data-theme="dark"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     /* Sophisticated gradient background */
     background: linear-gradient(
         135deg,
         var(--hero-bg-light) 0%,
         color-mix(in srgb, var(--hero-bg-light) 85%, black) 100%
     );
-    
+
     /* Subtle texture overlay */
-    background-image: 
-        linear-gradient(135deg, var(--hero-bg-light) 0%, color-mix(in srgb, var(--hero-bg-light) 85%, black) 100%),
+    background-image:
+        linear-gradient(
+            135deg,
+            var(--hero-bg-light) 0%,
+            color-mix(in srgb, var(--hero-bg-light) 85%, black) 100%
+        ),
         url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
@@ -804,14 +874,14 @@ body[data-theme="dark"] .hero--premium {
 .badge {
     /* More refined padding */
     padding: var(--space-1) var(--space-3);
-    
+
     /* Thinner border */
     border-width: 1px;
     border-color: rgba(0, 0, 0, 0.08);
-    
+
     /* Subtle shadow */
     box-shadow: var(--elevation-1);
-    
+
     /* Premium typography */
     font-size: var(--font-size-xs);
     font-weight: 500;
@@ -820,7 +890,7 @@ body[data-theme="dark"] .hero--premium {
 }
 
 body[data-theme="dark"] .badge {
-    border-color: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .badge--outline {
@@ -842,7 +912,7 @@ body[data-theme="dark"] .badge {
     backdrop-filter: blur(8px) saturate(120%);
     -webkit-backdrop-filter: blur(8px) saturate(120%);
     background: rgba(0, 0, 0, 0.5);
-    
+
     /* Smooth fade-in */
     animation: fadeIn 0.3s var(--ease-out-smooth);
 }
@@ -861,7 +931,7 @@ body[data-theme="dark"] .badge {
     border-radius: var(--space-3);
     box-shadow: var(--elevation-5);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    
+
     /* Smooth entry animation */
     animation: slideUp 0.4s var(--ease-out-expo);
 }
@@ -888,11 +958,11 @@ body[data-theme="dark"] .badge {
 .site-footer {
     /* Subtle separation */
     border-top: 1px solid rgba(0, 0, 0, 0.06);
-    
+
     /* Premium spacing */
     padding-top: var(--space-16);
     padding-bottom: var(--space-12);
-    
+
     /* Subtle gradient background */
     background: linear-gradient(
         180deg,
@@ -922,24 +992,28 @@ body[data-theme="dark"] .site-footer {
 ## Implementation Priority
 
 ### Phase 1: Foundation (Week 1)
+
 1. ✅ Typography refinements (letter-spacing, weights)
 2. ✅ Enhanced spacing scale
 3. ✅ Multi-layer shadow system
 4. ✅ Custom easing functions
 
 ### Phase 2: Components (Week 2)
+
 5. ✅ Button refinements
 6. ✅ Card enhancements
 7. ✅ Form element improvements
 8. ✅ Navigation polish
 
 ### Phase 3: Polish (Week 3)
+
 9. ✅ Micro-interactions
 10. ✅ Color sophistication
 11. ✅ Hero section enhancement
 12. ✅ Badge & modal refinements
 
 ### Phase 4: Testing & Validation (Week 4)
+
 13. ✅ Cross-browser testing
 14. ✅ Accessibility audit
 15. ✅ Performance optimization
@@ -950,18 +1024,21 @@ body[data-theme="dark"] .site-footer {
 ## Success Metrics
 
 ### Visual Quality
+
 - [ ] Increased spacing creates better breathing room
 - [ ] Layered shadows provide realistic depth perception
 - [ ] Typography hierarchy is clear and sophisticated
 - [ ] Hover states are smooth and intentional
 
 ### User Experience
+
 - [ ] Interactions feel premium yet subtle
 - [ ] No jarring animations or excessive motion
 - [ ] Accessibility maintained or improved
 - [ ] Performance not degraded
 
 ### Brand Perception
+
 - [ ] Design feels more expensive and refined
 - [ ] Attention to detail is evident
 - [ ] Professional polish throughout
@@ -972,6 +1049,7 @@ body[data-theme="dark"] .site-footer {
 ## Testing Checklist
 
 ### Visual Review
+
 - [ ] Check all components in light theme
 - [ ] Check all components in dark theme
 - [ ] Verify spacing consistency
@@ -979,18 +1057,21 @@ body[data-theme="dark"] .site-footer {
 - [ ] Review typography at all sizes
 
 ### Interaction Testing
+
 - [ ] Test all hover states
 - [ ] Verify focus indicators
 - [ ] Check active/pressed states
 - [ ] Validate transitions and animations
 
 ### Accessibility
+
 - [ ] Keyboard navigation functional
 - [ ] Screen reader compatibility
 - [ ] Color contrast ratios (WCAG AA minimum)
 - [ ] Reduced motion respected
 
 ### Performance
+
 - [ ] No layout shift during animations
 - [ ] Smooth 60fps interactions
 - [ ] Reasonable CSS file size
@@ -1001,6 +1082,7 @@ body[data-theme="dark"] .site-footer {
 ## Notes & Considerations
 
 ### Design Philosophy
+
 This refinement maintains the project's emphasis on **calm, subtle interactions** while elevating the visual sophistication. The improvements focus on:
 
 - **Restraint**: Enhancements are subtle, not flashy
@@ -1009,13 +1091,16 @@ This refinement maintains the project's emphasis on **calm, subtle interactions*
 - **Performance**: Visual richness doesn't sacrifice speed
 
 ### Browser Support
+
 All recommendations use modern CSS with appropriate fallbacks:
+
 - Backdrop-filter (with fallback)
 - CSS custom properties (widely supported)
 - Color-mix (with fallback hex values)
 - Clamp() for typography (with fallback rem values)
 
 ### Maintenance
+
 These improvements build on the existing design token system, making future updates straightforward. All values use CSS custom properties for easy theming and adjustment.
 
 ---
@@ -1025,6 +1110,7 @@ These improvements build on the existing design token system, making future upda
 These recommendations transform the current solid foundation into a truly premium, sophisticated design system while honoring the project's commitment to subtle, calm interactions. The enhancements focus on refinement rather than revolution—improving details, spacing, depth, and micro-interactions to create a more expensive feel without compromising usability or performance.
 
 **Next Steps:**
+
 1. Review recommendations with stakeholders
 2. Prioritize implementation phases
 3. Create feature branch for changes
@@ -1037,4 +1123,3 @@ These recommendations transform the current solid foundation into a truly premiu
 **Last Updated:** November 12, 2025  
 **Author:** AI Design Review  
 **Status:** Ready for Implementation
-

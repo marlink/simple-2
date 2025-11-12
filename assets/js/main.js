@@ -23,23 +23,9 @@
  */
 
 // Import utility functions from utils.js (loaded globally)
-const safeQuery = window.safeQuery || ((selector, context = document) => {
-    try {
-        return context.querySelector(selector);
-    } catch (e) {
-        console.warn('Invalid selector:', selector, e);
-        return null;
-    }
-});
-
-const safeQueryAll = window.safeQueryAll || ((selector, context = document) => {
-    try {
-        return Array.from(context.querySelectorAll(selector));
-    } catch (e) {
-        console.warn('Invalid selector:', selector, e);
-        return [];
-    }
-});
+// Note: utils.js must be loaded before this file
+const safeQuery = window.safeQuery;
+const safeQueryAll = window.safeQueryAll;
 
 document.addEventListener('DOMContentLoaded', () => {
     try {

@@ -28,23 +28,9 @@
  */
 
 // Import utility functions from utils.js (loaded globally)
-const safeQuery = window.safeQuery || ((selector, context = document) => {
-    try {
-        return context.querySelector(selector);
-    } catch (e) {
-        console.warn('Invalid selector:', selector, e);
-        return null;
-    }
-});
-
-const safeQueryAll = window.safeQueryAll || ((selector, context = document) => {
-    try {
-        return Array.from(context.querySelectorAll(selector));
-    } catch (e) {
-        console.warn('Invalid selector:', selector, e);
-        return [];
-    }
-});
+// Note: utils.js must be loaded before this file
+const safeQuery = window.safeQuery;
+const safeQueryAll = window.safeQueryAll;
 
 document.addEventListener('DOMContentLoaded', () => {
     try {
@@ -349,39 +335,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Copy text to clipboard
-     * @param {string} text - Text to copy
-     * @returns {Promise<boolean>} - Success status
+     * Uses copyToClipboard from utils.js
      */
-    const copyToClipboard = async (text) => {
-        try {
-            // Use modern Clipboard API
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                await navigator.clipboard.writeText(text);
-                return true;
-            }
-            
-            // Fallback for older browsers
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            textarea.style.left = '-9999px';
-            document.body.appendChild(textarea);
-            textarea.select();
-            
-            try {
-                const successful = document.execCommand('copy');
-                document.body.removeChild(textarea);
-                return successful;
-            } catch (err) {
-                document.body.removeChild(textarea);
-                return false;
-            }
-        } catch (err) {
-            console.error('Failed to copy text:', err);
-            return false;
-        }
-    };
+    const copyToClipboard = window.copyToClipboard;
 
     /**
      * Create and setup copy button for a code block

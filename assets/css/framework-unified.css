@@ -1433,11 +1433,11 @@ body[data-theme="dark"] .site-header--scrolled {
 
 /* Ensure button hover/active states work with scale */
 .site-header--scrolled .nav .btn:hover {
-  transform: scale(var(--nav-scale-scrolled)) translateY(-1px);
+  transform: scale(var(--nav-scale-scrolled));
 }
 
 .site-header--scrolled .nav .btn:active {
-  transform: scale(var(--nav-scale-scrolled)) translateY(0);
+  transform: scale(var(--nav-scale-scrolled));
 }
 
 .nav__logo {
@@ -2907,7 +2907,6 @@ body[data-theme="dark"] .newsletter__message--error {
   -webkit-tap-highlight-color: transparent; /* Removes iOS tap highlight */
 }
 .btn:hover {
-  transform: translateY(-2px); /* More pronounced lift */
   box-shadow:
     0 6px 12px rgba(0, 0, 0, 0.12),
     0 2px 4px rgba(0, 0, 0, 0.08),
@@ -2916,7 +2915,6 @@ body[data-theme="dark"] .newsletter__message--error {
   color: var(--btn-fg); /* Preserve text color on hover */
 }
 .btn:active {
-  transform: translateY(0);
   transition-duration: 0.1s;
   box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.08),
@@ -3002,7 +3000,6 @@ body[data-theme="dark"] .btn--outline:hover {
   --btn-border: var(--color-accent-hover);
   background: rgba(183, 240, 77, 0.08); /* More subtle */
   color: var(--color-accent-hover);
-  transform: translateY(-2px);
   box-shadow:
     0 4px 8px rgba(0, 0, 0, 0.08),
     0 0 0 1px rgba(183, 240, 77, 0.1),
@@ -3020,7 +3017,6 @@ body[data-theme="dark"] .btn--outline:active {
   --btn-border: var(--color-accent-hover);
   background: rgba(183, 240, 77, 0.12);
   color: var(--color-accent-hover);
-  transform: translateY(0);
   box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.08),
     0 0 1px rgba(0, 0, 0, 0.05);

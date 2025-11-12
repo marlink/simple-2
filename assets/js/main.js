@@ -31,6 +31,25 @@
     const safeQuery = window.safeQuery
     const safeQueryAll = window.safeQueryAll
 
+    const updateTokenValueDisplays = () => {
+        try {
+            if (!document.body) return
+            const tokenValueEls = safeQueryAll('[data-token-value]')
+            if (!tokenValueEls.length) return
+            const styles = window.getComputedStyle(document.body)
+            tokenValueEls.forEach((el) => {
+                const tokenName = el.getAttribute('data-token-value')
+                if (!tokenName) return
+                const rawValue = styles.getPropertyValue(tokenName)
+                if (rawValue) {
+                    el.textContent = rawValue.trim()
+                }
+            })
+        } catch (error) {
+            console.error('Error updating token values:', error)
+        }
+    }
+
     /* ========================================================================
      * 0️⃣ PAGE LOAD SPINNER
      * ========================================================================
@@ -57,6 +76,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        updateTokenValueDisplays()
         try {
         /* ========================================================================
          * 1️⃣ FOOTER YEAR UPDATE
@@ -125,6 +145,8 @@
                     }, 10)
                 }, 100)
             }
+
+            updateTokenValueDisplays()
         }
 
         /**
@@ -152,10 +174,12 @@
         if (document.body) {
             document.body.setAttribute('data-theme', savedTheme)
             document.documentElement.setAttribute('data-theme', savedTheme)
+            updateTokenValueDisplays()
         } else {
             document.addEventListener('DOMContentLoaded', () => {
                 document.body.setAttribute('data-theme', savedTheme)
                 document.documentElement.setAttribute('data-theme', savedTheme)
+                updateTokenValueDisplays()
             })
         }
 

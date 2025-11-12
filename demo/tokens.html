@@ -161,6 +161,48 @@
         border-color: var(--color-primary);
         box-shadow: var(--shadow-xs);
     }
+    .token-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        padding: var(--space-3);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+    .token-swatch {
+        width: 100%;
+        height: var(--space-10);
+        border-radius: var(--border-radius);
+        background: var(--token-color, transparent);
+        border: 1px solid rgba(15, 23, 42, 0.1);
+    }
+    body[data-theme="dark"] .token-swatch {
+        border-color: rgba(234, 244, 244, 0.15);
+    }
+    .token-card code {
+        display: block;
+        font-size: var(--font-size-xs);
+        color: var(--color-text);
+        letter-spacing: 0.03em;
+    }
+    .token-value {
+        font-size: var(--font-size-xs);
+        color: var(--color-text-muted);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+    .token-card--primary { --token-color: var(--color-primary); }
+    .token-card--secondary { --token-color: var(--color-secondary); }
+    .token-card--bg { --token-color: var(--color-bg); }
+    .token-card--surface { --token-color: var(--color-surface); }
+    .token-card--accent { --token-color: var(--color-accent); }
+    .token-card--success { --token-color: var(--color-success); }
+    .token-card--warning { --token-color: var(--color-warning); }
+    .token-card--danger { --token-color: var(--color-danger); }
+    .token-card--text { --token-color: var(--color-text); }
+    .token-card--text-muted { --token-color: var(--color-text-muted); }
+    .token-card--border { --token-color: var(--color-border); }
 
 </style>
 </head>
@@ -201,49 +243,86 @@
                         <h3 class="h3 mt-4">Colours</h3>
                         <div class="grid">
                             <div class="col-6 col-sm-3">
-                                <div class="token-swatch" style="background:var(--color-primary)"></div>
-                                <code>--color-primary</code>
+                                <div class="token-card token-card--primary">
+                                    <div class="token-swatch"></div>
+                                    <code>--color-primary</code>
+                                    <span class="token-value" data-token-value="--color-primary"></span>
+                                </div>
                             </div>
                             <div class="col-6 col-sm-3">
-                                <div class="token-swatch" style="background:var(--color-secondary)"></div>
-                                <code>--color-secondary</code>
+                                <div class="token-card token-card--secondary">
+                                    <div class="token-swatch"></div>
+                                    <code>--color-secondary</code>
+                                    <span class="token-value" data-token-value="--color-secondary"></span>
+                                </div>
                             </div>
                             <div class="col-6 col-sm-3">
-                                <div class="token-swatch" style="background:var(--color-bg)"></div>
-                                <code>--color-bg</code>
+                                <div class="token-card token-card--bg">
+                                    <div class="token-swatch"></div>
+                                    <code>--color-bg</code>
+                                    <span class="token-value" data-token-value="--color-bg"></span>
+                                </div>
                             </div>
                             <div class="col-6 col-sm-3">
-                                <div class="token-swatch" style="background:var(--color-surface)"></div>
-                                <code>--color-surface</code>
+                                <div class="token-card token-card--surface">
+                                    <div class="token-swatch"></div>
+                                    <code>--color-surface</code>
+                                    <span class="token-value" data-token-value="--color-surface"></span>
+                                </div>
                             </div>
                             <div class="col-6 col-sm-3">
-                                <div class="token-swatch" style="background:var(--color-accent)"></div>
-                                <code>--color-accent</code>
+                                <div class="token-card token-card--accent">
+                                    <div class="token-swatch"></div>
+                                    <code>--color-accent</code>
+                                    <span class="token-value" data-token-value="--color-accent"></span>
+                                </div>
                             </div>
                             <div class="col-6 col-sm-3">
-                                <div class="token-swatch" style="background:var(--color-success)"></div>
-                                <code>--color-success</code>
+                                <div class="token-card token-card--success">
+                                    <div class="token-swatch"></div>
+                                    <code>--color-success</code>
+                                    <span class="token-value" data-token-value="--color-success"></span>
+                                </div>
                             </div>
                             <div class="col-6 col-sm-3">
-                                <div class="token-swatch" style="background:var(--color-warning)"></div>
-                                <code>--color-warning</code>
+                                <div class="token-card token-card--warning">
+                                    <div class="token-swatch"></div>
+                                    <code>--color-warning</code>
+                                    <span class="token-value" data-token-value="--color-warning"></span>
+                                </div>
                             </div>
                             <div class="col-6 col-sm-3">
-                                <div class="token-swatch" style="background:var(--color-danger)"></div>
-                                <code>--color-danger</code>
+                                <div class="token-card token-card--danger">
+                                    <div class="token-swatch"></div>
+                                    <code>--color-danger</code>
+                                    <span class="token-value" data-token-value="--color-danger"></span>
+                                </div>
                             </div>
                             <div class="col-6 col-sm-3">
-                                <div class="token-swatch" style="background:var(--color-text)"></div>
-                                <code>--color-text</code>
+                                <div class="token-card token-card--text">
+                                    <div class="token-swatch"></div>
+                                    <code>--color-text</code>
+                                    <span class="token-value" data-token-value="--color-text"></span>
+                                </div>
                             </div>
                             <div class="col-6 col-sm-3">
-                                <div class="token-swatch" style="background:var(--color-text-muted)"></div>
-                                <code>--color-text-muted</code>
+                                <div class="token-card token-card--text-muted">
+                                    <div class="token-swatch"></div>
+                                    <code>--color-text-muted</code>
+                                    <span class="token-value" data-token-value="--color-text-muted"></span>
+                                </div>
                             </div>
                             <div class="col-6 col-sm-3">
-                                <div class="token-swatch" style="background:var(--color-border)"></div>
-                                <code>--color-border</code>
-                            
+                                <div class="token-card token-card--border">
+                                    <div class="token-swatch"></div>
+                                    <code>--color-border</code>
+                                    <span class="token-value" data-token-value="--color-border"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 <script src="../assets/js/utils.js"></script>

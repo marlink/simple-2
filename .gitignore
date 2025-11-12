@@ -31,3 +31,9 @@ tests/screenshots/
 
 # Build artifacts
 *.min.css
+
+# Environment variables and API keys
+.env
+.env.local
+.env.*.local
+.cursor/openrouter-api-key.txt

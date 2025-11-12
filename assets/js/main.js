@@ -768,3 +768,9 @@
         }
     })
 })() // Close IIFE to scope safeQuery and safeQueryAll
+
+// Update the year in the footer
+const yearSpan = document.getElementById('year');
+if (yearSpan) {
+  yearSpan.textContent = new Date().getFullYear();
+}

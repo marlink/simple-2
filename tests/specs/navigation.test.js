@@ -30,33 +30,55 @@ module.exports = {
                 // Set mobile viewport
                 await setViewport(page, { width: 375, height: 667 });
                 await page.reload({ waitUntil: "networkidle0" });
+                await page.waitForTimeout(500); // Wait for page to fully load
 
                 // Check menu is initially hidden
                 const initiallyVisible = await isVisible(page, ".nav__mobile-menu");
+                helpers.expect(initiallyVisible).toBeFalsy();
 
                 // Click burger
                 await click(page, ".nav__burger");
-                await page.waitForTimeout(300);
+                await page.waitForTimeout(500); // Wait for menu animation
 
                 // Check menu is now visible
                 const afterClick = await isVisible(page, ".nav__mobile-menu");
-                helpers.expect(afterClick).notToBe(initiallyVisible);
+                helpers.expect(afterClick).toBeTruthy();
+
+                // Click burger again to close
+                await click(page, ".nav__burger");
+                await page.waitForTimeout(500); // Wait for menu animation
+
+                // Check menu is closed again
+                const afterClose = await isVisible(page, ".nav__mobile-menu");
+                helpers.expect(afterClose).toBeFalsy();
             },
         },
         {
             name: "should close mobile menu on overlay click",
             run: async (page, helpers) => {
-                const { click, isVisible, setViewport, expect } = helpers;
+                const { click, isVisible, setViewport } = helpers;
                 await setViewport(page, { width: 375, height: 667 });
                 await page.reload({ waitUntil: "networkidle0" });
+                await page.waitForTimeout(500); // Wait for page to fully load
 
                 // Open menu
                 await click(page, ".nav__burger");
-                await page.waitForTimeout(300);
+                await page.waitForTimeout(500); // Wait for menu animation
 
-                // Click overlay
-                await click(page, ".nav__overlay");
-                await page.waitForTimeout(300);
+                // Verify menu is open
+                const menuOpen = await isVisible(page, ".nav__mobile-menu");
+                helpers.expect(menuOpen).toBeTruthy();
+
+                // Click overlay - click on the left side of the screen (not covered by menu panel)
+                // The menu panel is on the right side (320px wide), so click on the left
+                // Use evaluate to trigger the overlay click handler directly
+                await page.evaluate(() => {
+                    const overlay = document.querySelector('.nav__overlay');
+                    if (overlay) {
+                        overlay.click();
+                    }
+                });
+                await page.waitForTimeout(500); // Wait for menu animation
 
                 // Check menu is closed
                 const menuVisible = await isVisible(page, ".nav__mobile-menu");

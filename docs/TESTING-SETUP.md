@@ -29,6 +29,7 @@ npm run lint:all
 ### ESLint Rules
 
 Key rules configured:
+
 - `no-console`: Warns on console.log (allows console.warn/error)
 - `no-unused-vars`: Warns on unused variables (ignores vars starting with `_`)
 - `prefer-const`: Warns when `let` could be `const`
@@ -40,7 +41,30 @@ Key rules configured:
 
 ### Overview
 
-The browser testing framework uses Puppeteer for browser automation and is designed to work with MCP browser tools when available.
+The browser testing framework uses Playwright for browser automation and is designed to work with MCP browser tools when available.
+
+### Mobile Menu Behavior
+
+The mobile menu (burger menu) has specific behavior that tests should account for:
+
+#### Display Rules
+- **Default state**: Mobile menu is `display: none` by default
+- **When open**: Mobile menu becomes `display: flex` when `data-menu-open="true"` is set on `.nav` element
+- **Breakpoint**: Burger menu appears at `max-width: 600px` (mobile breakpoint)
+- **Animation**: Menu slides in from the right using `transform: translateX()`
+
+#### Toggle Behavior
+- **Burger click**: Toggles menu open/closed state
+- **Overlay click**: Closes menu (click on overlay area, not menu panel)
+- **Link click**: Closes menu automatically
+- **Escape key**: Closes menu
+- **Resize**: Menu auto-closes when viewport exceeds 600px
+
+#### Testing Considerations
+- Wait for menu animations (300-500ms) after state changes
+- Menu visibility is controlled by both CSS `display` and `data-menu-open` attribute
+- Overlay clicks should target areas not covered by the menu panel (left side of screen)
+- Use `force: true` option when clicking overlay to bypass pointer event interception
 
 ### Test Structure
 
@@ -89,18 +113,18 @@ Edit `tests/config.js` to configure:
 
 ```javascript
 module.exports = {
-  name: 'Feature Tests',
-  tests: [
-    {
-      name: 'should do something',
-      run: async (page, helpers) => {
-        const { goto, $, expect } = helpers;
-        await goto(page, '/index.html');
-        const element = await $(page, '.my-class');
-        expect(element).notToBeNull();
-      }
-    }
-  ]
+    name: "Feature Tests",
+    tests: [
+        {
+            name: "should do something",
+            run: async (page, helpers) => {
+                const { goto, $, expect } = helpers;
+                await goto(page, "/index.html");
+                const element = await $(page, ".my-class");
+                expect(element).notToBeNull();
+            },
+        },
+    ],
 };
 ```
 
@@ -134,29 +158,29 @@ module.exports = {
 Current test suites cover:
 
 1. **Theme Tests** (`theme.test.js`)
-   - Theme toggle button presence
-   - Theme switching functionality
-   - localStorage persistence
-   - Theme application on page load
+    - Theme toggle button presence
+    - Theme switching functionality
+    - localStorage persistence
+    - Theme application on page load
 
 2. **Navigation Tests** (`navigation.test.js`)
-   - Navigation menu structure
-   - Required navigation links
-   - Mobile menu toggle
-   - Active link highlighting
+    - Navigation menu structure
+    - Required navigation links
+    - Mobile menu toggle
+    - Active link highlighting
 
 3. **Component Tests** (`components.test.js`)
-   - Tabs component initialization
-   - Tab switching
-   - Modal open/close
-   - Accordion toggle
+    - Tabs component initialization
+    - Tab switching
+    - Modal open/close
+    - Accordion toggle
 
 4. **Accessibility Tests** (`accessibility.test.js`)
-   - Skip link presence
-   - Main content landmark
-   - Image alt text
-   - ARIA labels on buttons
-   - Proper component roles
+    - Skip link presence
+    - Main content landmark
+    - Image alt text
+    - ARIA labels on buttons
+    - Proper component roles
 
 ### MCP Browser Integration
 
@@ -184,11 +208,12 @@ browser: {
 ```
 
 Or set environment variable:
+
 ```bash
 HEADLESS=false npm test
 ```
 
-**Note:** By default, tests use the new headless mode (`headless: "new"`), which is recommended by Puppeteer. Set `HEADLESS=false` to run in non-headless mode for debugging.
+**Note:** By default, tests use headless mode. Set `HEADLESS=false` to run in non-headless mode for debugging. You can also change the browser using `BROWSER=firefox` or `BROWSER=webkit` environment variables.
 
 #### Screenshots
 
@@ -197,6 +222,7 @@ Screenshots are automatically taken on test failures (if enabled in config). The
 #### Debug Output
 
 Run with debug logging:
+
 ```bash
 DEBUG=* npm test
 ```
@@ -223,7 +249,7 @@ Tests can be integrated into CI/CD pipelines:
 
 - name: Start local server
   run: python -m http.server 8000 &
-  
+
 - name: Run tests
   run: npm test
 ```
@@ -231,7 +257,7 @@ Tests can be integrated into CI/CD pipelines:
 ### Best Practices
 
 1. **Wait for Elements**: Always wait for elements before interacting
-2. **Use Helpers**: Use helper functions instead of direct Puppeteer API
+2. **Use Helpers**: Use helper functions instead of direct Playwright API
 3. **Clean State**: Reset state between tests when needed
 4. **Descriptive Names**: Use clear test names that describe what's being tested
 5. **Isolated Tests**: Tests should be independent and not rely on other tests
@@ -251,16 +277,16 @@ Tests can be integrated into CI/CD pipelines:
 - Check if element is dynamically loaded (add wait)
 - Increase `timeouts.element` in `tests/config.js`
 
-#### Puppeteer Installation Issues
+#### Playwright Installation Issues
 
-If Puppeteer fails to install:
+If Playwright fails to install browsers:
 
 ```bash
-# Install with Chromium
-npm install puppeteer --save-dev
+# Install Playwright browsers
+npx playwright install chromium
 
-# Or use system Chrome
-PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install puppeteer --save-dev
+# Or install all browsers (chromium, firefox, webkit)
+npx playwright install
 ```
 
 ### Future Enhancements
@@ -272,4 +298,3 @@ PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install puppeteer --save-dev
 - [ ] Parallel test execution
 - [ ] MCP browser tool integration
 - [ ] CI/CD pipeline integration
-

@@ -19,7 +19,9 @@
         "version:update": "node scripts/update-version.js",
         "version:increment": "node scripts/increment-version.js",
         "review:check": "node scripts/check-review-needed.js",
-        "review:complete": "node scripts/check-review-needed.js --mark-complete"
+        "review:complete": "node scripts/check-review-needed.js --mark-complete",
+        "generate:article": "node scripts/generate-article.js",
+        "generate:case-study": "node scripts/generate-article.js case-study"
     },
     "devDependencies": {
         "eslint": "^8.57.0",
@@ -31,7 +33,8 @@
         "prettier": "^3.2.5",
         "@playwright/test": "^1.40.0",
         "stylelint": "^16.0.0",
-        "stylelint-config-standard": "^36.0.0"
+        "stylelint-config-standard": "^36.0.0",
+        "sharp": "^0.33.0"
     },
     "keywords": [
         "static-site",

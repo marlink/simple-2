@@ -2,15 +2,20 @@
  * Browser Test Helpers
  *
  * Helper functions for browser automation testing
- * Works with Puppeteer and can be adapted for MCP browser tools
+ * NOTE: This file is deprecated. The main test runner (browser-runner.js) now uses Playwright.
+ * This file is kept for backward compatibility but should not be used for new tests.
+ * Use the helpers from browser-runner.js instead.
+ *
+ * @deprecated Use Playwright helpers from browser-runner.js
  */
 
-const puppeteer = require("puppeteer");
+const { chromium } = require("@playwright/test");
 const config = require("../config");
 const path = require("path");
 const fs = require("fs");
 
 let browser = null;
+let context = null;
 let page = null;
 
 /**
@@ -18,14 +23,16 @@ let page = null;
  */
 async function initBrowser() {
     if (!browser) {
-        browser = await puppeteer.launch(config.browser);
-        page = await browser.newPage();
-
-        // Set default viewport
-        await page.setViewport(config.viewports.desktop);
-
-        // Set default timeout
-        page.setDefaultTimeout(config.timeouts.element);
+        // Use Playwright instead of Puppeteer
+        browser = await chromium.launch({
+            headless: config.browser.headless,
+            ...config.browser.launchOptions,
+        });
+        context = await browser.newContext({
+            viewport: config.viewports.desktop,
+        });
+        context.setDefaultTimeout(config.timeouts.element);
+        page = await context.newPage();
     }
     return { browser, page };
 }
@@ -34,11 +41,15 @@ async function initBrowser() {
  * Close browser
  */
 async function closeBrowser() {
+    if (context) {
+        await context.close();
+        context = null;
+    }
     if (browser) {
         await browser.close();
         browser = null;
-        page = null;
     }
+    page = null;
 }
 
 /**
@@ -47,7 +58,7 @@ async function closeBrowser() {
 async function goto(url) {
     if (!page) await initBrowser();
     const fullUrl = url.startsWith("http") ? url : `${config.baseUrl}${url}`;
-    await page.goto(fullUrl, { waitUntil: "networkidle0", timeout: config.timeouts.navigation });
+    await page.goto(fullUrl, { waitUntil: "networkidle", timeout: config.timeouts.navigation });
 }
 
 /**
@@ -74,10 +85,13 @@ async function screenshot(name) {
  */
 async function waitForSelector(selector, options = {}) {
     if (!page) throw new Error("Page not initialized");
-    return await page.waitForSelector(selector, {
-        timeout: config.timeouts.element,
-        ...options,
-    });
+    await page
+        .locator(selector)
+        .first()
+        .waitFor({
+            timeout: options.timeout || config.timeouts.element,
+            ...options,
+        });
 }
 
 /**
@@ -85,7 +99,9 @@ async function waitForSelector(selector, options = {}) {
  */
 async function $(selector) {
     if (!page) throw new Error("Page not initialized");
-    return await page.$(selector);
+    const locator = page.locator(selector).first();
+    const count = await page.locator(selector).count();
+    return count > 0 ? locator : null;
 }
 
 /**
@@ -93,7 +109,7 @@ async function $(selector) {
  */
 async function $$(selector) {
     if (!page) throw new Error("Page not initialized");
-    return await page.$$(selector);
+    return await page.locator(selector).all();
 }
 
 /**
@@ -102,7 +118,7 @@ async function $$(selector) {
 async function click(selector) {
     if (!page) throw new Error("Page not initialized");
     await waitForSelector(selector);
-    await page.click(selector);
+    await page.locator(selector).first().click();
 }
 
 /**
@@ -111,7 +127,7 @@ async function click(selector) {
 async function type(selector, text) {
     if (!page) throw new Error("Page not initialized");
     await waitForSelector(selector);
-    await page.type(selector, text);
+    await page.locator(selector).first().fill(text);
 }
 
 /**
@@ -121,7 +137,7 @@ async function getText(selector) {
     if (!page) throw new Error("Page not initialized");
     const element = await $(selector);
     if (!element) return null;
-    return await page.evaluate((el) => el.textContent, element);
+    return await element.textContent();
 }
 
 /**
@@ -131,7 +147,7 @@ async function getAttribute(selector, attribute) {
     if (!page) throw new Error("Page not initialized");
     const element = await $(selector);
     if (!element) return null;
-    return await page.evaluate((el, attr) => el.getAttribute(attr), element, attribute);
+    return await element.getAttribute(attribute);
 }
 
 /**
@@ -139,12 +155,13 @@ async function getAttribute(selector, attribute) {
  */
 async function isVisible(selector) {
     if (!page) throw new Error("Page not initialized");
-    const element = await $(selector);
-    if (!element) return false;
-    return await page.evaluate((el) => {
-        const style = window.getComputedStyle(el);
-        return style.display !== "none" && style.visibility !== "hidden" && style.opacity !== "0";
-    }, element);
+    try {
+        const element = await $(selector);
+        if (!element) return false;
+        return await element.isVisible();
+    } catch (e) {
+        return false;
+    }
 }
 
 /**
@@ -161,7 +178,7 @@ async function evaluate(fn) {
 async function setViewport(size) {
     if (!page) throw new Error("Page not initialized");
     const viewport = config.viewports[size] || size;
-    await page.setViewport(viewport);
+    await page.setViewportSize(viewport);
 }
 
 /**
@@ -169,10 +186,9 @@ async function setViewport(size) {
  */
 async function waitForNavigation(options = {}) {
     if (!page) throw new Error("Page not initialized");
-    return await page.waitForNavigation({
-        waitUntil: "networkidle0",
-        timeout: config.timeouts.navigation,
-        ...options,
+    // Playwright handles navigation automatically, but we can wait for load state
+    await page.waitForLoadState(options.waitUntil === "networkidle0" ? "networkidle" : "load", {
+        timeout: options.timeout || config.timeouts.navigation,
     });
 }
 

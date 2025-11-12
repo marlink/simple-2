@@ -14,7 +14,7 @@
  * - formatDate: Format date as YYYY-MM-DD
  * - validateEmail: Validate email format
  *
- * @author Your School
+* @author Design System
  * @version 1.0.0
  * ============================================================================
  */

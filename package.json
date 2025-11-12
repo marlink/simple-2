@@ -18,8 +18,6 @@
         "version:increment": "node scripts/increment-version.js",
         "review:check": "node scripts/check-review-needed.js",
         "review:complete": "node scripts/check-review-needed.js --mark-complete",
-        "generate:article": "node scripts/generate-article.js",
-        "generate:case-study": "node scripts/generate-article.js case-study",
         "build:css": "node scripts/build-css.js",
         "build": "npm run build:css"
     },
@@ -34,7 +32,6 @@
         "html-validate": "^8.7.3",
         "postcss": "^8.5.6",
         "postcss-cli": "^11.0.1",
-        "sharp": "^0.33.0",
         "stylelint": "^16.0.0",
         "stylelint-config-standard": "^36.0.0"
     },

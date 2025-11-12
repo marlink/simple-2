@@ -67,7 +67,7 @@ npm run check:consistency
 
 - [ ] **ARIA Labels**
   - [ ] All interactive elements have `aria-label` or `aria-labelledby`
-  - [ ] Navigation has `aria-label="YourSchool"` on logo
+  - [ ] Navigation has `aria-label="Design System"` on logo
   - [ ] Theme toggle has `aria-label="Toggle color theme"`
   - [ ] Buttons have `type` attribute
   - [ ] Form inputs have associated labels

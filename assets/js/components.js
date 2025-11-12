@@ -22,7 +22,7 @@
  * - Event delegation where appropriate
  * - Accessible (ARIA attributes, keyboard navigation)
  *
- * @author Your School
+* @author Design System
  * @version 1.0.0
  * ============================================================================
  */

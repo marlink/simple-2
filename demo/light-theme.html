@@ -5,51 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Light Theme Test</title>
     <link rel="stylesheet" href="../assets/css/framework-unified.css">
-<style>
-    .demo-nav {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-2);
-        justify-content: center;
-        margin: var(--space-4) auto var(--space-6);
-    }
-    .demo-nav__link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: var(--space-1) var(--space-2);
-        border: 1px solid var(--color-border);
-        border-radius: var(--border-radius);
-        background: var(--color-surface);
-        color: var(--color-text);
-        text-decoration: none;
-        font-size: var(--font-size-xs);
-        font-weight: 600;
-        letter-spacing: 0.02em;
-        transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    }
-    .demo-nav__link:hover,
-    .demo-nav__link:focus-visible {
-        background: var(--color-primary);
-        color: var(--color-primary-contrast);
-        border-color: var(--color-primary);
-    }
-    .demo-nav__link.is-active {
-        background: var(--color-primary);
-        color: var(--color-primary-contrast);
-        border-color: var(--color-primary);
-        box-shadow: var(--shadow-xs);
-    }
-
-    .demo-button-group {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-2);
-        align-items: flex-start;
-    }
-</style>
+    <link rel="stylesheet" href="../assets/css/typography-system.css">
+    <link rel="stylesheet" href="../assets/css/demo.css">
 </head>
-<body data-theme="light">
+<body class="demo-body" data-theme="light">
     <!-- Page Load Spinner -->
     <div class="page-spinner">
         <div class="page-spinner__content">
@@ -59,196 +18,208 @@
     </div>
 
     <a href="#main-content" class="skip-link">Skip to main content</a>
-        <nav class="demo-nav">
-        <a class="demo-nav__link" href="overview.html">Overview</a>
-        <a class="demo-nav__link" href="components.html">Components</a>
-        <a class="demo-nav__link" href="cards.html">Cards</a>
-        <a class="demo-nav__link" href="tokens.html">Tokens</a>
-        <a class="demo-nav__link" href="layout.html">Layout</a>
-        <a class="demo-nav__link" href="accessibility.html">Accessibility</a>
-        <a class="demo-nav__link" href="typography.html">Typography</a>
-        <a class="demo-nav__link" href="icons.html">Icons</a>
-        <a class="demo-nav__link" href="utilities.html">Utilities</a>
-        <a class="demo-nav__link" href="photos.html">Photos</a>
-        <a class="demo-nav__link is-active" href="light-theme.html" aria-current="page">Light Theme</a>
-        <a class="demo-nav__link" href="dark-theme.html">Dark Theme</a>
-    </nav>
-
-    <main id="main-content">
-        <div class="container">
-            <div class="grid" style="margin-top: var(--space-8); margin-bottom: var(--space-8);">
-                <div class="col-12">
-                    <h1>Light Theme Test Page</h1>
-                    <p class="lead">Testing the enhanced light theme colors and components.</p>
+    <header class="demo-toolbar" role="banner">
+        <div class="demo-toolbar__inner container">
+            <div class="demo-toolbar__brand">
+                <a class="demo-toolbar__title" href="overview.html">Framework Demo</a>
+                <div class="demo-toolbar__meta" aria-label="Current section">
+                    <span>Theme audit</span>
+                    <span class="demo-toolbar__meta-dot" aria-hidden="true"></span>
+                    <span>Light palette</span>
                 </div>
             </div>
+            <nav class="demo-toolbar__nav demo-scroll-shadow" aria-label="Component index">
+                <ul class="demo-toolbar__list">
+                    <li><a class="demo-toolbar__link" href="overview.html">Overview</a></li>
+                    <li><a class="demo-toolbar__link" href="components.html">Components</a></li>
+                    <li><a class="demo-toolbar__link" href="cards.html">Cards</a></li>
+                    <li><a class="demo-toolbar__link" href="tokens.html">Tokens</a></li>
+                    <li><a class="demo-toolbar__link" href="layout.html">Layout</a></li>
+                    <li><a class="demo-toolbar__link" href="forms.html">Forms</a></li>
+                    <li><a class="demo-toolbar__link" href="navigation.html">Navigation</a></li>
+                    <li><a class="demo-toolbar__link" href="utilities.html">Utilities</a></li>
+                    <li><a class="demo-toolbar__link" href="typography.html">Typography</a></li>
+                    <li><a class="demo-toolbar__link" href="icons.html">Icons</a></li>
+                    <li><a class="demo-toolbar__link" href="accessibility.html">Accessibility</a></li>
+                    <li><a class="demo-toolbar__link" href="photos.html">Photos</a></li>
+                    <li><a class="demo-toolbar__link" href="light-theme.html" aria-current="page">Light Theme</a></li>
+                    <li><a class="demo-toolbar__link" href="dark-theme.html">Dark Theme</a></li>
+                    <li><a class="demo-toolbar__link" href="../index.html">Marketing Site</a></li>
+                </ul>
+            </nav>
+            <div class="demo-toolbar__controls">
+                <div class="demo-toolbar__theme">
+                    <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+                        <span class="theme-toggle__icon theme-toggle__icon--light">
+                            <img src="../assets/icons/sun.svg" alt="Light theme" width="24" height="24">
+                        </span>
+                        <span class="theme-toggle__icon theme-toggle__icon--dark">
+                            <img src="../assets/icons/moon.svg" alt="Dark theme" width="24" height="24">
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
 
-            <!-- Color Swatches -->
-            <section style="margin-bottom: var(--space-8);">
-                <h2>Color Palette</h2>
-                <div class="grid">
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card__body">
-                                <div style="height: 100px; background: var(--color-bg); border: 1px solid var(--color-border); margin-bottom: var(--space-3);"></div>
-                                <h3 style="font-size: var(--font-size-sm);">Background</h3>
-                                <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">#f0f7f7</p>
-                            </div>
+    <main id="main-content" class="demo-main">
+        <div class="container">
+            <div class="demo-page-intro">
+                <span class="demo-page-intro__eyebrow">Light theme</span>
+                <h1 class="demo-page-intro__title h2">Premium light surface demo</h1>
+                <p class="demo-page-intro__description">Production-ready components tinted for the light palette. Verify backgrounds, surfaces, and accents maintain required contrast before shipping.</p>
+            </div>
+
+            <section class="demo-section" id="light-colors">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Colour palette</h2>
+                    <p class="demo-section__subtitle">Token values load from computed styles. Keep these names consistent across themes for effortless toggling.</p>
+                </div>
+                <div class="grid demo-stack">
+                    <div class="col-12 col-md-3">
+                        <div class="token-card token-card--bg">
+                            <div class="token-swatch"></div>
+                            <code>--color-bg</code>
+                            <span class="token-value" data-token-value="--color-bg"></span>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card__body">
-                                <div style="height: 100px; background: var(--color-surface); border: 1px solid var(--color-border); margin-bottom: var(--space-3);"></div>
-                                <h3 style="font-size: var(--font-size-sm);">Surface (Cards)</h3>
-                                <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">#ffffff</p>
-                            </div>
+                    <div class="col-12 col-md-3">
+                        <div class="token-card token-card--surface">
+                            <div class="token-swatch"></div>
+                            <code>--color-surface</code>
+                            <span class="token-value" data-token-value="--color-surface"></span>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card__body">
-                                <div style="height: 100px; background: var(--color-accent); border: 1px solid var(--color-border); margin-bottom: var(--space-3);"></div>
-                                <h3 style="font-size: var(--font-size-sm);">Accent</h3>
-                                <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">#10b981 (Emerald)</p>
-                            </div>
+                    <div class="col-12 col-md-3">
+                        <div class="token-card token-card--primary">
+                            <div class="token-swatch"></div>
+                            <code>--color-primary</code>
+                            <span class="token-value" data-token-value="--color-primary"></span>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card__body">
-                                <div style="height: 100px; background: var(--color-accent-hover); border: 1px solid var(--color-border); margin-bottom: var(--space-3);"></div>
-                                <h3 style="font-size: var(--font-size-sm);">Accent Hover</h3>
-                                <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">#b7f04d (Green)</p>
-                            </div>
+                    <div class="col-12 col-md-3">
+                        <div class="token-card token-card--accent">
+                            <div class="token-swatch"></div>
+                            <code>--color-accent</code>
+                            <span class="token-value" data-token-value="--color-accent"></span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Buttons -->
-            <section style="margin-bottom: var(--space-8);">
-                <h2>Buttons</h2>
-                <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
-                    <button type="button" class="btn btn--primary">Primary Button</button>
-                    <button type="button" class="btn btn--secondary">Secondary Button</button>
-                    <button type="button" class="btn btn--outline">Outline Button</button>
-                    <button type="button" class="btn btn--ghost">Ghost Button</button>
+            <section class="demo-section" id="light-buttons">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Buttons</h2>
+                    <p class="demo-section__subtitle">Hover and focus states inherit light-mode tokens. Keyboard through to confirm focus visibility.</p>
+                </div>
+                <div class="demo-flex demo-flex--wrap">
+                    <button type="button" class="btn btn--primary">Primary</button>
+                    <button type="button" class="btn btn--secondary">Secondary</button>
+                    <button type="button" class="btn btn--outline">Outline</button>
+                    <button type="button" class="btn btn--ghost">Ghost</button>
+                    <button type="button" class="btn btn--text">Text</button>
                 </div>
                 <div class="demo-button-group mt-3">
-                    <button type="button" class="btn btn--primary btn--sm">Small Button</button>
-                    <button type="button" class="btn btn--primary">Default Button</button>
-                    <button type="button" class="btn btn--primary btn--big">Big Button</button>
-                    <button type="button" class="btn btn--primary btn--lg">Large Button</button>
+                    <button type="button" class="btn btn--primary btn--sm">Small</button>
+                    <button type="button" class="btn btn--primary">Default</button>
+                    <button type="button" class="btn btn--primary btn--big">Big</button>
+                    <button type="button" class="btn btn--primary btn--lg">Large</button>
                 </div>
             </section>
 
-            <!-- Cards -->
-            <section style="margin-bottom: var(--space-8);">
-                <h2>Cards</h2>
-                <div class="grid">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card">
+            <section class="demo-section" id="light-cards">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Cards</h2>
+                    <p class="demo-section__subtitle">Surface treatments favour airy shadows and crisp borders for the light mode aesthetic.</p>
+                </div>
+                <div class="grid demo-stack">
+                    <div class="col-12 col-md-4">
+                        <article class="card">
                             <div class="card__body">
-                                <h3>Standard Card</h3>
-                                <p>This is a standard card with white surface and subtle shadow.</p>
-                                <button type="button" class="btn btn--primary btn--sm">Learn More</button>
+                                <h3>Standard card</h3>
+                                <p>Minimal framing with a subtle drop shadow.</p>
+                                <button type="button" class="btn btn--primary btn--sm">Learn more</button>
                             </div>
-                        </div>
+                        </article>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card">
+                    <div class="col-12 col-md-4">
+                        <article class="card card--glass-outline">
                             <div class="card__body">
-                                <h3>Premium Feel</h3>
-                                <p>Pure white surface with refined borders and elevation.</p>
+                                <h3>Glass outline</h3>
+                                <p>Ideal for tinted backgrounds while retaining clarity.</p>
                                 <button type="button" class="btn btn--outline btn--sm">Explore</button>
                             </div>
-                        </div>
+                        </article>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card">
+                    <div class="col-12 col-md-4">
+                        <article class="card card--solid">
                             <div class="card__body">
-                                <h3>Sophisticated</h3>
-                                <p>Hover over cards to see the refined interactions.</p>
+                                <h3>Solid highlight</h3>
+                                <p>Accent-filled surface for high-priority callouts.</p>
                                 <button type="button" class="btn btn--ghost btn--sm">Details</button>
                             </div>
-                        </div>
+                        </article>
                     </div>
                 </div>
             </section>
 
-            <!-- Forms -->
-            <section style="margin-bottom: var(--space-8);">
-                <h2>Form Elements</h2>
-                <form class="form">
+            <section class="demo-section" id="light-form">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Form elements</h2>
+                    <p class="demo-section__subtitle">Inputs brighten while retaining strong focus rings and accessible labels.</p>
+                </div>
+                <form class="form demo-stack">
                     <div class="form__row">
-                        <label for="test-name-light">Name</label>
-                        <input type="text" id="test-name-light" placeholder="Enter your name" required>
+                        <label for="light-name" class="form__label">Name</label>
+                        <input type="text" id="light-name" class="form__input" placeholder="Enter your name" required>
                     </div>
                     <div class="form__row">
-                        <label for="test-email-light">Email</label>
-                        <input type="email" id="test-email-light" placeholder="your@email.com" required>
+                        <label for="light-email" class="form__label">Email</label>
+                        <input type="email" id="light-email" class="form__input" placeholder="you@example.com" required>
                     </div>
                     <div class="form__row">
-                        <label for="test-message-light">Message</label>
-                        <textarea id="test-message-light" rows="4" placeholder="Your message here..."></textarea>
+                        <label for="light-message" class="form__label">Message</label>
+                        <textarea id="light-message" class="form__input" rows="4" placeholder="Your message here..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn--primary">Submit Form</button>
+                    <div class="form__row">
+                        <button type="submit" class="btn btn--primary">Submit form</button>
+                    </div>
                 </form>
             </section>
 
-            <!-- Alerts -->
-            <section style="margin-bottom: var(--space-8);">
-                <h2>Alerts</h2>
-                <div class="alert alert--success" style="margin-bottom: var(--space-3);">
-                    <strong>Success!</strong> This is a success alert with refined styling.
+            <section class="demo-section" id="light-alerts">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Alerts &amp; badges</h2>
+                    <p class="demo-section__subtitle">Ensure lighter backgrounds preserve hierarchy and legibility.</p>
                 </div>
-                <div class="alert alert--info" style="margin-bottom: var(--space-3);">
-                    <strong>Info:</strong> This is an informational alert.
+                <div class="demo-alert-stack">
+                    <div class="alert alert--success">
+                        <strong>Success:</strong> Light theme adjustments applied.
+                        <button class="alert__close" aria-label="Close alert">&times;</button>
+                    </div>
+                    <div class="alert alert--info">
+                        <strong>Info:</strong> Hover states use reduced motion by default.
+                        <button class="alert__close" aria-label="Close alert">&times;</button>
+                    </div>
+                    <div class="alert alert--warning">
+                        <strong>Warning:</strong> Verify 4.5:1 contrast prior to sign-off.
+                        <button class="alert__close" aria-label="Close alert">&times;</button>
+                    </div>
                 </div>
-                <div class="alert alert--warning" style="margin-bottom: var(--space-3);">
-                    <strong>Warning:</strong> This is a warning alert.
-                </div>
-                <div class="alert alert--error">
-                    <strong>Error:</strong> This is an error alert.
-                </div>
-            </section>
-
-            <!-- Badges -->
-            <section style="margin-bottom: var(--space-8);">
-                <h2>Badges</h2>
-                <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+                <div class="demo-badge-row mt-4">
                     <span class="badge">Default</span>
-                    <span class="badge badge--pill">Pill Badge</span>
+                    <span class="badge badge--pill">Pill</span>
                     <span class="badge badge--outline">Outline</span>
+                    <span class="badge badge--success">Success</span>
                 </div>
             </section>
 
-            <!-- Typography -->
-            <section style="margin-bottom: var(--space-8);">
-                <h2>Typography</h2>
-                <h1>Heading 1 - Bold Impact</h1>
-                <h2>Heading 2 - Semi-bold</h2>
-                <h3>Heading 3 - Balanced</h3>
-                <h4>Heading 4 - Refined</h4>
-                <h5>Heading 5 - Medium</h5>
-                <h6>Heading 6 - Uppercase</h6>
-                <p>Regular paragraph text with refined letter-spacing and optimal line height for readability.</p>
-                <p class="lead">Lead paragraph with larger text for emphasis and better visual hierarchy.</p>
-            </section>
-
-            <!-- Code Block -->
-            <section style="margin-bottom: var(--space-8);">
-                <h2>Code Block</h2>
-                <pre class="code-block"><code>// Example code with refined styling
-const example = "Premium code block";
-console.log(example);</code></pre>
-            </section>
-
-            <!-- Table -->
-            <section style="margin-bottom: var(--space-8);">
-                <h2>Table</h2>
-                <div class="table-wrapper">
+            <section class="demo-section" id="light-table">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Tables</h2>
+                    <p class="demo-section__subtitle">`.table` retains subtle zebra striping without sacrificing clarity.</p>
+                </div>
+                <div class="demo-table-wrapper">
                     <table class="table">
                         <thead>
                             <tr>
@@ -259,29 +230,71 @@ console.log(example);</code></pre>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Refined Borders</td>
-                                <td>Thinner, more elegant borders</td>
-                                <td><span class="badge">Active</span></td>
+                                <td>Background</td>
+                                <td>Softer hue for the primary canvas.</td>
+                                <td><span class="badge badge--success">Complete</span></td>
                             </tr>
                             <tr>
-                                <td>Premium Typography</td>
-                                <td>Uppercase headers with spacing</td>
-                                <td><span class="badge">Active</span></td>
+                                <td>Buttons</td>
+                                <td>Hover overlay set to 12% tint.</td>
+                                <td><span class="badge badge--warning">Review</span></td>
                             </tr>
                             <tr>
-                                <td>Hover States</td>
-                                <td>Subtle elevation on hover</td>
-                                <td><span class="badge">Active</span></td>
+                                <td>Cards</td>
+                                <td>Border radius aligned to `--border-radius` token.</td>
+                                <td><span class="badge badge--success">Complete</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+            </section>
+
+            <section class="demo-section" id="light-typography">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Typography scale</h2>
+                    <p class="demo-section__subtitle">Headings and paragraphs demonstrate the light theme baseline rhythm.</p>
+                </div>
+                <div class="demo-stack">
+                    <h1>Heading 1 — Display</h1>
+                    <h2>Heading 2 — Section</h2>
+                    <h3>Heading 3 — Subsection</h3>
+                    <h4>Heading 4 — Eyebrow</h4>
+                    <h5>Heading 5 — Label</h5>
+                    <h6>Heading 6 — Meta</h6>
+                    <p>Standard paragraph text with generous line height for readability.</p>
+                    <p class="lead">Lead paragraph emphasises hero copy and supporting statements.</p>
+                </div>
+            </section>
+
+            <section class="demo-section" id="light-code">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Code block</h2>
+                    <p class="demo-section__subtitle">Copy button interactions originate from `components.js` for consistency.</p>
+                </div>
+                <pre class="code-block"><code>// Example code with refined styling
+const example = 'Premium code block'
+console.log(example)</code></pre>
             </section>
         </div>
     </main>
 <script src="../assets/js/utils.js"></script>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = window.safeQuery?.('.demo-scroll-shadow')
+            if (!nav) return
+
+            const updateOverflowState = () => {
+                const isOverflowing = nav.scrollWidth > nav.clientWidth + 4
+                nav.classList.toggle('is-scrollable', isOverflowing)
+            }
+
+            updateOverflowState()
+            nav.addEventListener('scroll', updateOverflowState, { passive: true })
+            window.addEventListener('resize', updateOverflowState)
+        })
+    </script>
 </body>
 </html>
 

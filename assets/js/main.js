@@ -17,7 +17,7 @@
  * - Throttled/debounced event handlers where appropriate
  * - Passive event listeners for better scroll performance
  *
- * @author Your School
+ * @author Design System
  * @version 1.0.0
  * ============================================================================
  */
@@ -108,8 +108,6 @@
      * @param {string} theme - 'light' or 'dark'
      */
         const applyTheme = (theme) => {
-            console.log('Applying theme:', theme)
-
             if (!document.body) {
                 console.error('Body element not found!')
                 return
@@ -125,10 +123,6 @@
             } catch (e) {
                 console.warn('Could not save theme to localStorage:', e)
             }
-
-            // Verify it was set
-            const verifyTheme = document.body.getAttribute('data-theme')
-            console.log('Theme verified on body:', verifyTheme)
 
             // Force reflow to ensure CSS updates
             void document.body.offsetHeight
@@ -153,17 +147,13 @@
      * Toggle between light and dark themes
      */
         const toggleTheme = (e) => {
-            console.log('Theme toggle clicked!', e)
-
             // Don't prevent default - let button work normally
             if (e) {
                 e.stopPropagation()
             }
 
             const currentTheme = document.body?.getAttribute('data-theme') || 'dark'
-            console.log('Current theme:', currentTheme)
             const newTheme = currentTheme === 'light' ? 'dark' : 'light'
-            console.log('Switching to theme:', newTheme)
             applyTheme(newTheme)
 
             return false
@@ -208,7 +198,6 @@
         document.addEventListener('click', (e) => {
             const toggle = e.target.closest('.theme-toggle')
             if (toggle) {
-                console.log('Theme toggle clicked via delegation')
                 toggleTheme(e)
             }
         })
@@ -216,13 +205,11 @@
         // Also attach directly to existing toggles as backup
         const initThemeToggles = () => {
             const themeToggles = safeQueryAll('.theme-toggle')
-            console.log('Initializing theme toggles, found:', themeToggles.length)
 
-            themeToggles.forEach((toggle, index) => {
+            themeToggles.forEach((toggle) => {
                 if (toggle && !toggle.dataset.themeListenerAttached) {
                     toggle.addEventListener('click', toggleTheme)
                     toggle.dataset.themeListenerAttached = 'true'
-                    console.log(`Theme toggle ${index} attached directly`)
                 }
             })
         }
@@ -375,7 +362,6 @@
      * Currently handled by CSS, but function exists for future enhancements
      */
         const syncMobileTheme = () => {
-            const currentTheme = document.body.getAttribute('data-theme') || 'dark'
             const mobileThemeToggle = mobileMenu?.querySelector('.theme-toggle')
 
             if (mobileThemeToggle) {

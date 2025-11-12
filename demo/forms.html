@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Forms Demo | Framework Showcase</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Demo page showcasing production-ready form patterns from the responsive CSS framework.">
+    <meta name="keywords" content="CSS framework, responsive design, forms, design system, UI components">
+    <meta name="author" content="Marceli Cieplik">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Unified Responsive Framework -->
+    <link rel="stylesheet" href="../assets/css/framework-unified.css">
+    <link rel="stylesheet" href="../assets/css/typography-system.css">
+    <link rel="stylesheet" href="../assets/css/demo.css">
+</head>
+<body class="demo-body" data-theme="dark">
+    <!-- Page Load Spinner -->
+    <div class="page-spinner">
+        <div class="page-spinner__content">
+            <div class="page-spinner__logo"></div>
+            <div class="page-spinner__spinner"></div>
+        </div>
+    </div>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="demo-toolbar" role="banner">
+        <div class="demo-toolbar__inner container">
+            <div class="demo-toolbar__brand">
+                <a class="demo-toolbar__title" href="overview.html">Framework Demo</a>
+                <div class="demo-toolbar__meta" aria-label="Current section">
+                    <span>Form patterns</span>
+                    <span class="demo-toolbar__meta-dot" aria-hidden="true"></span>
+                    <span>Inputs &amp; validation</span>
+                </div>
+            </div>
+            <nav class="demo-toolbar__nav demo-scroll-shadow" aria-label="Component index">
+                <ul class="demo-toolbar__list">
+                    <li><a class="demo-toolbar__link" href="overview.html">Overview</a></li>
+                    <li><a class="demo-toolbar__link" href="components.html">Components</a></li>
+                    <li><a class="demo-toolbar__link" href="cards.html">Cards</a></li>
+                    <li><a class="demo-toolbar__link" href="tokens.html">Tokens</a></li>
+                    <li><a class="demo-toolbar__link" href="layout.html">Layout</a></li>
+                    <li><a class="demo-toolbar__link" href="forms.html" aria-current="page">Forms</a></li>
+                    <li><a class="demo-toolbar__link" href="navigation.html">Navigation</a></li>
+                    <li><a class="demo-toolbar__link" href="utilities.html">Utilities</a></li>
+                    <li><a class="demo-toolbar__link" href="typography.html">Typography</a></li>
+                    <li><a class="demo-toolbar__link" href="icons.html">Icons</a></li>
+                    <li><a class="demo-toolbar__link" href="accessibility.html">Accessibility</a></li>
+                    <li><a class="demo-toolbar__link" href="photos.html">Photos</a></li>
+                    <li><a class="demo-toolbar__link" href="light-theme.html">Light Theme</a></li>
+                    <li><a class="demo-toolbar__link" href="dark-theme.html">Dark Theme</a></li>
+                    <li><a class="demo-toolbar__link" href="../index.html">Marketing Site</a></li>
+                </ul>
+            </nav>
+            <div class="demo-toolbar__controls">
+                <div class="demo-toolbar__theme">
+                    <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+                        <span class="theme-toggle__icon theme-toggle__icon--light">
+                            <img src="../assets/icons/sun.svg" alt="Light theme" width="24" height="24">
+                        </span>
+                        <span class="theme-toggle__icon theme-toggle__icon--dark">
+                            <img src="../assets/icons/moon.svg" alt="Dark theme" width="24" height="24">
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="demo-main">
+        <div class="container">
+            <div class="demo-page-intro">
+                <span class="demo-page-intro__eyebrow">Forms</span>
+                <h1 class="demo-page-intro__title h2">Accessible form building blocks</h1>
+                <p class="demo-page-intro__description">Every example mirrors the production markup from `framework-unified.css`. Labels remain connected via `for`/`id`, helper text uses `aria-describedby`, and validation messages announce changes for screen readers.</p>
+            </div>
+
+            <section class="demo-section" id="form-standard">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Standard form</h2>
+                    <p class="demo-section__subtitle">Baseline form layout using the `.form` wrapper and `.form__row` groupings. Inputs stretch full width with generous tap targets and built-in spacing.</p>
+                </div>
+                <form class="form demo-stack" novalidate>
+                    <div class="form__row">
+                        <label for="demo-name" class="form__label">Full name</label>
+                        <input type="text" id="demo-name" name="demo-name" class="form__input" placeholder="Alex Johnson" required>
+                    </div>
+                    <div class="form__row">
+                        <label for="demo-email" class="form__label">Email address</label>
+                        <input type="email" id="demo-email" name="demo-email" class="form__input" placeholder="alex@example.com" required>
+                    </div>
+                    <div class="form__row">
+                        <label for="demo-select" class="form__label">How can we help?</label>
+                        <select id="demo-select" name="demo-select" class="form__input">
+                            <option value="">Select reason</option>
+                            <option value="support">Support</option>
+                            <option value="demo">Product demo</option>
+                            <option value="billing">Billing question</option>
+                        </select>
+                    </div>
+                    <div class="form__row">
+                        <label for="demo-message" class="form__label">Message</label>
+                        <textarea id="demo-message" name="demo-message" class="form__input" rows="4" placeholder="Tell us more..."></textarea>
+                    </div>
+                    <div class="form__row">
+                        <button type="submit" class="btn btn--primary">Submit request</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="demo-section" id="form-states">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Input states</h2>
+                    <p class="demo-section__subtitle">Focus rings, success, and error states are consistent across input types. Helper text connects through `aria-describedby`.</p>
+                </div>
+                <div class="grid demo-stack">
+                    <div class="col-12 col-md-6">
+                        <form class="form">
+                            <div class="form__row">
+                                <label for="focus-example" class="form__label">Focus example</label>
+                                <input type="text" id="focus-example" class="form__input is-focused" value="Focus ring preview" readonly>
+                                <p id="focus-example-help" class="form__help-text">`.is-focused` class added for demo purposes.</p>
+                            </div>
+                            <div class="form__row">
+                                <label for="success-example" class="form__label">Success state</label>
+                                <input type="text" id="success-example" class="form__input is-valid" value="Looks good!" aria-describedby="success-example-help">
+                                <p id="success-example-help" class="form__help-text form__help-text--success">This input passes validation.</p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <form class="form">
+                            <div class="form__row">
+                                <label for="error-example" class="form__label">Error state</label>
+                                <input type="email" id="error-example" class="form__input is-invalid" value="wrong@format" aria-describedby="error-example-help">
+                                <p id="error-example-help" class="form__help-text form__help-text--error">Enter a valid email address.</p>
+                            </div>
+                            <fieldset class="form__fieldset">
+                                <legend class="form__legend">Notification preference</legend>
+                                <label class="form__choice">
+                                    <input type="radio" name="notifications" value="email" checked>
+                                    Email updates
+                                </label>
+                                <label class="form__choice">
+                                    <input type="radio" name="notifications" value="sms">
+                                    SMS alerts
+                                </label>
+                                <label class="form__choice">
+                                    <input type="radio" name="notifications" value="push">
+                                    Push notifications
+                                </label>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="demo-section" id="form-compact">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Compact form (inline)</h2>
+                    <p class="demo-section__subtitle">Use grid utilities for inline layouts. Labels remain visually hidden while staying accessible.</p>
+                </div>
+                <form class="form">
+                    <div class="grid align-center">
+                        <div class="col-12 col-md-4">
+                            <label for="newsletter-name" class="sr-only">Name</label>
+                            <input type="text" id="newsletter-name" class="form__input" placeholder="Your name">
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label for="newsletter-email" class="sr-only">Email</label>
+                            <input type="email" id="newsletter-email" class="form__input" placeholder="you@example.com">
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <button type="submit" class="btn btn--primary btn--big w-100">Join newsletter</button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+            <section class="demo-section" id="form-horizontal">
+                <div class="demo-section__heading">
+                    <h2 class="demo-section__title h3">Horizontal form layout</h2>
+                    <p class="demo-section__subtitle">Apply the grid inside `.form__row` for multi-column arrangements. Works responsively with no extra CSS.</p>
+                </div>
+                <form class="form demo-stack">
+                    <div class="form__row">
+                        <div class="grid">
+                            <div class="col-12 col-md-6">
+                                <label for="billing-first" class="form__label">First name</label>
+                                <input type="text" id="billing-first" class="form__input" required>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="billing-last" class="form__label">Last name</label>
+                                <input type="text" id="billing-last" class="form__input" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form__row">
+                        <div class="grid">
+                            <div class="col-12 col-md-8">
+                                <label for="billing-address" class="form__label">Street address</label>
+                                <input type="text" id="billing-address" class="form__input" placeholder="123 Main Street">
+                            </div>
+                            <div class="col-6 col-md-2">
+                                <label for="billing-city" class="form__label">City</label>
+                                <input type="text" id="billing-city" class="form__input">
+                            </div>
+                            <div class="col-6 col-md-2">
+                                <label for="billing-postcode" class="form__label">Postcode</label>
+                                <input type="text" id="billing-postcode" class="form__input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form__row">
+                        <div class="grid">
+                            <div class="col-12 col-md-6">
+                                <label for="billing-country" class="form__label">Country</label>
+                                <select id="billing-country" class="form__input">
+                                    <option value="">Select country</option>
+                                    <option value="uk">United Kingdom</option>
+                                    <option value="us">United States</option>
+                                    <option value="pl">Poland</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label class="form__checkbox">
+                                    <input type="checkbox" name="billing-terms" required>
+                                    I agree to the terms and privacy policy.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form__row">
+                        <button type="submit" class="btn btn--primary">Save billing details</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = window.safeQuery?.('.demo-scroll-shadow')
+            if (!nav) return
+
+            const updateOverflowState = () => {
+                const isOverflowing = nav.scrollWidth > nav.clientWidth + 4
+                nav.classList.toggle('is-scrollable', isOverflowing)
+            }
+
+            updateOverflowState()
+            nav.addEventListener('scroll', updateOverflowState, { passive: true })
+            window.addEventListener('resize', updateOverflowState)
+        })
+    </script>
+</body>
+</html>
+

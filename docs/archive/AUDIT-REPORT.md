@@ -239,7 +239,7 @@ if (txt.includes(term)) {
 
 **Verification:**
 - ✅ Theme toggle has `role="group"` and `aria-label="Color theme"`
-- ✅ Navigation logo has `aria-label="YourSchool"`
+- ✅ Navigation logo has `aria-label="Design System"`
 - ✅ Social links have `aria-label` attributes
 - ✅ Form inputs have `aria-label` where needed
 - ✅ Tab system uses proper ARIA (`aria-selected`, `aria-controls`)

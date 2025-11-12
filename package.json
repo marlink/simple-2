@@ -9,8 +9,6 @@
         "lint:js": "eslint 'assets/js/**/*.js'",
         "lint:js:fix": "eslint 'assets/js/**/*.js' --fix",
         "lint:all": "npm run lint:js && npm run validate:css && npm run validate:html",
-        "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
-        "format:check": "prettier --check \"**/*.{html,css,js,json,md}\"",
         "sync-components": "node scripts/sync-components.js",
         "check:consistency": "node scripts/check-consistency.js",
         "test": "node tests/runner.js",
@@ -37,7 +35,6 @@
         "html-validate": "^8.7.3",
         "postcss": "^8.5.6",
         "postcss-cli": "^11.0.1",
-        "prettier": "^3.2.5",
         "sharp": "^0.33.0",
         "stylelint": "^16.0.0",
         "stylelint-config-standard": "^36.0.0"

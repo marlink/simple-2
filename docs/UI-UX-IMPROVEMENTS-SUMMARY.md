@@ -510,21 +510,21 @@ All enhancements use modern CSS with fallbacks:
 ### Core Framework
 
 - `assets/css/framework-unified.css` (+5KB)
-  - Enhanced design tokens
-  - Improved component styles
-  - Better shadows and transitions
+    - Enhanced design tokens
+    - Improved component styles
+    - Better shadows and transitions
 
 ### Documentation
 
 - `docs/UI-UX-IMPROVEMENT-RECOMMENDATIONS.md` (NEW)
-  - Comprehensive improvement plan
-  - Detailed specifications
-  - Implementation priorities
+    - Comprehensive improvement plan
+    - Detailed specifications
+    - Implementation priorities
 
 - `docs/UI-UX-IMPROVEMENTS-SUMMARY.md` (NEW - this file)
-  - Implementation summary
-  - What was changed
-  - Testing status
+    - Implementation summary
+    - What was changed
+    - Testing status
 
 ---
 
